@@ -1,0 +1,72 @@
+<div class="dashboard-container">
+  <div class="row">
+    <div class="col-4 section-container">
+      <div class="col-section">
+        <div class="col-section-title d-flex align-items-center">
+          <h5 class="m-0">Group Summary</h5>
+        </div>
+        <p-divider></p-divider>
+        <div class="row">
+          <div class="col-8">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Total IPs</li>
+              <li class="list-group-item">Reserved IPs</li>
+              <li class="list-group-item">Total Subnets</li>
+              <li class="list-group-item">Used Percentage</li>
+              <li class="list-group-item">Reverse Lookup Failed</li>
+              <li class="list-group-item">Forward Lookup Failed</li>
+              <li class="list-group-item">Forward Lookup IP Mismatch</li>
+            </ul>
+          </div>
+          <div class="col-4">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">3048</li>
+              <li class="list-group-item">0</li>
+              <li class="list-group-item">12</li>
+              <li class="list-group-item">16.77%</li>
+              <li class="list-group-item">124</li>
+              <li class="list-group-item">27</li>
+              <li class="list-group-item">192</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4 d-flex section-container">
+      <div class="col-section d-flex flex-column">
+        <div class="col-section-title d-flex align-items-center">
+          <h5 class="m-0">IP Availability</h5>
+        </div>
+        <p-divider></p-divider>
+        <div class="col-section-content">
+          <div echarts [options]="eChartOptions"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4 d-flex section-container">
+      <div class="col-section d-flex flex-column">
+        <div class="col-section-title">
+          <p-dropdown
+            [options]="chartOptions"
+            optionLabel="name"
+            styleClass="w-100"
+          >
+          </p-dropdown>
+        </div>
+        <p-divider></p-divider>
+        <div class="col-section-content">
+          <div echarts [options]="eChartOptions2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="d-flex flex-column mt-5">
+    <div class="section-title d-flex justify-content-between">
+      <h5>Subnets</h5>
+    </div>
+    <p-divider></p-divider>
+    <div class="section-content">
+      <div echarts [options]="eChartOptionsForBar"></div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,161 @@
+<section class="content-body">
+  <div class="col-md-12 no-padding">
+    <div class="box">
+      <div class="box-header">
+        <h5 class="box-title">Subnet</h5>
+      </div>
+      <div class="box-body">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr (click)="onColumnClick($event.target)">
+              <th data-column="Address" class="table-sorter">Address</th>
+              <th data-column="Mask" class="table-sorter">Mask</th>
+              <th data-column="Name" class="table-sorter">Name</th>
+              <th data-column="Size" class="table-sorter">Size</th>
+              <th data-column="ScanStatus" class="table-sorter" style="width:150px">ScanStatus</th>
+              <th data-column="LastScannedOn" class="table-sorter" style="width:150px">Last Scanned On</th>
+              <th data-column="Available" class="table-sorter" style="width:150px">Available</th>
+              <th data-column="Used" class="table-sorter" style="width:150px">Used</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf='subnets && subnets.length > 0'>
+              <tr *ngFor='let subnet of subnets'>
+                <td>{{subnet.address}}</td>
+                <td>{{subnet.mask}}</td>
+                <td>{{subnet.name}}</td>
+                <td>{{subnet.size}}</td>
+                <td>{{subnet.scanStatus}}</td>
+                <td>{{subnet.lastScannedOn  | date:'dd/MM/yyyy'}}</td>
+                <td>{{subnet.available}}</td>
+                <td>{{subnet.used}}</td>
+              </tr>
+            </ng-container>
+            <tr *ngIf='subnets == null || subnets.length == 0'>
+              <td colspan="8" style="text-align: center;">
+                {{statusMessage}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <div style="position: fixed; top: calc(100vh - 90px); right: 0; z-index: 10; padding: 20px;" *ngIf="modes.includes('add')" cdkDrag>
+  <button mat-fab color="primary" matTooltip="Add Subnet" aria-label="Add Subnet" (click)="add()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div> -->
+
+<!-- <div class="float-box float-box-hide" *ngIf="subnet">
+  <as-split direction="horizontal" [gutterSize]="2">
+    <as-split-area [size]="10" [minSize]="10">
+
+    </as-split-area>
+    <as-split-area [size]="90" [minSize]="40" class="float-box-content">
+      <div>
+        <div class="box-header">
+          <div class="box-tools pull-right">
+            <ng-container>
+              <button mat-icon-button color="primary" aria-label="Save" matTooltip="Save" (click)="save()"
+                [disabled]="form.invalid || !form.dirty">
+                <mat-icon>save</mat-icon>
+              </button>
+            </ng-container>
+            <button mat-icon-button color="warn" aria-label="Close" matTooltip="Close" (click)="close()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <h3 class="box-title">Add Subnet</h3>
+        </div>
+        <div>
+          <div class="form-group" style="padding-left:10px">
+            <mat-radio-group name="isGenerate" [(ngModel)]="isGenerate">
+              <div class="form-group" style="padding-bottom:10px;">
+                <mat-radio-button [value]=true style="padding-right:20px">Generate</mat-radio-button>
+                <mat-radio-button [value]=false>Import</mat-radio-button>
+              </div>
+            </mat-radio-group>
+          </div>
+          <form name="form" action="javascript:{}" #form="ngForm" novalidate autocomplete="off">
+            <div class="form-group col-md-6">
+              <label for="countryCode" class="control-label">Country Code</label>
+              <mat-select name="numberType" [(ngModel)]="numberType">
+                <mat-option value="Mobile">Mobile</mat-option>
+                <mat-option value="Landline">Landline</mat-option>
+              </mat-select>
+              <input type="text" class="form-control input-sm" name="countryCode" required
+                [(ngModel)]="settings.countryCode" readonly>
+            </div>
+            <div *ngIf="isGenerate == true">
+              <div class="form-group col-md-6" *ngIf="numberType == 'Mobile'">
+                <label class="control-label">MNC Code <span style="color:red;">*</span></label>
+                <input type="text" class="form-control input-sm" name="mncCode" required
+                  [(ngModel)]="numberSeries.mncCode">
+              </div>
+              <div class="form-group col-md-6" *ngIf="numberType == 'Landline'">
+                <label class="control-label">Area Code <span style="color:red;">*</span></label>
+                <input type="text" class="form-control input-sm" name="areaCode" required
+                  [(ngModel)]="numberSeries.areaCode">
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">Start Number <span style="color:red;">*</span></label>
+                <input type="number" class="form-control input-sm" name="startNumber" required
+                  [(ngModel)]="numberSeries.startNumber">
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">End Number <span style="color:red;">*</span></label>
+                <input type="number" class="form-control input-sm" name="endNumber" required
+                  [(ngModel)]="numberSeries.endNumber">
+              </div>
+            </div>
+            <div *ngIf="isGenerate == false">
+              <div class="form-group col-md-12">
+                <label for="uploadFile">Upload file</label>
+                <div class="input-group col-md-12">
+                  <input type="text" name="fileName" class="form-control" readonly id="uploadFile"
+                    placeholder="Choose file" [(ngModel)]="fileName">
+                  <span class="input-group-btn">
+                    <span class="btn btn-primary btn-file">
+                      Browse&hellip; <input type="file" name="file" #fileInput (click)="fileInput.value = null"
+                        accept=".csv" value="" (change)="fileChangeEvent($event)">
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="col-md-12">
+            <label class="control-label">Generated Numbers (Sample top 10 records)</label>
+            <div style="overflow-y:auto; max-height:300px;padding-right:3px">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngIf='generatedNumbers && generatedNumbers.length > 0'>
+                    <tr *ngFor='let genNumber of generatedNumbers;'>
+                      <td>{{genNumber.number}}</td>
+                    </tr>
+                  </ng-container>
+                  <tr *ngIf='generatedNumbers == null || generatedNumbers.length == 0'>
+                    <td style="text-align: center;">
+                      {{genStatusMessage}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </as-split-area>
+  </as-split>
+
+</div> -->
+

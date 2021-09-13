@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "address": "172.21.146.0/24",
+            "name": "Not Defined",
+            "size": 254,
+            "usage": 24,
+            "scanStatus": "Scanned",
+            "available": 0,
+            "used": 65,
+            "transient": 545,
+            "lastScannedOn": "2019/09/09"
+        },
+        {
+            "id": "2",
+            "address": "172.21.146.0/24",
+            "name": "Not Defined",
+            "size": 254,
+            "usage": 4,
+            "scanStatus": "Scanned",
+            "available": 0,
+            "used": 65,
+            "transient": 97,
+            "lastScannedOn": "2019/09/10"
+        },
+        {
+            "id": "3",
+            "address": "172.21.146.0/24",
+            "name": "Not Defined",
+            "size": 254,
+            "usage": 9,
+            "scanStatus": "Not Started",
+            "available": 0,
+            "used": 33,
+            "transient": 88,
+            "lastScannedOn": "2019/09/01"
+        }
+    ]
+}

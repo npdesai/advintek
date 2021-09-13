@@ -1,0 +1,174 @@
+<div class="row content-section" [ngStyle]="{'width': openWidth + '%'}">
+    <div class="col-md-6 blur-section"></div>
+    <div class="col-md-6 page-section">
+        <div class="row pageHeader">
+            <div class="col-10">
+                <h4 class="mb-0">{{pageTitle}}</h4>
+            </div>
+            <div class="col-2 text-right">
+                <button pButton type="button" icon="pi pi-times" class="p-button-secondary p-button-text"
+                    (click)="onCancel()"></button>
+            </div>
+        </div>
+        <div class="row pageContent" *ngIf="isAddIPv4Subnet">
+            <div class="col">
+                <form class="form-section">
+                    <div class="row form-row">
+                        <div class="col">
+                            <mat-radio-group>
+                                <mat-radio-button value="addmanual" checked="true" (change)="ipv4RadioChange($event)">Add Manually</mat-radio-button>
+                                <mat-radio-button value="importcsv" (change)="ipv4RadioChange($event)">Import from CSV</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <div class="row form-row" *ngIf="isAddManual">
+                        <div class="col">
+                            <h6>Group Name</h6>
+                            <div class="row">
+                                <div class="col pr-0">
+                                    <p-dropdown [options]="groups" placeholder="Select Group" optionLabel="name"
+                                        styleClass="w-100" *ngIf="!isAdd"></p-dropdown>
+                                        <input type="text" pInputText class="w-100" *ngIf="isAdd" />
+                                </div>
+                                <div class="col">
+                                    <button pButton pRipple type="button" icon="pi pi-plus"
+                                        class="p-button-success p-button-rounded" (click)="addClick()"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-row" *ngIf="isAddManual">
+                        <div class="col">
+                            <h6>Subnet/Network Address</h6>
+                            <input type="text" pInputText class="w-100" />
+                        </div>
+                        <div class="col">
+                            <h6>Subnet Mask</h6>
+                            <p-dropdown [options]="subnetmasks" placeholder="Select Subnet Mask" optionLabel="name"
+                                styleClass="w-100"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="row form-row" *ngIf="isAddManual">
+                        <div class="col">
+                            <h6>Subnet Name</h6>
+                            <input type="text" pInputText class="w-100" />
+                        </div>
+                        <div class="col">
+                            <h6>Description</h6>
+                            <input type="text" pInputText class="w-100" />
+                        </div>
+                    </div>
+                    <div class="row form-row" *ngIf="isAddManual">
+                        <div class="col">
+                            <h6>VLAN Name</h6>
+                            <input type="text" pInputText class="w-100" />
+                        </div>
+                        <div class="col">
+                            <h6>Location</h6>
+                            <input type="text" pInputText class="w-100" />
+                        </div>
+                    </div>
+                    <div class="row form-row" *ngIf="!isAddManual">
+                        <div class="col">
+                            <h6>Import File</h6>
+                            <p-fileUpload url="./upload.php" (onUpload)="onUpload($event)">
+                                <ng-template pTemplate="content">
+                                    <ul *ngIf="uploadedFiles.length">
+                                        <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                                    </ul>
+                                </ng-template>
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                    <p-divider></p-divider>
+                    <div class="row">
+                        <div class="col text-right">
+                            <p-button label="Cancel" styleClass="p-button-secondary p-button-sm" (click)="onCancel()">
+                            </p-button>
+                            <p-button label="Add" styleClass="p-button-success p-button-sm ml-2"></p-button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row pageContent" *ngIf="isAddIPv6SubnetSite">
+            <div class="col">
+                <form class="form-section">
+                    <div class="row form-row">
+                        <div class="col">
+                            <mat-radio-group>
+                                <mat-radio-button value="gp" checked="true" (change)="ipv6RadioChange($event)">Global Prefix</mat-radio-button>
+                                <mat-radio-button value="ss" (change)="ipv6RadioChange($event)">Subnet/Site</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                    <div class="row form-row" *ngIf="!isGP">
+                        <div class="col-12 col-md-6">
+                            <h6>Company</h6>
+                            <p-dropdown [options]="companies" placeholder="Select Company" optionLabel="name" styleClass="w-100"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="row form-row">
+                        <div class="col-12 col-md-6">
+                            <h6>Prefix Name</h6>
+                            <input type="text" pInputText class="w-100" />
+                        </div>
+                    </div>
+                    <div class="row form-row">
+                        <div class="col-12 col-md-6">
+                            <h6>Prefix Address</h6>
+                            <input type="text" pInputText aria-describedby="prefix-address-help" class="w-100" />
+                            <small id="prefix-address-help">Ex: </small>
+                        </div>
+                    </div>
+                    <div class="row form-row">
+                        <div class="col-12 col-md-6">
+                            <h6>Prefix Length</h6>
+                            <p-dropdown [options]="prefixLengths" placeholder="Select Length" optionLabel="name" styleClass="w-100"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="row form-row">
+                        <div class="col-12 col-md-6">
+                            <h6>Prefix Description</h6>
+                            <textarea pInputTextarea class="w-100"></textarea>
+                        </div>
+                    </div>
+                    <p-divider></p-divider>
+                    <div class="row">
+                        <div class="col text-right">
+                            <p-button label="Cancel" styleClass="p-button-secondary p-button-sm" (click)="onCancel()">
+                            </p-button>
+                            <p-button label="Add" styleClass="p-button-success p-button-sm ml-2"></p-button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row pageContent" *ngIf="isAddDHCPServer">
+            <div class="col">
+                <form class="form-section">
+                    <div class="row form-row">
+                        <div class="col-12 col-md-6">
+                            <h6>Server Name</h6>
+                            <input type="text" pInputText class="w-100" />
+                        </div>
+                    </div>
+                    <div class="row form-row">
+                        <div class="col-12 col-md-6">
+                            <h6>Select AD Domain</h6>
+                            <p-dropdown [options]="adDomains" placeholder="Choose AD Domain" optionLabel="name" styleClass="w-100"></p-dropdown>
+                        </div>
+                    </div>
+                    <p-divider></p-divider>
+                    <div class="row">
+                        <div class="col text-right">
+                            <p-button label="Cancel" styleClass="p-button-secondary p-button-sm" (click)="onCancel()">
+                            </p-button>
+                            <p-button label="Add" styleClass="p-button-success p-button-sm ml-2"></p-button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

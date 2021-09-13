@@ -1,0 +1,44 @@
+<app-menu></app-menu>
+<div class="d-flex main-section">
+  <div>
+    <aside id="mainNavMenu" class="main-sidebar">
+      <p-tabView>
+        <p-tabPanel header="Tree View" [selected]="true">
+          <p-tree [value]="treeitems" selectionMode="single" [(selection)]="selectedFile" (onNodeSelect)="nodeSelect($event)"></p-tree>
+        </p-tabPanel>
+        <p-tabPanel header="Donut View"> Under Construction.. </p-tabPanel>
+      </p-tabView>
+    </aside>
+  </div>
+  <div class="page-section">
+    <div id="ContentWrapper" class="content-wrapper">
+      <div class="col-12 top-section">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="">
+            <p-breadcrumb [model]="crumbs" styleClass="pl-0"></p-breadcrumb>
+          </div>
+          <div>
+            <p-splitButton
+              label="Add"
+              [model]="items"
+              styleClass="action-btn mr-2"
+            ></p-splitButton>
+            <p-splitButton
+              label="Settings"
+              [model]="settingsItems"
+              styleClass="action-btn"
+            ></p-splitButton>
+          </div>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<!-- <app-addsubnetmodal [subname]="titleSubnet"></app-addsubnetmodal> -->
+<app-add
+  [(pageTitle)]="pageTitle"
+  [(openWidth)]="width"
+  (closeWidth)="closeDiv($event)"
+></app-add>

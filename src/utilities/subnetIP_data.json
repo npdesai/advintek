@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "ipAddress": "192.168.1.4",
+            "macAddress": "7E:31:D9:DE:BD:DE",
+            "ipDNS": "",
+            "dnsIp": "",
+            "dnsStatus": "Success",
+            "status": "Transient",
+            "deviceType": "",
+            "connectedSwitch": "",
+            "connectedPort": 5032
+        },
+        {
+            "id": "2",
+            "ipAddress": "192.168.25.65",
+            "macAddress": "66:D2:6E:23:9A:C8",
+            "ipDNS": "",
+            "dnsIp": "",
+            "dnsStatus": "Reverse Lookup Failed",
+            "status": "Used",
+            "deviceType": "",
+            "connectedSwitch": "",
+            "connectedPort": 1337
+        },
+        {
+            "id": "3",
+            "ipAddress": "192.168.88.45",
+            "macAddress": "F2:BB:8B:97:D2:EA",
+            "ipDNS": "",
+            "dnsIp": "",
+            "dnsStatus": "N/A",
+            "status": "Transient",
+            "deviceType": "",
+            "connectedSwitch": "",
+            "connectedPort": 3001
+        }
+    ]
+}

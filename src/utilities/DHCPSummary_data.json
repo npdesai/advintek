@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "ipAddress": "172.21.146.0/24",
+            "serverType": "Not Defined",
+            "noOfScopes": 254,
+            "totalIPs": 24,
+            "leasedIPs": "198.168.24.54",
+            "reservedIPs": "198.168.2.2",
+            "lastScanTime": "2019/09/09 08:10:00",
+            "status": "Active",
+            "action": ""
+        },
+        {
+            "id": "2",
+            "ipAddress": "172.21.128.0/25",
+            "serverType": "N/A",
+            "noOfScopes": 44,
+            "totalIPs": 2,
+            "leasedIPs": "198.168.24.54",
+            "reservedIPs": "198.168.2.2",
+            "lastScanTime": "2019/09/15 18:20:00",
+            "status": "Active",
+            "action": ""
+        },
+        {
+            "id": "3",
+            "ipAddress": "172.21.16.5/24",
+            "serverType": "Not Defined",
+            "noOfScopes": 1,
+            "totalIPs": 10,
+            "leasedIPs": "198.168.24.10",
+            "reservedIPs": "198.168.25.2",
+            "lastScanTime": "2019/09/08 10:10:00",
+            "status": "Active",
+            "action": ""
+        }
+    ]
+}

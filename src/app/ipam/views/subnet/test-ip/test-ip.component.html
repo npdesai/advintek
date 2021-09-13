@@ -1,0 +1,343 @@
+<div class="row content-section" [ngStyle]="{ width: openWidth + '%' }">
+  <div class="col-md-6 blur-section"></div>
+  <div class="col-md-6 page-section">
+    <div class="row pageHeader">
+      <div class="col-10">
+        <h4 class="mb-0">{{ pageTitle }} - {{ ipDetail.ipAddress }}</h4>
+      </div>
+      <div class="col-2 text-right">
+        <button
+          pButton
+          type="button"
+          icon="pi pi-times"
+          class="p-button-secondary p-button-text"
+          (click)="onCancel()"
+        ></button>
+      </div>
+    </div>
+    <div class="row pageContent" *ngIf="isPing">
+      <div class="col-12 mb-4">
+        <form class="form-section">
+          <div class="row form-row">
+            <div class="col-12 col-md-6">
+              <h6>IP Address/Host Name</h6>
+              <input
+                type="text"
+                pInputText
+                class="w-100"
+                [value]="ipDetail.ipAddress"
+                disabled
+              />
+            </div>
+          </div>
+          <p-divider></p-divider>
+          <div class="row">
+            <div class="col text-right">
+              <p-button
+                label="Ping"
+                styleClass="p-button-success p-button-sm"
+              ></p-button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-12 mb-4">
+        <h6>Ping Status</h6>
+        <p-divider></p-divider>
+      </div>
+      <div class="col-12 mb-4">
+        <h6>Ping Response</h6>
+        <p-divider></p-divider>
+      </div>
+      <div class="col-12 mb-4">
+        <p-divider></p-divider>
+        <div class="row">
+          <div class="col-6">DNS Name</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">IP Address</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">Packet Count</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">Packet Size</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">Time to Live</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">Timed out</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">Packet Sent</div>
+          <div class="col-6">N/A</div>
+        </div>
+        <div class="row">
+          <div class="col-6">Packet Received</div>
+          <div class="col-6">N/A</div>
+        </div>
+        <div class="row">
+          <div class="col-6">Packet Loss</div>
+          <div class="col-6">N/A</div>
+        </div>
+      </div>
+      <div class="col-12">
+        <h6>Round Tip Time</h6>
+        <p-divider></p-divider>
+        <div class="row">
+          <div class="col-6">Maximum</div>
+          <div class="col-6">N/A</div>
+        </div>
+        <div class="row">
+          <div class="col-6">Minimum</div>
+          <div class="col-6">N/A</div>
+        </div>
+        <div class="row">
+          <div class="col-6">Average</div>
+          <div class="col-6">N/A</div>
+        </div>
+      </div>
+    </div>
+    <div class="row pageContent" *ngIf="isSNMPPing">
+      <div class="col-12 mb-4">
+        <form class="form-section">
+          <div class="row form-row">
+            <div class="col-12 col-md-6">
+              <h6>IP Address/Host Name</h6>
+              <input
+                type="text"
+                pInputText
+                class="w-100"
+                [value]="ipDetail.ipAddress"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="row form-row">
+            <div class="col-12 col-md-6">
+              <h6>Credential</h6>
+              <p-dropdown
+                [options]="credentials"
+                placeholder="Select Subnet Mask"
+                optionLabel="name"
+                styleClass="w-100"
+              ></p-dropdown>
+            </div>
+          </div>
+          <p-divider></p-divider>
+          <div class="row">
+            <div class="col text-right">
+              <p-button
+                label="SNMP Ping"
+                styleClass="p-button-success p-button-sm"
+              ></p-button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row pageContent" *ngIf="isResolveDNS">
+      <div class="col-12 mb-4">
+        <form class="form-section">
+          <div class="row form-row">
+            <div class="col-12 col-md-6">
+              <h6>IP Address/Host Name</h6>
+              <input
+                type="text"
+                pInputText
+                class="w-100"
+                [value]="ipDetail.ipAddress"
+                disabled
+              />
+            </div>
+          </div>
+          <p-divider></p-divider>
+          <div class="row">
+            <div class="col text-right">
+              <p-button
+                label="Resolve"
+                styleClass="p-button-success p-button-sm"
+              ></p-button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-12 mb-3">
+        <h6>DNS Details</h6>
+        <p-divider></p-divider>
+        <div class="row">
+          <div class="col-6">DNS Name</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">IP Address</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">Status</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">Response Time</div>
+          <div class="col-6"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row pageContent" *ngIf="isResolveMACAddress">
+      <div class="col-12 mb-4">
+        <form class="form-section">
+          <div class="row form-row">
+            <div class="col-12 col-md-6">
+              <h6>IP Address/Host Name</h6>
+              <input
+                type="text"
+                pInputText
+                class="w-100"
+                [value]="ipDetail.ipAddress"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="row form-row">
+            <div class="col-12 col-md-6">
+              <h6>Community (optional)</h6>
+              <input type="text" pInputText class="w-100" />
+            </div>
+          </div>
+          <p-divider></p-divider>
+          <div class="row">
+            <div class="col text-right">
+              <p-button
+                label="Resolve"
+                styleClass="p-button-success p-button-sm"
+              ></p-button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-12 mb-3">
+        <h6>MAC Address Details</h6>
+        <p-divider></p-divider>
+        <div class="row">
+          <div class="col-6">MAC Address Status</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">IP Address</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">DNS Name</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">MAC Address</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">NIC Type</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">Port</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">System Object Identifier</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">System Name</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">System Type</div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row">
+          <div class="col-6">System Description</div>
+          <div class="col-6"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row pageContent" *ngIf="isTraceRoute">
+      <div class="col-12 mb-4">
+        <form class="form-section">
+          <div class="row form-row">
+            <div class="col-12 col-md-6">
+              <h6>IP Address/Host Name</h6>
+              <input
+                type="text"
+                pInputText
+                class="w-100"
+                [value]="ipDetail.ipAddress"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="row form-row">
+            <div class="col-12 col-md-6">
+              <h6>Maximum Hops</h6>
+              <input type="text" pInputText class="w-100" />
+            </div>
+          </div>
+          <div class="row form-row">
+            <div class="col-12 col-md-6">
+              <h6>Timeout</h6>
+              <input type="text" pInputText class="w-100" />
+            </div>
+          </div>
+          <p-divider></p-divider>
+          <div class="row">
+            <div class="col text-right">
+              <p-button
+                label="Trace"
+                styleClass="p-button-success p-button-sm"
+              ></p-button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row pageContent" *ngIf="isSystemExplorer">
+        <div class="col-12 mb-4">
+            <form class="form-section">
+              <div class="row form-row">
+                <div class="col-12 col-md-6">
+                  <h6>IP Address/Host Name</h6>
+                  <input
+                    type="text"
+                    pInputText
+                    class="w-100"
+                    [value]="ipDetail.ipAddress"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="row form-row">
+                <div class="col-12 col-md-6">
+                  <h6>Read Community</h6>
+                  <input type="password" pInputText class="w-100" />
+                </div>
+              </div>
+              <p-divider></p-divider>
+              <div class="row">
+                <div class="col text-right">
+                  <p-button
+                    label="Show"
+                    styleClass="p-button-success p-button-sm"
+                  ></p-button>
+                </div>
+              </div>
+            </form>
+          </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+{
+    "data": 
+    [
+        {
+            "label": "Default Group",
+            "data": "Documents Folder",
+            "path": "/ipam/groups/1",
+            "expandedIcon": "pi pi-folder-open",
+            "collapsedIcon": "pi pi-folder",
+            "expanded": "true",
+            "children": [{
+                    "label": "192.168.1.2/24",
+                    "data": "Work Folder",
+                    "path": "/ipam/subnets/192.168.1.2",
+                    "expandedIcon": "pi pi-cloud",
+                    "collapsedIcon": "pi pi-cloud",
+                    "children": []
+                },
+                {
+                    "label": "192.168.1.3/28",
+                    "data": "Work Folder",
+                    "path": "/ipam/subnets/192.168.1.3",
+                    "expandedIcon": "pi pi-cloud",
+                    "collapsedIcon": "pi pi-cloud",
+                    "children": []
+                }]
+                },
+                {
+                    "label": "DHCP Servers",
+                    "data": "Home Folder",
+                    "path": "/ipam/DHCPSummary/2",
+                    "expandedIcon": "pi pi-search",
+                    "collapsedIcon": "pi pi-search",
+                    "children": []
+                },
+                {
+                    "label": "Discovered Subnet",
+                    "data": "Home Folder",
+                    "path": "/ipam/DiscoveredSubnetSummary/1",
+                    "expandedIcon": "pi pi-search",
+                    "collapsedIcon": "pi pi-search",
+                    "children": []
+                },
+                {
+                    "label": "Discovered v6 Hosts",
+                    "data": "Home Folder",
+                    "path": "/ipam/DiscoveredV6Subnet/5",
+                    "expandedIcon": "pi pi-star",
+                    "collapsedIcon": "pi pi-star",
+                    "children": []
+                }
+    ]
+}

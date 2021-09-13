@@ -1,0 +1,19 @@
+.success-dialog {
+  color: white !important;
+  background-color: green !important;
+}
+
+.error-dialog {
+  color: white !important;
+  background-color: red !important;
+}
+
+.info-dialog {
+  color: #444 !important;
+  background-color: lightgray !important;
+}
+
+.message ul {
+  margin: 0px;
+  padding-left: 20px;
+}

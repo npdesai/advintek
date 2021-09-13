@@ -1,0 +1,53 @@
+<mat-tab-group animationDuration="0ms">
+    <mat-tab label="DHCP Summary">
+        <section class="content-body">
+            <div class="col-md-12 no-padding">
+                <div class="box">
+                    <div class="box-header">
+                        <h5 class="box-title">DHCP Summary</h5>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th data-column="Address">IP Address</th>
+                                    <th data-column="Name">Server Type</th>
+                                    <th data-column="Size">No of Scopes</th>
+                                    <th data-column="Usage" style="width:125px">Total IPs</th>
+                                    <th data-column="ScanStatus">Leased IPs</th>
+                                    <th data-column="Available">Reserved IPs</th>
+                                    <th data-column="Used">Last ScanTime</th>
+                                    <th data-column="Transient">Status</th>
+                                    <th data-column="LastScanTime">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngIf="dhcpServers && dhcpServers.length > 0">
+                                    <tr *ngFor="let dhcpServer of dhcpServers">
+                                        <td>{{ dhcpServer.ipAddress }}</td>
+                                        <td>{{ dhcpServer.serverType }}</td>
+                                        <td>{{ dhcpServer.noOfScopes }}</td>
+                                        <td>{{ dhcpServer.totalIPs }}</td>                                      
+                                        <td>{{ dhcpServer.leasedIPs }}</td>
+                                        <td>{{ dhcpServer.reservedIPs }}</td>
+                                        <td>{{ dhcpServer.lastScanTime }}</td>
+                                        <td>
+                                            <i class="fas fa-check-circle text-success"></i>
+                                            <span class="ml-2">{{ dhcpServer.status }}</span>
+                                        </td>
+                                        <td>{{ dhcpServer.action}}</td>
+                                    </tr>
+                                </ng-container>
+                                <tr *ngIf="dhcpServers == null || dhcpServers.length == 0">
+                                    <td colspan="9" style="text-align: center">
+                                        {{ statusMessage }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </mat-tab>
+</mat-tab-group>

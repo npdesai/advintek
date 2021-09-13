@@ -1,0 +1,74 @@
+<mat-tab-group animationDuration="0ms">
+  <mat-tab label="IP Details">
+    <section class="content-body">
+      <div class="col-md-12 no-padding">
+        <div class="box">
+          <div class="box-header">
+            <h5 class="box-title">IPs</h5>
+          </div>
+          <p-contextMenu
+            #cm
+            [model]="cmenuitems"
+            appendTo="body"
+            triggerEvent="click"
+            [autoZIndex]="true"
+          ></p-contextMenu>
+          <div class="box-body">
+            <table class="table table-bordered table-striped table-responsive">
+              <thead>
+                <tr>
+                  <th>IP Address</th>
+                  <th>MAC Address</th>
+                  <th>IP->DNS</th>
+                  <th>DNS->IP</th>
+                  <th>DNS Status</th>
+                  <th>Status</th>
+                  <th>Device Type</th>
+                  <th>Connected Switch</th>
+                  <th>Connected Port</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngIf="ipDetails && ipDetails.length > 0">
+                  <tr *ngFor="let ipDetail of ipDetails">
+                    <td>
+                      <span class="mr-2">{{ ipDetail.ipAddress }}</span>
+                      <i
+                        class="fas fa-caret-right"
+                        (click)="openCM($event, cm, ipDetail)"
+                      ></i>
+                    </td>
+                    <td>{{ ipDetail.macAddress }}</td>
+                    <td>{{ ipDetail.ipDNS }}</td>
+                    <td>{{ ipDetail.dnsIp }}</td>
+                    <td>{{ ipDetail.dnsStatus }}</td>
+                    <td>
+                      <i class="fas fa-check-circle text-success"></i>
+                      <span class="ml-2">{{ ipDetail.status }}</span>
+                    </td>
+                    <td>{{ ipDetail.deviceType }}</td>
+                    <td>{{ ipDetail.connectedSwitch }}</td>
+                    <td>{{ ipDetail.connectedPort }}</td>
+                  </tr>
+                </ng-container>
+                <tr *ngIf="ipDetails == null || ipDetails.length == 0">
+                  <td colspan="9" style="text-align: center">
+                    {{ statusMessage }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </mat-tab>
+  <mat-tab label="IP History"></mat-tab>
+</mat-tab-group>
+
+<app-test-ip
+  [(pageTitle)]="pageTitle"
+  [(ipDetail)]="selectedIpDetail"
+  [(openWidth)]="width"
+  (closeWidth)="closeDiv($event)"
+></app-test-ip>
