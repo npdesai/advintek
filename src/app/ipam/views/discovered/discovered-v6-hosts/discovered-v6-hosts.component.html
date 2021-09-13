@@ -1,1 +1,144 @@
-<p>discovered-v6-hosts works!</p>
+<div class="content-container">
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab label="Global">
+            <section class="content-body">
+                <div class="col-md-12 no-padding">
+                    <div class="box">
+                        <div class="box-header">
+                            <h5 class="box-title">Discovered V6 Hosts</h5>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-4 text-right mb-2">Total IPs</div>
+                                        <div class="col-md-7 offset-md-1 mb-2">0</div>
+                                        <div class="col-md-4 text-right mb-2">Used IPs</div>
+                                        <div class="col-md-7 offset-md-1 mb-2">200</div>
+                                        <div class="col-md-4 text-right mb-2">Available IPs</div>
+                                        <div class="col-md-7 offset-md-1 mb-2">0</div>
+                                        <div class="col-md-4 text-right mb-2">Transient IPs</div>
+                                        <div class="col-md-7 offset-md-1 mb-2">535</div>
+                                        <div class="col-md-4 text-right mb-2">Not Scanned</div>
+                                        <div class="col-md-7 offset-md-1 mb-2">0</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="chart-container">
+                                        <div echarts [options]="eChartOptions"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="box-header">
+                            <h5 class="box-title">Discovered V6 Hosts</h5>
+                        </div>
+                        <div class="box-body">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>IPv6 Address</th>
+                                        <th>Status</th>
+                                        <th>MAC Address</th>
+                                        <th>DNS Status</th>
+                                        <th>DNS->IP</th>
+                                        <th>Vendor Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngIf="discoveredV6Hosts && discoveredV6Hosts.length > 0">
+                                        <tr *ngFor="let discoveredV6Host of discoveredV6Hosts">
+                                            <td>{{ discoveredV6Host.IPV6Address }}</td>
+                                            <td>{{ discoveredV6Host.status }}</td>
+                                            <td>{{ discoveredV6Host.MACAddress }}</td>
+                                            <td>{{ discoveredV6Host.DNSStatus }}</td>
+                                            <td>{{ discoveredV6Host.DNSIp }}</td>
+                                            <td>{{ discoveredV6Host.vendorName }}</td>
+                                        </tr>
+                                        <tr *ngIf="discoveredV6Hosts == null || discoveredV6Hosts.length == 0">
+                                            <td colspan="9" style="text-align: center">
+                                                {{ statusMessage }}
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </mat-tab>
+        <mat-tab label="Local">
+            <section class="content-body">
+                <div class="col-md-12 no-padding">
+                    <div class="box">
+                        <div class="box-header">
+                            <h5 class="box-title">Discovered V6 Hosts</h5>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-4 text-right mb-2">Total IPs</div>
+                                        <div class="col-md-7 offset-md-1 mb-2">0</div>
+                                        <div class="col-md-4 text-right mb-2">Used IPs</div>
+                                        <div class="col-md-7 offset-md-1 mb-2">200</div>
+                                        <div class="col-md-4 text-right mb-2">Available IPs</div>
+                                        <div class="col-md-7 offset-md-1 mb-2">300</div>
+                                        <div class="col-md-4 text-right mb-2">Transient IPs</div>
+                                        <div class="col-md-7 offset-md-1 mb-2">535</div>
+                                        <div class="col-md-4 text-right mb-2">Not Scanned</div>
+                                        <div class="col-md-7 offset-md-1 mb-2">170</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="chart-container">
+                                        <div echarts [options]="eChartOptionsLocal"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="box-header">
+                            <h5 class="box-title">Discovered V6 Hosts</h5>
+                        </div>
+                        <div class="box-body">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>IPv6 Address</th>
+                                        <th>Status</th>
+                                        <th>MAC Address</th>
+                                        <th>DNS Status</th>
+                                        <th>DNS->IP</th>
+                                        <th>Vendor Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngIf="discoveredV6Hosts && discoveredV6Hosts.length > 0">
+                                        <tr *ngFor="let discoveredV6Host of discoveredV6Hosts">
+                                            <td>{{ discoveredV6Host.IPV6Address }}</td>
+                                            <td>{{ discoveredV6Host.status }}</td>
+                                            <td>{{ discoveredV6Host.MACAddress }}</td>
+                                            <td>{{ discoveredV6Host.DNSStatus }}</td>
+                                            <td>{{ discoveredV6Host.DNSIp }}</td>
+                                            <td>{{ discoveredV6Host.vendorName }}</td>
+                                        </tr>
+                                        <tr *ngIf="discoveredV6Hosts == null || discoveredV6Hosts.length == 0">
+                                            <td colspan="9" style="text-align: center">
+                                                {{ statusMessage }}
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </mat-tab>
+    </mat-tab-group>
+</div>
