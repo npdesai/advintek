@@ -365,6 +365,11 @@ body .ui-widget {
   /* margin-left: 240px; */
 }
 
+.content-container {
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
 .content-body-root {
   min-height: calc(100vh - 150px);
   padding: 0 5px;

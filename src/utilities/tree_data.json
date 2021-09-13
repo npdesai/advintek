@@ -36,7 +36,7 @@
                 {
                     "label": "Discovered Subnet",
                     "data": "Home Folder",
-                    "path": "/ipam/DiscoveredSubnetSummary/1",
+                    "path": "/ipam/discovered/subnets",
                     "expandedIcon": "pi pi-search",
                     "collapsedIcon": "pi pi-search",
                     "children": []
@@ -44,7 +44,7 @@
                 {
                     "label": "Discovered v6 Hosts",
                     "data": "Home Folder",
-                    "path": "/ipam/DiscoveredV6Subnet/5",
+                    "path": "/ipam/discovered/v6hosts",
                     "expandedIcon": "pi pi-star",
                     "collapsedIcon": "pi pi-star",
                     "children": []

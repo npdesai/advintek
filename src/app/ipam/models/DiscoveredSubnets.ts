@@ -1,12 +1,10 @@
 export class DiscoveredSubnets {
   id: string;
-  ipAddress: string;
-  serverType: string;
-  noOfScopes: number;
-  totalIPs: number;
-  leasedIPs: string;
-  reservedIPs: string;
-  lastScanTime: string;
+  subnetAddress: string;
+  broadcastAddress: string;
+  size: number;
+  subnetMask: number;
+  addedTime: string;
   status: string;
   action: string;
 }
