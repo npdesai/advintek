@@ -8,6 +8,7 @@ import { DiscoveredV6HostsComponent } from './views/discovered/discovered-v6-hos
 import { GroupComponent } from './views/group/group.component';
 import { HomeComponent } from './views/home.component';
 import { IpamComponent } from './views/ipam.component';
+import { RoutersComponent } from './views/settings/routers/routers.component';
 import { SubnetComponent } from './views/subnet/subnet.component';
 
 export const ipamRoutes: Routes = [
@@ -26,6 +27,9 @@ export const ipamRoutes: Routes = [
           { path: 'discovered', children: [
             { path: 'subnets', component: DiscoveredSubnetsComponent },
             { path: 'v6hosts', component: DiscoveredV6HostsComponent }
+          ] },
+          { path: 'settings', children: [
+            { path: 'router', component: RoutersComponent }
           ] },
           { path: '**', redirectTo: 'home', pathMatch: 'full' },
         ],

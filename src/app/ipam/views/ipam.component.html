@@ -4,7 +4,12 @@
     <aside id="mainNavMenu" class="main-sidebar">
       <p-tabView>
         <p-tabPanel header="Tree View" [selected]="true">
-          <p-tree [value]="treeitems" selectionMode="single" [(selection)]="selectedFile" (onNodeSelect)="nodeSelect($event)"></p-tree>
+          <p-tree
+            [value]="treeitems"
+            selectionMode="single"
+            [(selection)]="selectedFile"
+            (onNodeSelect)="nodeSelect($event)"
+          ></p-tree>
         </p-tabPanel>
         <p-tabPanel header="Donut View"> Under Construction.. </p-tabPanel>
       </p-tabView>
@@ -36,9 +41,12 @@
   </div>
 </div>
 
-<!-- <app-addsubnetmodal [subname]="titleSubnet"></app-addsubnetmodal> -->
+<!-- Add -->
 <app-add
   [(pageTitle)]="pageTitle"
   [(openWidth)]="width"
   (closeWidth)="closeDiv($event)"
 ></app-add>
+
+<!-- Settings -->
+<app-add-dns-server [(openDNSWidth)]="dnswidth" (closeDNSWidth)="closeDNSServer($event)"></app-add-dns-server>

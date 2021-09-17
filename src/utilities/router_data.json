@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "deviceName": "192.168.50.140",
+            "ipAddress": "192.168.50.140",
+            "lastScanTime": "16 Oct 18, 04:34 AM",
+            "modifiedBy": "admin",
+            "status": "Finished",
+            "remarks": ""
+        },
+        {
+            "id": "2",
+            "deviceName": "192.168.51.140",
+            "ipAddress": "192.168.51.140",
+            "lastScanTime": "16 Oct 18, 05:00 AM",
+            "modifiedBy": "admin",
+            "status": "Finished",
+            "remarks": ""
+        }
+    ]
+}

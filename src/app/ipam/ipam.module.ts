@@ -26,10 +26,11 @@ import {ContextMenuModule} from 'primeng/contextmenu';
 import { GroupComponent } from './views/group/group.component';
 import { TestIpComponent } from './views/subnet/test-ip/test-ip.component';
 import { DasboardComponent } from './views/dasboard/dasboard.component';
-import { SettingsComponent } from './views/settings/settings.component';
 import { DHCPSummaryComponent } from './views/DHCP/dhcp-summary/dhcp-summary.component';
 import { DiscoveredSubnetsComponent } from './views/discovered/discovered-subnets/discovered-subnets.component';
 import { DiscoveredV6HostsComponent } from './views/discovered/discovered-v6-hosts/discovered-v6-hosts.component';
+import { AddDnsServerComponent } from './views/settings/add-dns-server/add-dns-server.component';
+import { RoutersComponent } from './views/settings/routers/routers.component';
 
 @NgModule({
   imports: [
@@ -63,10 +64,11 @@ import { DiscoveredV6HostsComponent } from './views/discovered/discovered-v6-hos
     GroupComponent,
     TestIpComponent,
     DasboardComponent,
-    SettingsComponent,
     DHCPSummaryComponent,
     DiscoveredSubnetsComponent,
-    DiscoveredV6HostsComponent
+    DiscoveredV6HostsComponent,
+    AddDnsServerComponent,
+    RoutersComponent
   ],
   providers: [
     SubnetService

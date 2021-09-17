@@ -1,4 +1,4 @@
-import { Component,EventEmitter,Input, Output  } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem, TreeNode } from 'primeng/api';
 import { TreeModule } from 'primeng/tree';
@@ -19,13 +19,15 @@ export class IpamComponent {
   settingsItems: MenuItem[];
   pageTitle: string;
   width = 0;
-  constructor(private treeserviceService: TreeserviceService, private router:Router) {}
+  dnswidth = 0;
+  constructor(
+    private treeserviceService: TreeserviceService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.getTreeData();
-    this.crumbs = [
-      { label: 'Your Company' }
-    ];
+    this.crumbs = [{ label: 'Your Company' }];
 
     this.items = [
       { label: 'Add IPv4 Subnet', command: (x) => this.addItems(x) },
@@ -34,8 +36,12 @@ export class IpamComponent {
     ];
 
     this.settingsItems = [
-      { label: 'Add DNS Server', command: (x) => this.addItems(x) },
-      { label: 'Add Router', command: (x) => this.addItems(x) }
+      { label: 'Add DNS Server', command: (x) => this.addDNSServer(x) },
+      {
+        label: 'Add Router',
+        url: 'ipam/settings/router',
+        command: (x) => this.navigateToRouter(x),
+      },
     ];
   }
 
@@ -53,18 +59,27 @@ export class IpamComponent {
   }
 
   addItems(x) {
-    console.log('calll', x, x.item.label);
     this.pageTitle = x.item.label;
-    //$('.float-box').toggleClass('float-box-hide');
-    //$('#myModal2').modal('show');
     this.width = 100;
   }
 
+  addDNSServer(x) {
+    this.dnswidth = 100;
+  }
+
   nodeSelect(event) {
-    this.router.navigate([event.node.path]);    
-   }
+    this.router.navigate([event.node.path]);
+  }
+
+  navigateToRouter(x) {
+    this.router.navigate([x.item.url]);
+  }
 
   closeDiv(width) {
     this.width = width;
+  }
+
+  closeDNSServer(width) {
+    this.dnswidth = width;
   }
 }
