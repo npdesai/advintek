@@ -2,52 +2,9 @@
   <a href="/" class="logo">
     <img src="images/logo.png">
   </a>
-  <nav class="navbar" role="navigation" *ngIf="authUser">
+  <nav class="navbar" role="navigation">
     <a class="sidebar-toggle" role="button" (click)="toggleNavMenu()" *ngIf="showToggleMenu == true">
       <i class="fas fa-bars"></i>
     </a>
-    <div class="navbar-right-menu">
-      <ul class="nav navbar-nav">
-        <!--<li>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="far fa-bell" style="font-size:15px">
-              <span class="badge" style="background-color: #f39c12">10</span>
-            </i>
-          </a>
-          <ul class="dropdown-menu" style="padding:0px">
-            <li><a [routerLink]="['/profile']" class="nav-link" style="border-bottom: 1px solid #f4f4f4;padding: 10px 10px;">{{"Home.ViewProfile" | translate}}</a></li>
-            <li><a [routerLink]="" class="nav-link" style="padding: 10px 10px;" (click)="logout()">{{"Home.SignOut" | translate}}</a></li>
-          </ul>
-        </li>-->
-        <li>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="far fa-flag" style="font-size:15px">
-              <span class="badge" style="background-color:red">1</span>
-            </i>
-          </a>
-          <ul class="dropdown-menu" style="padding:0px; width:300px">
-            <li><div class="alert-menu-header">You have 1 alert</div></li>
-            <li>
-              <div class="alert-menu">
-                  <span>
-                    <small class="pull-right"><i class="far fa-clock"></i> 01/08/2021 3:57 AM</small>
-                    <small class="pull-left">Entity Scan</small>
-                  </span>
-                  <p>Entity (CBL-ABC) has readings over prescribed range (125). <a href="">View details..</a></p>
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <span class="hidden-xs">{{authUser.firstName}} {{authUser.lastName}}</span>
-          </a>
-          <ul class="dropdown-menu" style="padding:0px">
-            <li><a [routerLink]="['/profile']" class="nav-link" style="border-bottom: 1px solid #f4f4f4;padding: 10px 10px;">{{"Home.ViewProfile" | translate}}</a></li>
-            <li><a [routerLink]="" class="nav-link" style="padding: 10px 10px;" (click)="logout()">{{"Home.SignOut" | translate}}</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
   </nav>
 </header>

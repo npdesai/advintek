@@ -2,17 +2,12 @@
 <div class="d-flex main-section">
   <div>
     <aside id="mainNavMenu" class="main-sidebar">
-      <p-tabView>
-        <p-tabPanel header="Tree View" [selected]="true">
-          <p-tree
-            [value]="treeitems"
-            selectionMode="single"
-            [(selection)]="selectedFile"
-            (onNodeSelect)="nodeSelect($event)"
-          ></p-tree>
-        </p-tabPanel>
-        <p-tabPanel header="Donut View"> Under Construction.. </p-tabPanel>
-      </p-tabView>
+      <p-tree
+        [value]="treeitems"
+        selectionMode="single"
+        [(selection)]="selectedFile"
+        (onNodeSelect)="nodeSelect($event)"
+      ></p-tree>
     </aside>
   </div>
   <div class="page-section">
@@ -49,4 +44,7 @@
 ></app-add>
 
 <!-- Settings -->
-<app-add-dns-server [(openDNSWidth)]="dnswidth" (closeDNSWidth)="closeDNSServer($event)"></app-add-dns-server>
+<app-add-dns-server
+  [(openDNSWidth)]="dnswidth"
+  (closeDNSWidth)="closeDNSServer($event)"
+></app-add-dns-server>
