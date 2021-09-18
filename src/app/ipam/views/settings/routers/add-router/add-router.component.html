@@ -1,0 +1,164 @@
+<div class="row content-section" [ngStyle]="{ width: openWidth + '%' }">
+  <div class="col-md-6 blur-section"></div>
+  <div class="col-md-6 page-section">
+    <div class="row pageHeader">
+      <div class="col-10">
+        <h4 class="mb-0">Add Device</h4>
+      </div>
+      <div class="col-2 text-right">
+        <button
+          pButton
+          type="button"
+          icon="pi pi-times"
+          class="p-button-secondary p-button-text"
+          (click)="onCancel()"
+        ></button>
+      </div>
+    </div>
+    <div class="row pageContent">
+      <div class="col">
+        <form class="form-section">
+          <div class="row form-row">
+            <div class="col">
+              <mat-radio-group>
+                <mat-radio-button
+                  value="addmanual"
+                  checked="true"
+                  (change)="radioChange($event)"
+                  >Add Manually</mat-radio-button
+                >
+                <mat-radio-button
+                  value="importcsv"
+                  (change)="radioChange($event)"
+                  >Import from CSV</mat-radio-button
+                >
+              </mat-radio-group>
+            </div>
+          </div>
+          <div *ngIf="isAddManual">
+            <div class="row form-row">
+              <div class="col-12 col-md-6">
+                <h6>Server / Router / Switch</h6>
+                <input type="text" pInputText class="w-100" />
+              </div>
+            </div>
+            <div class="row form-row">
+              <div class="col">
+                <p-panel>
+                  <ng-template pTemplate="header">
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" /> SNMP
+                      Settings
+                    </div>
+                  </ng-template>
+                  <div class="row form-row">
+                    <div class="col-12 col-md-6">
+                      <h6>SNMP Credential</h6>
+                      <p-dropdown
+                        [options]="credentials"
+                        optionLabel="name"
+                        styleClass="w-100"
+                      ></p-dropdown>
+                    </div>
+                  </div>
+                </p-panel>
+              </div>
+            </div>
+            <div class="row form-row">
+              <div class="col">
+                <p-panel>
+                  <ng-template pTemplate="header">
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" /> CLI
+                      Settings (CLI settings is applicable only for Routers and
+                      Switches)
+                    </div>
+                  </ng-template>
+                  <div class="row form-row">
+                    <div class="col-12 col-md-6">
+                      <h6>Protocol</h6>
+                      <p-dropdown
+                        [options]="protocols"
+                        optionLabel="name"
+                        styleClass="w-100"
+                      ></p-dropdown>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <h6>Vendor</h6>
+                      <p-dropdown
+                        [options]="vendors"
+                        optionLabel="name"
+                        styleClass="w-100"
+                      ></p-dropdown>
+                    </div>
+                  </div>
+                  <div class="row form-row">
+                    <div class="col-12 col-md-6">
+                      <h6>User Name</h6>
+                      <input type="text" pInputText autocomplete="off" class="w-100" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <h6>Password</h6>
+                      <input type="password" pInputText autocomplete="off" class="w-100" />
+                    </div>
+                  </div>
+                  <div class="row form-row">
+                    <div class="col-12 col-md-6">
+                      <h6>Prompt</h6>
+                      <input type="text" pInputText class="w-100" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <h6>Enable UserName</h6>
+                      <input type="password" pInputText class="w-100" />
+                    </div>
+                  </div>
+                  <div class="row form-row">
+                    <div class="col-12 col-md-6">
+                      <h6>Enable Password</h6>
+                      <input type="password" pInputText class="w-100" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <h6>Enable Prompt</h6>
+                      <input type="text" pInputText class="w-100" />
+                    </div>
+                  </div>
+                </p-panel>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!isAddManual">
+            <div class="row form-row">
+              <div class="col">
+                <h6>Import File</h6>
+                <p-fileUpload url="./upload.php" (onUpload)="onUpload($event)">
+                  <ng-template pTemplate="content">
+                    <ul *ngIf="uploadedFiles.length">
+                      <li *ngFor="let file of uploadedFiles">
+                        {{ file.name }} - {{ file.size }} bytes
+                      </li>
+                    </ul>
+                  </ng-template>
+                </p-fileUpload>
+              </div>
+            </div>
+          </div>
+          <p-divider></p-divider>
+          <div class="row">
+            <div class="col text-right">
+              <p-button
+                label="Cancel"
+                styleClass="p-button-secondary p-button-sm"
+                (click)="onCancel()"
+              >
+              </p-button>
+              <p-button
+                label="Add"
+                styleClass="p-button-success p-button-sm ml-2"
+              ></p-button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

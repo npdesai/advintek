@@ -31,6 +31,8 @@ import { DiscoveredSubnetsComponent } from './views/discovered/discovered-subnet
 import { DiscoveredV6HostsComponent } from './views/discovered/discovered-v6-hosts/discovered-v6-hosts.component';
 import { AddDnsServerComponent } from './views/settings/add-dns-server/add-dns-server.component';
 import { RoutersComponent } from './views/settings/routers/routers.component';
+import { AddRouterComponent } from './views/settings/routers/add-router/add-router.component';
+import { PanelModule } from 'primeng/panel';
 
 @NgModule({
   imports: [
@@ -52,6 +54,7 @@ import { RoutersComponent } from './views/settings/routers/routers.component';
     DividerModule,
     FileUploadModule,
     ContextMenuModule,
+    PanelModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     })
@@ -68,7 +71,8 @@ import { RoutersComponent } from './views/settings/routers/routers.component';
     DiscoveredSubnetsComponent,
     DiscoveredV6HostsComponent,
     AddDnsServerComponent,
-    RoutersComponent
+    RoutersComponent,
+    AddRouterComponent
   ],
   providers: [
     SubnetService

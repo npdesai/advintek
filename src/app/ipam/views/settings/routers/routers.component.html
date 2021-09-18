@@ -2,7 +2,15 @@
   <div class="col-md-12 no-padding">
     <div class="box">
       <div class="box-header">
-        <h5 class="box-title">Routers</h5>
+        <div>
+          <h5 class="box-title">Routers</h5>
+        </div>
+        <div>
+          <button type="button" class="btn btn-success mr-2" (click)="onAddDeviceClick()">Add Device</button>
+          <button type="button" class="btn btn-success mr-2">Scan</button>
+          <button type="button" class="btn btn-success mr-2">Discover Subnets</button>
+          <button type="button" class="btn btn-success">Delete</button>
+        </div>
       </div>
       <p-divider></p-divider>
       <div class="box-body">
@@ -39,3 +47,5 @@
     </div>
   </div>
 </section>
+
+<app-add-router [(openWidth)]="width" (closeWidth)="closeAddDevice($event)"></app-add-router>
