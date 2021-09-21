@@ -803,3 +803,23 @@ input[type=radio] {
   padding: 10px;
   font-size: 14px;
 }
+
+.fa { 
+  color: #f5c32e !important;
+}
+
+.colordefaultgroup {
+  color: #947ec5 !important;
+}
+
+.companyicon {
+  color: #0baa7c !important;
+}
+
+.v6hosticon {
+  color: #77b7d0 !important;
+}
+
+.ipv4icon {
+  color: #d1c8c8 !important;
+}

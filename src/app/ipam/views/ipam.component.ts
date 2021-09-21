@@ -50,7 +50,7 @@ export class IpamComponent {
       this.treeitems = [
         {
           label: 'Your Company',
-          icon: 'pi pi-globe',
+          icon: 'fa fa-globe companyicon',
           expanded: true,
           children: data,
         },
