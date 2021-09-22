@@ -3,8 +3,8 @@ export class DHCPScope {
   scopeAddress: string;
   scopeName: string;
   totalIPs: number;
-  leasedIPs: string;
-  reservedIPs: string;
+  leasedIPs: number;
+  reservedIPs: number;
   scopeAddressRange: number;
   scopeState: string;
   scopeComments: string;

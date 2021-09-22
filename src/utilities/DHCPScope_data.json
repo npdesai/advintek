@@ -5,8 +5,8 @@
             "scopeAddress": "198.168.2.3",
             "scopeName": "vlan123",
             "totalIPs": 24,
-            "leasedIPs": "198.168.24.54",
-            "reservedIPs": "198.168.2.2",
+            "leasedIPs": 2,
+            "reservedIPs": 22,
             "scopeAddressRange": 60,
             "scopeState": "Enabled",
             "scopeComments": "vlan456"
@@ -16,8 +16,8 @@
             "scopeAddress": "198.168.2.4",
             "scopeName": "vlan",
             "totalIPs": 24,
-            "leasedIPs": "198.168.24.54",
-            "reservedIPs": "198.168.2.2",
+            "leasedIPs": 4,
+            "reservedIPs": 20,
             "scopeAddressRange": 40,
             "scopeState": "Enabled",
             "scopeComments": "vlan is active"
@@ -27,8 +27,8 @@
             "scopeAddress": "198.168.2.5",
             "scopeName": "vlan567",
             "totalIPs": 24,
-            "leasedIPs": "198.168.24.54",
-            "reservedIPs": "198.168.2.2",
+            "leasedIPs": 10,
+            "reservedIPs": 14,
             "scopeAddressRange": 20,
             "scopeState": "Enabled",
             "scopeComments": "vlan is off"
