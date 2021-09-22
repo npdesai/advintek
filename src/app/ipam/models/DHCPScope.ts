@@ -1,11 +1,15 @@
 export class DHCPScope {
   id: string;
-  scopeAddress: string;
-  scopeName: string;
+  address: string;
+  name: string;
   totalIPs: number;
   leasedIPs: number;
   reservedIPs: number;
-  scopeAddressRange: number;
-  scopeState: string;
-  scopeComments: string;
+  addressRange: number;
+  state: string;
+  comments: string;
+  range: string;
+  excludedRange: string[];
+  relatedScops: string;
+  tooltip: string;
 }

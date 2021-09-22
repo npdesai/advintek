@@ -1,4 +1,4 @@
-<div class="row content-section" [ngStyle]="{'width': openWidth + '%'}">
+<div class="row content-section" [ngStyle]="{'width': openEditWidth + '%'}">
     <div class="col-md-6 blur-section"></div>
     <div class="col-md-6 page-section">
         <div class="row pageHeader">
@@ -14,25 +14,27 @@
             <div class="col">
                 <form class="form-section">
                     <div class="row form-row">
-                        <div class="col">
+                        <div class="col-12 col-md-6">
                             <h6>Scope Name</h6>
                             <input type="text" pInputText class="w-100" [(ngModel)]="scopeName" [ngModelOptions]="{standalone: true}"/>
                         </div>
                     </div>
                     <div class="row form-row">
-                        <div class="col">
+                        <div class="col-12 col-md-6">
                             <h6>Scope Comments</h6>
                             <input type="text" pInputText class="w-100" [(ngModel)]="scopeComments" [ngModelOptions]="{standalone: true}"/>
                         </div>
                     </div>
                     <div class="row form-row warning-div">
                         <div class="col">
-                            <i class="fas fa-exclamation-circle warning-i"></i>
+                            <div class="d-flex align-items-center text-danger">
+                            <i class="pi pi-exclamation-circle warning-i"></i>
                             <span class="warning-span">
                                 Note : Updated values will be only reflected in OpUtils console, not in DHCP server.
                                 <br>
                                 The values will be periodically updated on successive DHCP scans.
                             </span>
+                            </div>
                         </div>
                     </div>
                     <p-divider></p-divider>

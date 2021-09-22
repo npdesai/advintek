@@ -2,7 +2,8 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IpamModule } from './ipam.module';
 import { DasboardComponent } from './views/dasboard/dasboard.component';
-import { DHCPSummaryComponent } from './views/DHCP/dhcp-summary/dhcp-summary.component';
+import { DHCPServerDetailComponent } from './views/dhcp/dhcp-server-detail/dhcp-server-detail.component';
+import { DHCPSummaryComponent } from './views/dhcp/dhcp-summary/dhcp-summary.component';
 import { DiscoveredSubnetsComponent } from './views/discovered/discovered-subnets/discovered-subnets.component';
 import { DiscoveredV6HostsComponent } from './views/discovered/discovered-v6-hosts/discovered-v6-hosts.component';
 import { GroupComponent } from './views/group/group.component';
@@ -11,7 +12,6 @@ import { IpamComponent } from './views/ipam.component';
 import { RoutersComponent } from './views/settings/routers/routers.component';
 import { SubnetComponent } from './views/subnet/subnet.component';
 
-import { DHCPServerDetailComponent } from './views/DHCP/dhcp-server-detail/dhcp-server-detail.component';
 
 export const ipamRoutes: Routes = [
   {

@@ -54,15 +54,13 @@
 }
 
 .warning-span {
-    color: #fa5b5a !important;
-    font-size: 13px; 
+    font-size: 14px; 
     float: left;
 }
 
 .warning-i {
-    float: left;
     width: 10%; 
     text-align: center;
-    color: #fa5b5a !important;
+    font-size: 22px;
 }
 

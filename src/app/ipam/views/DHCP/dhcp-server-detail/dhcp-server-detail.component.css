@@ -5,4 +5,7 @@
   .f10 {
       font-size: 10px;
   }
-  
+
+ ::ng-deep .p-tooltip {
+      min-width: 500px;;
+  }
