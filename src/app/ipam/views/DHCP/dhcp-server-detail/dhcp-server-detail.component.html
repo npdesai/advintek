@@ -1,0 +1,77 @@
+<div class="content-container">
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab label="DHCP Summary">
+        </mat-tab>
+        
+        <mat-tab label="Scope Details">
+            <section class="content-body">
+                <div class="col-md-12 no-padding">
+                    <div class="box">
+                        <div class="box-header">
+                            <h5 class="box-title">Scope</h5>
+                        </div>
+                        <div class="box-body">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Scope Address</th>
+                                        <th>Scope Name</th>
+                                        <th style="width:125px">Total IPs</th>
+                                        <th>Leased IPs</th>
+                                        <th>Reserved IPs</th>
+                                        <th>Scope Address Range</th>
+                                        <th>Scope State</th>
+                                        <th>Scope Comments</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngIf="dhcpScopes && dhcpScopes.length > 0">
+                                        <tr *ngFor="let dhcpScope of dhcpScopes">
+                                            <td>{{ dhcpScope.scopeAddress }}</td>
+                                            <td><a (click)="editScopeName(dhcpScope)" role="button">{{ dhcpScope.scopeName }}</a></td>
+                                            <td>{{ dhcpScope.totalIPs }}</td>                                      
+                                            <td>{{ dhcpScope.leasedIPs }}</td>
+                                            <td>{{ dhcpScope.reservedIPs }}</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="align-self-start w-100">
+                                                        <div class="progress">
+                                                            <div
+                                                              class="progress-bar"
+                                                              role="progressbar"
+                                                              [ngStyle]="{ 'width.%': dhcpScope.scopeAddressRange }"
+                                                              aria-valuenow="25"
+                                                              aria-valuemin="0"
+                                                              aria-valuemax="100"
+                                                            ></div>
+                                                          </div>
+                                                    </div>
+                                                    <div class="align-self-end ml-2 f10">{{ dhcpScope.scopeAddressRange }}%</div>
+                                                </div>
+                                            </td>
+                                            <td>{{ dhcpScope.scopeState }}</td>
+                                            <td>{{ dhcpScope.scopeComments }}</td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </mat-tab>
+
+        <mat-tab label="IP Address">
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+
+<!-- Update window -->
+<app-edit
+  [(pageTitle)]="pageTitle"
+  [(openWidth)]="width"
+  (closeWidth)="closeDiv($event)"
+  [scopeName]="scopeName"
+  [scopeComments]="scopeComments"
+></app-edit>

@@ -34,6 +34,9 @@ import { RoutersComponent } from './views/settings/routers/routers.component';
 import { AddRouterComponent } from './views/settings/routers/add-router/add-router.component';
 import { PanelModule } from 'primeng/panel';
 
+import { EditComponent } from './views/edit/edit.component';
+import { DHCPServerDetailComponent } from './views/DHCP/dhcp-server-detail/dhcp-server-detail.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -72,7 +75,9 @@ import { PanelModule } from 'primeng/panel';
     DiscoveredV6HostsComponent,
     AddDnsServerComponent,
     RoutersComponent,
-    AddRouterComponent
+    AddRouterComponent,
+    EditComponent,
+    DHCPServerDetailComponent
   ],
   providers: [
     SubnetService

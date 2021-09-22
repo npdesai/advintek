@@ -24,30 +24,37 @@
                     "collapsedIcon": "fa fa-cloud ipv4icon",
                     "children": []
                 }]
-                },
-                {
-                    "label": "DHCP Servers",
-                    "data": "Home Folder",
-                    "path": "/ipam/DHCPSummary/2",
-                    "expandedIcon": "fa fa-network-wired",
-                    "collapsedIcon": "fa fa-network-wired",
+            },
+            {
+                "label": "DHCP Servers",
+                "data": "Home Folder",
+                "path": "/ipam/DHCPSummary/2",
+                "expandedIcon": "fa fa-network-wired",
+                "collapsedIcon": "fa fa-network-wired",
+                "children": [{
+                    "label": "192.168.1.58",
+                    "data":"Work Folder",
+                    "path": "/ipam/DHCPSummary/server/2",
+                    "expandedIcon": "pi pi-cloud",
+                    "collapsedIcon": "pi pi-cloud",
                     "children": []
-                },
-                {
-                    "label": "Discovered Subnet",
-                    "data": "Home Folder",
-                    "path": "/ipam/discovered/subnets",
-                    "expandedIcon": "fa fa-folder-open",
-                    "collapsedIcon": "fa fa-folder",
-                    "children": []
-                },
-                {
-                    "label": "Discovered v6 Hosts",
-                    "data": "Home Folder",
-                    "path": "/ipam/discovered/v6hosts",
-                    "expandedIcon": "fa fa-folder-open v6hosticon",
-                    "collapsedIcon": "fa fa-folder v6hosticon",
-                    "children": []
-                }
-    ]
+                }]
+            },
+            {
+                "label": "Discovered Subnet",
+                "data": "Home Folder",
+                "path": "/ipam/discovered/subnets",
+                "expandedIcon": "fa fa-folder-open",
+                "collapsedIcon": "fa fa-folder",
+                "children": []
+            },
+            {
+                "label": "Discovered v6 Hosts",
+                "data": "Home Folder",
+                "path": "/ipam/discovered/v6hosts",
+                "expandedIcon": "fa fa-folder-open v6hosticon",
+                "collapsedIcon": "fa fa-folder v6hosticon",
+                "children": []
+            }
+]
 }

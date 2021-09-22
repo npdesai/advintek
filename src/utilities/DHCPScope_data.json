@@ -1,0 +1,37 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "scopeAddress": "198.168.2.3",
+            "scopeName": "vlan123",
+            "totalIPs": 24,
+            "leasedIPs": "198.168.24.54",
+            "reservedIPs": "198.168.2.2",
+            "scopeAddressRange": 60,
+            "scopeState": "Enabled",
+            "scopeComments": "vlan456"
+        },
+        {
+            "id": "2",
+            "scopeAddress": "198.168.2.4",
+            "scopeName": "vlan",
+            "totalIPs": 24,
+            "leasedIPs": "198.168.24.54",
+            "reservedIPs": "198.168.2.2",
+            "scopeAddressRange": 40,
+            "scopeState": "Enabled",
+            "scopeComments": "vlan is active"
+        },
+        {
+            "id": "3",
+            "scopeAddress": "198.168.2.5",
+            "scopeName": "vlan567",
+            "totalIPs": 24,
+            "leasedIPs": "198.168.24.54",
+            "reservedIPs": "198.168.2.2",
+            "scopeAddressRange": 20,
+            "scopeState": "Enabled",
+            "scopeComments": "vlan is off"
+        }
+    ]
+}

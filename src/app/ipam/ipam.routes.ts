@@ -11,6 +11,8 @@ import { IpamComponent } from './views/ipam.component';
 import { RoutersComponent } from './views/settings/routers/routers.component';
 import { SubnetComponent } from './views/subnet/subnet.component';
 
+import { DHCPServerDetailComponent } from './views/DHCP/dhcp-server-detail/dhcp-server-detail.component';
+
 export const ipamRoutes: Routes = [
   {
     path: '',
@@ -24,6 +26,7 @@ export const ipamRoutes: Routes = [
           { path: 'groups/:Id', component: GroupComponent },
           { path: 'subnets/:Id', component: SubnetComponent },
           { path: 'DHCPSummary/:Id', component: DHCPSummaryComponent },
+          { path: 'DHCPSummary/server/:id', component: DHCPServerDetailComponent },
           { path: 'discovered', children: [
             { path: 'subnets', component: DiscoveredSubnetsComponent },
             { path: 'v6hosts', component: DiscoveredV6HostsComponent }
