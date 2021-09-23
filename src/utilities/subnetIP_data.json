@@ -10,7 +10,10 @@
             "status": "Transient",
             "deviceType": "",
             "connectedSwitch": "",
-            "connectedPort": 5032
+            "connectedPort": 5032,
+            "dnsName": "",
+            "leaseExpiryDate": "23 Sep 21, 10:25 PM",
+            "isSelected": false
         },
         {
             "id": "2",
@@ -22,7 +25,10 @@
             "status": "Used",
             "deviceType": "",
             "connectedSwitch": "",
-            "connectedPort": 1337
+            "connectedPort": 1337,
+            "dnsName": "",
+            "leaseExpiryDate": "20 Oct 21, 10:25 PM",
+            "isSelected": false
         },
         {
             "id": "3",
@@ -34,7 +40,10 @@
             "status": "Transient",
             "deviceType": "",
             "connectedSwitch": "",
-            "connectedPort": 3001
+            "connectedPort": 3001,
+            "dnsName": "",
+            "leaseExpiryDate": "3 Jan 21, 1:25 PM",
+            "isSelected": false
         }
     ]
 }

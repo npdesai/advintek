@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ContextMenu } from 'primeng/contextmenu';
+import { MenuItem } from 'primeng/api';
+
 import { DHCPScope } from 'src/app/ipam/models/DHCPScope';
 import { DHCPserviceService } from 'src/app/ipam/services/dhcpservice.service';
+import { IpDetail } from 'src/app/ipam/models/ipDetail';
+import { SubnetService } from '../../../services/subnet.service';
 
 @Component({
   selector: 'app-dhcp-server-detail',
@@ -10,23 +15,37 @@ import { DHCPserviceService } from 'src/app/ipam/services/dhcpservice.service';
 export class DHCPServerDetailComponent implements OnInit {
   statusMessage: string = '';
   dhcpScopes: DHCPScope[] = [];
+  cmenuitems: MenuItem[];
 
-  pageTitle: string;
-  width: number = 0;
+  pageTitleEdit: string;
+  widthEdit: number = 0;
   scopeName: string;
   scopeComments: string;
-  scopeAddressRange: any = {
-    'Scope Name': 'vlan1',
-    'Scope Range': '192.168.15.10 - 192.168.15.254',
-    'Excluded Range':
-      '192.168.15.10 - 192.168.15.50<br>192.168.15.10 - 192.168.15.50<br>192.168.15.221 - 192.168.15.254',
-    'Related Scopes': 'No Related Scopes Found',
-  };
+  pageTitle: string;
+  width: number = 0;
+  
+  allComplete: boolean = false;
 
-  constructor(private dHCPserviceService: DHCPserviceService) {}
+  ipDetails: IpDetail[] = [];
+  selectedIpDetail: IpDetail = new IpDetail();
+
+  constructor(
+    private dHCPserviceService: DHCPserviceService,
+    private subnetService: SubnetService
+    ) {
+    this.cmenuitems = [
+      { label: 'Ping', command: (item) => this.testIP(item) },
+      { label: 'SNMP Ping', command: (item) => this.testIP(item) },
+      { label: 'Resolve DNS', command: (item) => this.testIP(item) },
+      { label: 'Resolve MAC Address', command: (item) => this.testIP(item) },
+      { label: 'Trace Route', command: (item) => this.testIP(item) },
+      { label: 'System Explorer', command: (item) => this.testIP(item) },
+    ];
+  }
 
   ngOnInit(): void {
     this.getDHCPScopeData();
+    this.getSubnetIpData();
   }
 
   getDHCPScopeData() {
@@ -58,13 +77,45 @@ export class DHCPServerDetailComponent implements OnInit {
   }
 
   editScopeName(dhcpScope: DHCPScope) {
-    this.pageTitle = 'Edit DHCP Scope';
-    this.width = 100;
+    this.pageTitleEdit = 'Edit DHCP Scope';
+    this.widthEdit = 100;
     this.scopeName = dhcpScope.name;
     this.scopeComments = dhcpScope.comments;
   }
 
+  getSubnetIpData() {
+    this.statusMessage = "Loading data...";
+    this.subnetService.getSubnetIps(4).then((data) => {
+      this.ipDetails = data;
+    });
+  }
+
+  closeDivEdit(width: number) {
+    this.widthEdit = width;
+  }
+
+  openCM(event: MouseEvent, contextMenu: ContextMenu, ipDetail: IpDetail) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.selectedIpDetail = ipDetail;
+    contextMenu.show(event);
+    return false;
+  }
+
+  testIP(ip) {
+    this.pageTitle = ip.item.label;
+    this.width = 100;
+  }
+
   closeDiv(width: number) {
     this.width = width;
+  }
+
+  setAll(completed: boolean) {
+    this.allComplete = completed;
+    if (this.ipDetails == null) {
+      return;
+    }
+    this.ipDetails.forEach(t => t.isSelected = completed);
   }
 }
