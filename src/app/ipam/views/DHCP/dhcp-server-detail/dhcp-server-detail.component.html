@@ -1,6 +1,65 @@
 <div class="content-container">
   <mat-tab-group animationDuration="0ms">
-    <mat-tab label="DHCP Summary"> </mat-tab>
+    <mat-tab label="DHCP Summary">
+      <section class="content-body">
+        <div class="col-md-12 no-padding">
+            <div class="box">
+                <!-- <div class="box-header">
+                    <h5 class="box-title">DHCP Summary</h5>
+                </div> -->
+                <div class="box-body">
+                  <div class="row">
+                    <div class="col-5 section-container">
+                      <div class="col-section">
+                        <div class="col-section-title d-flex align-items-center">
+                          <h5 class="m-0">DHCP Summary</h5>
+                        </div>
+                        <p-divider></p-divider>
+                        <div class="row">
+                          <div class="col-6">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item font-weight-bold">Server Name</li>
+                              <li class="list-group-item font-weight-bold">Server Type</li>
+                              <li class="list-group-item font-weight-bold">Total IPs</li>
+                              <li class="list-group-item font-weight-bold">MAC Address</li>
+                              <li class="list-group-item font-weight-bold">Leased IPs</li>
+                              <li class="list-group-item font-weight-bold">DNS Name</li>
+                              <li class="list-group-item font-weight-bold">Reserved IPs</li>                              
+                              <li class="list-group-item font-weight-bold">No of Scopes</li>
+                              <li class="list-group-item font-weight-bold">Available IPs for Lease</li>
+                              <li class="list-group-item font-weight-bold">Scan Status</li>
+                            </ul>
+                          </div>
+                          <div class="col-6">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item">192.168.0.1</li>
+                              <li class="list-group-item">Microsoft DHCP Server</li>
+                              <li class="list-group-item">170</li>
+                              <li class="list-group-item">00:0C:29:C2:FF:6D</li>
+                              <li class="list-group-item">24</li>
+                              <li class="list-group-item">Test</li>
+                              <li class="list-group-item">0</li>
+                              <li class="list-group-item">1</li>
+                              <li class="list-group-item">142</li>
+                              <li class="list-group-item">Scanned</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-7 d-flex section-container">
+                      <div class="col-section d-flex flex-column">
+                        <div class="col-section-content">
+                          <!-- <div echarts [options]="eChartOptions"></div> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </mat-tab>
 
     <mat-tab label="Scope Details">
       <section class="content-body">
@@ -91,10 +150,6 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <mat-checkbox
-                    [checked]="allComplete"
-                    (change)="setAll($event.checked)"
-                    ></mat-checkbox>
                     <th>IP Address</th>
                     <th>MAC Address</th>
                     <th>DNS Name</th>
@@ -105,7 +160,6 @@
                 <tbody>
                   <ng-container *ngIf="ipDetails && ipDetails.length > 0">
                     <tr *ngFor="let ipDetail of ipDetails">
-                      <mat-checkbox [(ngModel)]="ipDetail.isSelected"></mat-checkbox>
                       <td>
                         <span class="mr-2">{{ ipDetail.ipAddress }}</span>
                         <i

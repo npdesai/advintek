@@ -23,9 +23,6 @@ export class DHCPServerDetailComponent implements OnInit {
   scopeComments: string;
   pageTitle: string;
   width: number = 0;
-  
-  allComplete: boolean = false;
-
   ipDetails: IpDetail[] = [];
   selectedIpDetail: IpDetail = new IpDetail();
 
@@ -111,11 +108,4 @@ export class DHCPServerDetailComponent implements OnInit {
     this.width = width;
   }
 
-  setAll(completed: boolean) {
-    this.allComplete = completed;
-    if (this.ipDetails == null) {
-      return;
-    }
-    this.ipDetails.forEach(t => t.isSelected = completed);
-  }
 }

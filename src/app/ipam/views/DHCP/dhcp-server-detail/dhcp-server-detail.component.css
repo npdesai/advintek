@@ -9,3 +9,39 @@
  ::ng-deep .p-tooltip {
       min-width: 500px;;
   }
+
+  section {
+    min-height: 454px;
+  }
+  
+  .col-section {
+    flex: 1 1 auto;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding: 15px;
+    border-left: 1px solid #c8c8c8;
+  }
+  
+  .section-container:first-child .col-section {
+    border-left: none;
+  }
+  
+  .col-section-title {
+    height: 40px;
+    margin: 0 ;
+  }
+  
+  .col-section-title,
+  .section-title {
+    flex: 0 1 auto;
+  }
+  
+  .col-section-content,
+  .section-content {
+    flex: 1 1 auto;
+  }
+  
+  .list-group-flush .list-group-item {
+    border: none !important;
+    font-size: 13px;
+  }

@@ -11,5 +11,4 @@ export class IpDetail  {
     connectedPort: number;
     dnsName: string;    
     leaseExpiryDate: Date;
-    isSelected: boolean;
 }

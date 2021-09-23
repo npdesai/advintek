@@ -12,8 +12,7 @@
             "connectedSwitch": "",
             "connectedPort": 5032,
             "dnsName": "",
-            "leaseExpiryDate": "23 Sep 21, 10:25 PM",
-            "isSelected": false
+            "leaseExpiryDate": "23 Sep 21, 10:25 PM"
         },
         {
             "id": "2",
@@ -27,8 +26,7 @@
             "connectedSwitch": "",
             "connectedPort": 1337,
             "dnsName": "",
-            "leaseExpiryDate": "20 Oct 21, 10:25 PM",
-            "isSelected": false
+            "leaseExpiryDate": "20 Oct 21, 10:25 PM"
         },
         {
             "id": "3",
@@ -42,8 +40,7 @@
             "connectedSwitch": "",
             "connectedPort": 3001,
             "dnsName": "",
-            "leaseExpiryDate": "3 Jan 21, 1:25 PM",
-            "isSelected": false
+            "leaseExpiryDate": "3 Jan 21, 1:25 PM"
         }
     ]
 }
