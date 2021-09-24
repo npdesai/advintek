@@ -26,10 +26,14 @@ export class DHCPServerDetailComponent implements OnInit {
   ipDetails: IpDetail[] = [];
   selectedIpDetail: IpDetail = new IpDetail();
 
+  eChartLeased: any;
+  eChartReserved: any;
+  eChartAvailableIP: any;
+
   constructor(
     private dHCPserviceService: DHCPserviceService,
     private subnetService: SubnetService
-    ) {
+  ) {
     this.cmenuitems = [
       { label: 'Ping', command: (item) => this.testIP(item) },
       { label: 'SNMP Ping', command: (item) => this.testIP(item) },
@@ -38,6 +42,243 @@ export class DHCPServerDetailComponent implements OnInit {
       { label: 'Trace Route', command: (item) => this.testIP(item) },
       { label: 'System Explorer', command: (item) => this.testIP(item) },
     ];
+
+    this.eChartLeased = {      
+      series: [
+        {
+          type: 'gauge',
+          startAngle: 180,
+          endAngle: 0,
+          min: 0,
+          max: 100,
+          center: ['50%', '50%'],
+          splitNumber: 0,
+          itemStyle: {
+            color: 'none',
+          },
+          pointer: {
+            length: '90%',
+            width: 10,
+            offsetCenter: [0, -3],
+            itemStyle: {
+              color: '#3b577e',
+            },
+          },
+          axisLine: {
+            roundCap: false,
+            lineStyle: {
+              width: 50,
+              color: [[1, '#fa5b5a']],
+            },
+          },
+          splitLine: {
+            lineStyle: {
+              width: 0,
+            },
+          },
+          axisLabel: {
+            fontSize: 0,
+          },
+          anchor: {
+            show: true,
+            showAbove: true,
+            size: 30,
+            itemStyle: {
+              borderWidth: 6,
+              borderColor: '#e9e9e9',
+            },
+          },
+          title: {
+            show: true,
+            fontSize: 15,
+            offsetCenter: [0, '60%'],
+          },
+          detail: {
+            fontSize: 20,
+            valueAnimation: true,
+            formatter: function (value) {
+              return '{value|' + value.toFixed(0) + '}{unit|%}';
+            },
+            rich: {
+              value: {
+                fontSize: 30,
+                fontWeight: 'bolder',
+                color: '#777',
+              },
+              unit: {
+                fontSize: 15,
+                color: '#999',
+                padding: [0, 0, 18, 5],
+              },
+            },
+          },
+          data: [
+            {
+              value: 15,
+              name: 'Leased IPs',
+            },
+          ],
+        },
+      ],
+    };
+
+    this.eChartReserved = {
+      series: [
+        {
+          type: 'gauge',
+          startAngle: 180,
+          endAngle: 0,
+          min: 0,
+          max: 100,
+          splitNumber: 0,
+          center: ['50%', '50%'],
+          itemStyle: {
+            color: 'none',
+          },
+          pointer: {
+            length: '90%',
+            width: 10,
+            offsetCenter: [0, -3],
+            itemStyle: {
+              color: '#3b577e',
+            },
+          },
+          axisLine: {
+            roundCap: false,
+            lineStyle: {
+              width: 50,
+              color: [[1, '#faad5a']],
+            },
+          },
+          splitLine: {
+            lineStyle: {
+              width: 0,
+            },
+          },
+          axisLabel: {
+            fontSize: 0,
+          },
+          anchor: {
+            show: true,
+            showAbove: true,
+            size: 30,
+            itemStyle: {
+              borderWidth: 6,
+              borderColor: '#e9e9e9',
+            },
+          },
+          title: {
+            show: true,
+            fontSize: 15,
+            offsetCenter: [0, '60%'],
+          },
+          detail: {
+            fontSize: 20,
+            valueAnimation: true,
+            formatter: function (value) {
+              return '{value|' + value.toFixed(0) + '}{unit|%}';
+            },
+            rich: {
+              value: {
+                fontSize: 30,
+                fontWeight: 'bolder',
+                color: '#777',
+              },
+              unit: {
+                fontSize: 15,
+                color: '#999',
+                padding: [0, 0, 18, 5],
+              },
+            },
+          },
+          data: [
+            {
+              value: 0,
+              name: 'Reserved IPs',
+            },
+          ],
+        },
+      ],
+    };
+
+    this.eChartAvailableIP = {
+      series: [
+        {
+          type: 'gauge',
+          startAngle: 180,
+          endAngle: 0,
+          min: 0,
+          max: 100,
+          splitNumber: 0,
+          center: ['50%', '50%'],
+          itemStyle: {
+            color: 'none',
+          },
+          pointer: {
+            length: '90%',
+            width: 10,
+            offsetCenter: [0, -3],
+            itemStyle: {
+              color: '#3b577e',
+            },
+          },
+          axisLine: {
+            roundCap: false,
+            lineStyle: {
+              width: 50,
+              color: [[1, '#46bb7d']],
+            },
+          },
+          splitLine: {
+            lineStyle: {
+              width: 0,
+            },
+          },
+          axisLabel: {
+            fontSize: 0,
+          },
+          anchor: {
+            show: true,
+            showAbove: true,
+            size: 30,
+            itemStyle: {
+              borderWidth: 6,
+              borderColor: '#e9e9e9',
+            },
+          },
+          title: {
+            show: true,
+            fontSize: 15,
+            offsetCenter: [0, '60%'],
+          },
+          detail: {
+            fontSize: 20,
+            valueAnimation: true,
+            formatter: function (value) {
+              return '{value|' + value.toFixed(0) + '}{unit|%}';
+            },
+            rich: {
+              value: {
+                fontSize: 30,
+                fontWeight: 'bolder',
+                color: '#777',
+              },
+              unit: {
+                fontSize: 15,
+                color: '#999',
+                padding: [0, 0, 18, 5],
+              },
+            },
+          },
+          data: [
+            {
+              value: 85,
+              name: 'Available IPs for lease',
+            },
+          ],
+        },
+      ],
+    };
   }
 
   ngOnInit(): void {
@@ -81,7 +322,7 @@ export class DHCPServerDetailComponent implements OnInit {
   }
 
   getSubnetIpData() {
-    this.statusMessage = "Loading data...";
+    this.statusMessage = 'Loading data...';
     this.subnetService.getSubnetIps(4).then((data) => {
       this.ipDetails = data;
     });
@@ -107,5 +348,4 @@ export class DHCPServerDetailComponent implements OnInit {
   closeDiv(width: number) {
     this.width = width;
   }
-
 }

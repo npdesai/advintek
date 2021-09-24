@@ -27,7 +27,6 @@
   }
   
   .col-section-title {
-    height: 40px;
     margin: 0 ;
   }
   
@@ -40,8 +39,16 @@
   .section-content {
     flex: 1 1 auto;
   }
+
+  .list-group-item {
+    padding: 5px 10px;
+  }
   
   .list-group-flush .list-group-item {
     border: none !important;
-    font-size: 13px;
+    font-size: 14px;
+  }
+
+  .chartheight{
+    height: 250px;
   }
