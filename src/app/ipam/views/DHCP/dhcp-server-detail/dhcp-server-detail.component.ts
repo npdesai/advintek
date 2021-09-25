@@ -43,7 +43,7 @@ export class DHCPServerDetailComponent implements OnInit {
       { label: 'System Explorer', command: (item) => this.testIP(item) },
     ];
 
-    this.eChartLeased = {      
+    this.eChartLeased = {
       series: [
         {
           type: 'gauge',
@@ -91,7 +91,7 @@ export class DHCPServerDetailComponent implements OnInit {
           title: {
             show: true,
             fontSize: 15,
-            offsetCenter: [0, '60%'],
+            offsetCenter: [0, '65%'],
           },
           detail: {
             fontSize: 20,
@@ -101,7 +101,7 @@ export class DHCPServerDetailComponent implements OnInit {
             },
             rich: {
               value: {
-                fontSize: 30,
+                fontSize: 25,
                 fontWeight: 'bolder',
                 color: '#777',
               },
@@ -161,7 +161,7 @@ export class DHCPServerDetailComponent implements OnInit {
           anchor: {
             show: true,
             showAbove: true,
-            size: 30,
+            size: 25,
             itemStyle: {
               borderWidth: 6,
               borderColor: '#e9e9e9',
@@ -170,7 +170,7 @@ export class DHCPServerDetailComponent implements OnInit {
           title: {
             show: true,
             fontSize: 15,
-            offsetCenter: [0, '60%'],
+            offsetCenter: [0, '65%'],
           },
           detail: {
             fontSize: 20,
@@ -249,7 +249,7 @@ export class DHCPServerDetailComponent implements OnInit {
           title: {
             show: true,
             fontSize: 15,
-            offsetCenter: [0, '60%'],
+            offsetCenter: [0, '65%'],
           },
           detail: {
             fontSize: 20,
@@ -259,7 +259,7 @@ export class DHCPServerDetailComponent implements OnInit {
             },
             rich: {
               value: {
-                fontSize: 30,
+                fontSize: 25,
                 fontWeight: 'bolder',
                 color: '#777',
               },

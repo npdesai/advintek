@@ -1,51 +1,104 @@
 <div class="content-container">
-    <mat-tab-group animationDuration="0ms">
-        <mat-tab label="Summary">
-            <section class="content-body">
-                <div class="col-md-12 no-padding">
-                    <div class="box">
-                        <div class="box-header">
-                            <h5 class="box-title">Discovered Subnets</h5>
-                        </div>
-                        <div class="box-body">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Subnet Address</th>
-                                        <th>Boradcast Address</th>
-                                        <th>Size</th>
-                                        <th>Subnet Mask</th>
-                                        <th>Added time</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <ng-container *ngIf="discoveredSubnets && discoveredSubnets.length > 0">
-                                        <tr *ngFor="let discoveredSubnet of discoveredSubnets">
-                                            <td>{{ discoveredSubnet.subnetAddress }}</td>
-                                            <td>{{ discoveredSubnet.broadcastAddress }}</td>
-                                            <td>{{ discoveredSubnet.size }}</td>
-                                            <td>{{ discoveredSubnet.subnetMask }}</td>
-                                            <td>{{ discoveredSubnet.addedTime }}</td>
-                                            <td>
-                                                <i class="fas fa-check-circle text-success"></i>
-                                                <span class="ml-2">{{ discoveredSubnet.status }}</span>
-                                            </td>
-                                            <td>{{ discoveredSubnet.action}}</td>
-                                        </tr>
-                                    </ng-container>
-                                    <tr *ngIf="discoveredSubnets == null || discoveredSubnets.length == 0">
-                                        <td colspan="9" style="text-align: center">
-                                            {{ statusMessage }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Summary">
+      <section class="content-body">
+        <div class="col-md-12 no-padding">
+          <div *ngIf="discoveredSubnets && discoveredSubnets.length == 0">
+            <p-panel>
+              <ng-template pTemplate="header">
+                <h5 class="box-title mb-0">Discovered Subnets</h5>
+              </ng-template>
+              <div class="row form-row">
+                <div class="col-12 justify-content-center text-center">
+                  <div class="col-12">
+                    <h6>
+                      <i
+                        class="
+                          pi pi-exclamation-triangle
+                          warning-i
+                          text-danger
+                          mt-2
+                          mr-2
+                        "
+                      ></i>
+                      No discovered subnets available
+                    </h6>
+                  </div>
+                  <div class="col-12 col-md-6 m-auto">
+                    <p class="">
+                      Discover subnets from already added routers or by adding
+                      new routers. Specify the router, switch, and gateway
+                      server in your network, on the Add Routers screen, and
+                      schedule scanning. On adding routers, OpUtils scans its
+                      ARP table using SNMP and CLI queries, to discover subnets.
+                      It also identifies MAC addresses by querying IPRoute table
+                      and LipRoute table. This data is used by built-in tools
+                      and in generating reports.
+                    </p>
+                  </div>
+                  <div class="col-12">
+                    <p-button
+                      label="Add Router"
+                      styleClass="p-button-success p-button-sm"
+                      (onClick)="navigateToRouter()"
+                    ></p-button>
+                  </div>
                 </div>
-            </section>
-        </mat-tab>
-    </mat-tab-group>
+              </div>
+            </p-panel>
+          </div>
+          <div
+            class="box"
+            *ngIf="discoveredSubnets && discoveredSubnets.length > 0"
+          >
+            <div class="box-header">
+              <h5 class="box-title">Discovered Subnets</h5>
+            </div>
+            <div class="box-body">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Subnet Address</th>
+                    <th>Boradcast Address</th>
+                    <th>Size</th>
+                    <th>Subnet Mask</th>
+                    <th>Added time</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container
+                    *ngIf="discoveredSubnets && discoveredSubnets.length > 0"
+                  >
+                    <tr *ngFor="let discoveredSubnet of discoveredSubnets">
+                      <td>{{ discoveredSubnet.subnetAddress }}</td>
+                      <td>{{ discoveredSubnet.broadcastAddress }}</td>
+                      <td>{{ discoveredSubnet.size }}</td>
+                      <td>{{ discoveredSubnet.subnetMask }}</td>
+                      <td>{{ discoveredSubnet.addedTime }}</td>
+                      <td>
+                        <i class="fas fa-check-circle text-success"></i>
+                        <span class="ml-2">{{ discoveredSubnet.status }}</span>
+                      </td>
+                      <td>{{ discoveredSubnet.action }}</td>
+                    </tr>
+                  </ng-container>
+                  <tr
+                    *ngIf="
+                      discoveredSubnets == null || discoveredSubnets.length == 0
+                    "
+                  >
+                    <td colspan="9" style="text-align: center">
+                      {{ statusMessage }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </mat-tab>
+  </mat-tab-group>
 </div>

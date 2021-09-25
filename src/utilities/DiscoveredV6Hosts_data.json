@@ -4,7 +4,7 @@
             "id": "1",
             "IPV6Address": "FE80:0000:0000:0000:FFE2:0D85:B2EB:00B0",
             "MACAddress": "D4:81:D7:B0:57:2B",
-            "DNSStatus": 254,
+            "DNSStatus": "",
             "DNSIp": "172.21.146.0",
             "vendorName": "Apple Inc.",
             "status": "Not Scanned"
@@ -13,7 +13,7 @@
             "id": "1",
             "IPV6Address": "FE80:0000:0000:0000:FFD6:1D5C:281E:0E69",
             "MACAddress": "",
-            "DNSStatus": 254,
+            "DNSStatus": "",
             "DNSIp": "172.21.146.0",
             "vendorName": "Lenovo",
             "status": "Used"
@@ -22,7 +22,7 @@
             "id": "1",
             "IPV6Address": "FE80:0000:0000:0000:FFBB:E9F6:90E0:0B8F",
             "MACAddress": "C8:1F:66:AF:BA:D7",
-            "DNSStatus": 254,
+            "DNSStatus": "",
             "DNSIp": "172.21.146.0",
             "vendorName": "Dell",
             "status": "Transient"
