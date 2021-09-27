@@ -1,0 +1,31 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "ipAddress": "192.168.1.4",
+            "macAddress": "7E:31:D9:DE:BD:DE",
+            "deviceType": "",
+            "dnsName": "",
+            "detectedTime": "time",
+            "sysDesc": "description"
+        },
+        {
+            "id": "2",
+            "ipAddress": "192.168.1.4",
+            "macAddress": "7E:31:D9:DE:BD:DE",
+            "deviceType": "",
+            "dnsName": "",
+            "detectedTime": "time",
+            "sysDesc": "description"
+        },
+        {
+            "id": "3",
+            "ipAddress": "192.168.1.4",
+            "macAddress": "7E:31:D9:DE:BD:DE",
+            "deviceType": "",
+            "dnsName": "",
+            "detectedTime": "time",
+            "sysDesc": "description"
+        }
+    ]
+}

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { RequestOptions, SortOrder } from '../../common/models/requestOptions';
 import { ServiceResponse } from '../../common/models/serviceResponse';
 import { IpDetail } from "../models/ipDetail";
+import { IpHistory } from "../models/ipHistory";
 import { Subnet } from "../models/subnet";
 
 @Injectable()
@@ -37,6 +38,16 @@ export class SubnetService {
     .get<any>('../../../utilities/subnetIP_data.json')
     .toPromise()
     .then((res) => <IpDetail[]>res.data);
+  }
+
+  getIpHistories(subnetId:any) {
+    return this.http
+    .get<any>('../../../utilities/subnetIpHistory_data.json')
+    .toPromise()
+    .then((res) => {
+      console.log("json data", res.data);
+      return <IpHistory[]>res.data;
+    });
   }
 
   downloadSubnets(requestOptions?: RequestOptions) {

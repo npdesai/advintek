@@ -9,6 +9,6 @@ export class IpDetail  {
     deviceType: string;
     connectedSwitch: string;
     connectedPort: number;
-    dnsName: string;    
-    leaseExpiryDate: Date;
+    dnsName?: string;    
+    leaseExpiryDate?: Date;
 }

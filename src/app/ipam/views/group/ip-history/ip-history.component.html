@@ -1,0 +1,40 @@
+<section class="content-body">
+    <div class="col-md-12 no-padding">
+      <div class="box">
+        <div class="box-header">
+          <h5 class="box-title">Ips</h5>
+        </div>
+        <div class="box-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th data-column="ipAddress">IP Address</th>
+                <th data-column="detectedTime">Detected Time</th>
+                <th data-column="dnsName">DNS Name</th>
+                <th data-column="macAddress" style="width:125px">MAC Address</th>
+                <th data-column="deviceType">Device Type</th>
+                <th data-column="sysDesc" style="width: 125px;">Sys Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngIf="ipHistories && ipHistories.length > 0">
+                <tr *ngFor="let ipHistory of ipHistories">
+                  <td>{{ ipHistory.ipAddress }}</td>
+                  <td>{{ ipHistory.detectedTime }}</td>
+                  <td>{{ ipHistory.dnsName }}</td>
+                  <td>{{ ipHistory.macAddress }}</td>
+                  <td>{{ ipHistory.deviceType }}</td>
+                  <td>{{ ipHistory.sysDesc }}</td>
+                </tr>
+              </ng-container>
+              <tr *ngIf="ipHistories == null || ipHistories.length == 0">
+                <td colspan="9" style="text-align: center">
+                  {{ statusMessage }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>

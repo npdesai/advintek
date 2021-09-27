@@ -42,6 +42,8 @@ import { AddRouterComponent } from './views/settings/routers/add-router/add-rout
 import { EditComponent } from './views/dhcp/edit/edit.component';
 import { DHCPSummaryComponent } from './views/dhcp/dhcp-summary/dhcp-summary.component';
 import { DHCPServerDetailComponent } from './views/dhcp/dhcp-server-detail/dhcp-server-detail.component';
+import { IpDetailsComponent } from './views/group/ip-details/ip-details.component';
+import { IpHistoryComponent } from './views/group/ip-history/ip-history.component';
 
 @NgModule({
   imports: [
@@ -84,7 +86,9 @@ import { DHCPServerDetailComponent } from './views/dhcp/dhcp-server-detail/dhcp-
     RoutersComponent,
     AddRouterComponent,
     EditComponent,
-    DHCPServerDetailComponent
+    DHCPServerDetailComponent,
+    IpDetailsComponent,
+    IpHistoryComponent
   ],
   providers: [
     SubnetService
