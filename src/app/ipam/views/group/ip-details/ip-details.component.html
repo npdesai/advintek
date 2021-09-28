@@ -30,7 +30,7 @@
               <ng-container *ngIf="ipDetails && ipDetails.length > 0">
                 <tr *ngFor="let ipDetail of ipDetails">
                   <td>
-                    {{ ipDetail.ipAddress }}
+                    <span class="mr-2">{{ ipDetail.ipAddress }}</span>
                     <i
                       class="fas fa-caret-right"
                       (click)="openCM($event, cm, ipDetail)"

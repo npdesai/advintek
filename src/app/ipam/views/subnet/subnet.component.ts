@@ -17,6 +17,7 @@ import {
   TextSearch,
 } from '../../../common/models/searchField';
 import { IpDetail } from '../../models/ipDetail';
+import { IpHistory } from '../../models/ipHistory';
 import { Subnet } from '../../models/subnet';
 import { SubnetService } from '../../services/subnet.service';
 
@@ -32,6 +33,7 @@ export class SubnetComponent {
   subnets: Subnet[] = [];
   subnet: Subnet;
   ipDetails: IpDetail[] = [];
+  ipHistories: IpHistory[] = [];
   selectedIpDetail: IpDetail = new IpDetail();
 
   statusMessage: string = '';
@@ -91,6 +93,7 @@ export class SubnetComponent {
   ngOnInit() {
     this.getFormData();
     this.getSubnetIpData();
+    this.getIpHistories();
   }
 
   getSubnetIpData() {
@@ -98,6 +101,13 @@ export class SubnetComponent {
     this.subnetService.getSubnetIps(4).then((data) => {
       this.ipDetails = data;
     });
+  }
+
+  getIpHistories() {
+    this.statusMessage = "Loading data...";
+    this.subnetService.getIpHistories(4).then((data) => {
+      this.ipHistories = data;
+    })
   }
 
   getFormData() {
@@ -144,7 +154,7 @@ export class SubnetComponent {
     //   });
   }
 
-  openCM(event: MouseEvent, contextMenu: ContextMenu, ipDetail: IpDetail) {
+  openCM(event: MouseEvent, contextMenu: ContextMenu, ipDetail: any) {
     event.preventDefault();
     event.stopPropagation();
     this.selectedIpDetail = ipDetail;
