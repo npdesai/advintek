@@ -155,8 +155,218 @@
                     </div>
                     <div class="row form-row">
                         <div class="col-12 col-md-6">
-                            <h6>Select AD Domain</h6>
-                            <p-dropdown [options]="adDomains" placeholder="Choose AD Domain" optionLabel="name" styleClass="w-100"></p-dropdown>
+                            <h6>Server Type</h6>
+                            <p-dropdown 
+                                [options]="serverTypes" 
+                                placeholder="Choose Server Type" 
+                                optionLabel="name" 
+                                styleClass="w-100"
+                                name="serverType"
+                                [(ngModel)]="selectedServerType"
+                                optionValue="code"
+                                (onChange)="onServerTypeChange($event)">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div [ngSwitch]="selectedServerType">
+                        <div class="row form-row" *ngSwitchCase="'mds'">
+                            <div class="col-12 col-md-6">
+                                <h6>Select AD Domain</h6>
+                                <p-dropdown [options]="adDomains" placeholder="Choose AD Domain" optionLabel="name" styleClass="w-100"></p-dropdown>
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'paf'">
+                            <div class="row form-row">
+                                <div class="col">
+                                    <mat-radio-group>
+                                        <mat-radio-button [value]="pafRadio1" checked="true" (change)="ipv4RadioChange($event)">REST API</mat-radio-button>
+                                        <mat-radio-button [value]="pafRadio2" (change)="ipv4RadioChange($event)">CLI Credential</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                            </div>
+                            <div [ngSwitch]="selectedPafType">
+                                <div *ngSwitchCase="pafRadio1">
+                                    <div class="row form-row">
+                                        <div class="col">
+                                            <h6>User Name</h6>
+                                            <input type="text" pInputText class="w-100" />
+                                        </div>
+                                        <div class="col">
+                                            <h6>Password</h6>
+                                            <input type="password" pInputText class="w-100" />
+                                        </div>
+                                    </div>
+                                    <div class="row form-row">
+                                        <div class="col">
+                                            <h6>Time Out <span class="text-muted">(sec)</span></h6>
+                                            <input type="text" pInputText class="w-100" />
+                                        </div>
+                                        <div class="col">
+                                            <h6>Retries</h6>
+                                            <input type="text" pInputText class="w-100" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngSwitchCase="pafRadio2">
+                                    <div class="row form-row">
+                                        <div class="col-12 col-md-6">
+                                            <h6>Protocol</h6>
+                                            <p-dropdown 
+                                                [options]="protocols" 
+                                                placeholder="Choose AD Domain" 
+                                                optionLabel="name"
+                                                name="protocol"
+                                                [(ngModel)]="selectedProtocol"
+                                                optionValue="code"
+                                                styleClass="w-100">
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+                                    <div class="row form-row">
+                                        <div class="col">
+                                            <h6>User Name</h6>
+                                            <input type="text" pInputText class="w-100" />
+                                        </div>
+                                        <div class="col">
+                                            <h6>Password<sup class="text-danger">*</sup></h6>
+                                            <input type="password" pInputText class="w-100" />
+                                        </div>
+                                    </div>
+                                    <div class="row form-row">
+                                        <div class="col">
+                                            <h6>Prompt<sup class="text-danger">*</sup></h6>
+                                            <input type="text" pInputText class="w-100" />
+                                        </div>
+                                        <div class="col">
+                                            <h6>Enable UserName</h6>
+                                            <input type="text" pInputText class="w-100" />
+                                        </div>
+                                    </div>
+                                    <div class="row form-row">
+                                        <div class="col">
+                                            <h6>Enable Password</h6>
+                                            <input type="text" pInputText class="w-100" />
+                                        </div>
+                                        <div class="col">
+                                            <h6>Enable Prompt</h6>
+                                            <input type="text" pInputText class="w-100" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div *ngSwitchCase="'ls'">
+                            <div class="row form-row">
+                                <div class="col-12 col-md-6">
+                                    <h6>User Name</h6>
+                                    <input type="text" pInputText class="w-100" />
+                                </div>
+                            </div>
+                            <div class="row form-row">
+                                <div class="col-12 col-md-6">
+                                    <h6>Password</h6>
+                                    <input type="password" pInputText class="w-100" />
+                                </div>
+                            </div>
+                            <div class="row form-row">
+                                <div class="col-12 col-md-6">
+                                    <h6>Port Number</h6>
+                                    <input type="number" pInputText class="w-100" />
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'cr'">
+                            <div class="row form-row">
+                                <div class="col-12 col-md-6">
+                                    <h6>Protocol</h6>
+                                    <p-dropdown 
+                                        [options]="protocols" 
+                                        placeholder="Choose AD Domain" 
+                                        optionLabel="name"
+                                        name="protocol"
+                                        [(ngModel)]="selectedProtocol"
+                                        optionValue="code"
+                                        styleClass="w-100">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="row form-row">
+                                <div class="col">
+                                    <h6>User Name</h6>
+                                    <input type="text" pInputText class="w-100" />
+                                </div>
+                                <div class="col">
+                                    <h6>Password<sup class="text-danger">*</sup></h6>
+                                    <input type="password" pInputText class="w-100" />
+                                </div>
+                            </div>
+                            <div class="row form-row">
+                                <div class="col">
+                                    <h6>Prompt<sup class="text-danger">*</sup></h6>
+                                    <input type="text" pInputText class="w-100" />
+                                </div>
+                                <div class="col">
+                                    <h6>Enable UserName</h6>
+                                    <input type="text" pInputText class="w-100" />
+                                </div>
+                            </div>
+                            <div class="row form-row">
+                                <div class="col">
+                                    <h6>Enable Password</h6>
+                                    <input type="text" pInputText class="w-100" />
+                                </div>
+                                <div class="col">
+                                    <h6>Enable Prompt</h6>
+                                    <input type="text" pInputText class="w-100" />
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'ff'">
+                            <div class="row form-row">
+                                <div class="col-12 col-md-6">
+                                    <h6>Protocol</h6>
+                                    <p-dropdown 
+                                        [options]="protocols" 
+                                        placeholder="Choose AD Domain" 
+                                        optionLabel="name"
+                                        name="protocol"
+                                        [(ngModel)]="selectedProtocol"
+                                        optionValue="code"
+                                        styleClass="w-100">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="row form-row">
+                                <div class="col">
+                                    <h6>User Name</h6>
+                                    <input type="text" pInputText class="w-100" />
+                                </div>
+                                <div class="col">
+                                    <h6>Password<sup class="text-danger">*</sup></h6>
+                                    <input type="password" pInputText class="w-100" />
+                                </div>
+                            </div>
+                            <div class="row form-row">
+                                <div class="col">
+                                    <h6>Prompt<sup class="text-danger">*</sup></h6>
+                                    <input type="text" pInputText class="w-100" />
+                                </div>
+                                <div class="col">
+                                    <h6>Enable UserName</h6>
+                                    <input type="text" pInputText class="w-100" />
+                                </div>
+                            </div>
+                            <div class="row form-row">
+                                <div class="col">
+                                    <h6>Enable Password</h6>
+                                    <input type="text" pInputText class="w-100" />
+                                </div>
+                                <div class="col">
+                                    <h6>Enable Prompt</h6>
+                                    <input type="text" pInputText class="w-100" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <p-divider></p-divider>

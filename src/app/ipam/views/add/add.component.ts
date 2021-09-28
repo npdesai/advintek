@@ -1,3 +1,4 @@
+import { computeDecimalDigest } from '@angular/compiler/src/i18n/digest';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
 
@@ -29,6 +30,13 @@ export class AddComponent implements OnInit {
   subnetmasks: any;
   prefixLengths: any;
   adDomains: any;
+  serverTypes: any;
+  selectedServerType: string;
+  protocols: any;
+  selectedProtocol: string;
+  selectedPafType: string;
+  pafRadio1: string = 'restapi';
+  pafRadio2: string = 'clicredential';
 
   isAddManual: boolean = true;
   isAdd: boolean = false;
@@ -59,13 +67,30 @@ export class AddComponent implements OnInit {
       { name: 'Domain 2', code: 'D2' },
     ];
 
+    this.serverTypes = [
+      { name: 'Microsoft DHCP Server', code:'mds'},
+      { name: 'Palo Alto Firewall', code:'paf'},
+      { name: 'Linux Server', code:'ls'},
+      { name: 'Cisco Router', code:'cr'},
+      { name: 'Fortinet Firewall', code:'ff'},
+    ]
+
+    this.protocols = [
+      { name: 'Telnet', code: 'telnet' },
+      { name: 'SSH', code: 'ssh' }
+    ]
+    
     this.companies = [
       { name: 'Company 1', code: 'C1' },
       { name: 'Company 2', code: 'C2' },
     ];
   }
-
-  ngOnInit(): void {}
+  
+  ngOnInit(): void {
+    this.selectedServerType = this.serverTypes[0].code;
+    this.selectedProtocol = this.protocols[0].code;
+    this.selectedPafType = this.pafRadio1;
+  }
 
   onCancel() {
     this.closeWidth.emit(0);
@@ -77,6 +102,7 @@ export class AddComponent implements OnInit {
 
   ipv4RadioChange(event: MatRadioChange) {
     this.isAddManual = event.value === 'addmanual';
+    this.selectedPafType = event.value;
   }
 
   ipv6RadioChange(event: MatRadioChange) {
@@ -87,5 +113,10 @@ export class AddComponent implements OnInit {
     for (let file of event.files) {
       this.uploadedFiles.push(file);
     }
+  }
+
+  onServerTypeChange(event) {
+    this.selectedServerType = event.value;
+    this.selectedPafType = this.pafRadio1;
   }
 }
