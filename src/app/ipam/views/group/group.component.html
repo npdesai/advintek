@@ -68,10 +68,17 @@
       </section>
     </mat-tab>
     <mat-tab label="IP Details">
-      <app-ip-details [ipDetails]="ipDetails" [statusMessage]="statusMessage"></app-ip-details>
+      <app-ip-details #openDetail [ipDetails]="ipDetails" [statusMessage]="statusMessage"></app-ip-details>
     </mat-tab>
     <mat-tab label="IP History">
       <app-ip-history [ipHistories]="ipHistories" [statusMessage]="statusMessage"></app-ip-history>
     </mat-tab>
   </mat-tab-group>
 </div>
+
+<app-test-ip
+  [(pageTitle)]="openDetail.pageTitle"
+  [(ipDetail)]="openDetail.selectedIpDetail"
+  [(openWidth)]="openDetail.width"
+  (closeWidth)="openDetail.closeDiv($event)"
+></app-test-ip>

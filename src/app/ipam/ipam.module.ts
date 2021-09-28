@@ -32,7 +32,7 @@ import { IpamComponent } from './views/ipam.component';
 import { SubnetComponent } from './views/subnet/subnet.component';
 import { AddComponent } from './views/add/add.component';
 import { GroupComponent } from './views/group/group.component';
-import { TestIpComponent } from './views/subnet/test-ip/test-ip.component';
+import { TestIpComponent } from './views/test-ip/test-ip.component';
 import { DasboardComponent } from './views/dasboard/dasboard.component';
 import { DiscoveredSubnetsComponent } from './views/discovered/discovered-subnets/discovered-subnets.component';
 import { DiscoveredV6HostsComponent } from './views/discovered/discovered-v6-hosts/discovered-v6-hosts.component';

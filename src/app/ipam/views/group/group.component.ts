@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IpDetail } from '../../models/ipDetail';
 import { IpHistory } from '../../models/ipHistory';
 import { Subnet } from '../../models/subnet';
