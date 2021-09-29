@@ -7,6 +7,13 @@
                         <div class="box-header">
                             <h5 class="box-title">DHCP Summary</h5>
                         </div>
+                        <p-contextMenu
+                            #cm
+                            [model]="cmenuitems"
+                            appendTo="body"
+                            triggerEvent="click"
+                            [autoZIndex]="true"
+                        ></p-contextMenu>
                         <div class="box-body">
                             <table class="table table-bordered table-striped">
                                 <thead>
@@ -25,7 +32,13 @@
                                 <tbody>
                                     <ng-container *ngIf="dhcpServers && dhcpServers.length > 0">
                                         <tr *ngFor="let dhcpServer of dhcpServers">
-                                            <td>{{ dhcpServer.ipAddress }}</td>
+                                            <td>
+                                                <span class="mr-2">{{ dhcpServer.ipAddress }}</span>
+                                                <i
+                                                    class="fas fa-caret-right"
+                                                    (click)="openCM($event, cm, dhcpServer)"
+                                                ></i>
+                                            </td>
                                             <td>{{ dhcpServer.serverType }}</td>
                                             <td>{{ dhcpServer.noOfScopes }}</td>
                                             <td>{{ dhcpServer.totalIPs }}</td>                                      
@@ -53,3 +66,10 @@
         </mat-tab>
     </mat-tab-group>
 </div>
+
+<app-test-ip
+  [(pageTitle)]="pageTitle"
+  [(ipDetail)]="selectedIpDetail"
+  [(openWidth)]="width"
+  (closeWidth)="closeDiv($event)"
+></app-test-ip>

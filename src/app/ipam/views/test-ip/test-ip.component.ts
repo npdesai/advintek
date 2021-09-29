@@ -23,7 +23,7 @@ export class TestIpComponent implements OnInit {
     this._pageTitle = value;
   }
   @Output() pageTitleChange = new EventEmitter<any>();
-  @Input() ipDetail: IpDetail;
+  @Input() ipDetail: any;
   @Output() ipDetailChange = new EventEmitter<any>();
   @Output() closeWidth = new EventEmitter<any>();
 

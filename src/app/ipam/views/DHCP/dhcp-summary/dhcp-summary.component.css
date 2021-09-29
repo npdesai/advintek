@@ -5,3 +5,7 @@
 .f10 {
     font-size: 10px;
 }
+
+.fa-caret-right {
+  cursor: pointer;
+}
