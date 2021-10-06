@@ -46,7 +46,7 @@ export class IpamComponent {
   }
 
   getTreeData() {
-    this.treeserviceService.getTreeData().then((data) => {
+    this.treeserviceService.getTreeData().subscribe((data) => {
       this.treeitems = [
         {
           label: 'Your Company',
@@ -77,6 +77,7 @@ export class IpamComponent {
 
   closeDiv(width) {
     this.width = width;
+    this.getTreeData();
   }
 
   closeDNSServer(width) {

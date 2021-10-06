@@ -1,6 +1,10 @@
 import { computeDecimalDigest } from '@angular/compiler/src/i18n/digest';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
+import { SubnetGroup, SubnetMask } from '../../models/master';
+import { AddSubnet } from '../../models/subnet';
+import { MasterService } from '../../services/master.service';
+import { SubnetService } from '../../services/subnet.service';
 
 @Component({
   selector: 'app-add',
@@ -25,9 +29,7 @@ export class AddComponent implements OnInit {
 
   isAddIPv4Subnet: boolean = false;
   isAddIPv6SubnetSite: boolean = false;
-  isAddDHCPServer: boolean = false;
-  groups: any;
-  subnetmasks: any;
+  isAddDHCPServer: boolean = false;    
   prefixLengths: any;
   adDomains: any;
   serverTypes: any;
@@ -46,16 +48,16 @@ export class AddComponent implements OnInit {
   isGP: boolean = true;
   companies: any;
 
-  constructor() {
-    this.groups = [
-      { name: 'Group 1', code: 'G1' },
-      { name: 'Group 2', code: 'G2' },
-    ];
+  addSubnet = new AddSubnet();
+  subnetGroups : SubnetGroup[] = [];
+  subnetMasks:SubnetMask[] = [];
 
-    this.subnetmasks = [
-      { name: 'Sub 1', code: 'S1' },
-      { name: 'Sub 2', code: 'S2' },
-    ];
+  constructor(
+    private subnetService : SubnetService,
+    private masterService : MasterService
+  ) {
+    this.getSubnetGroups();
+    this.getSubnetMasks();  
 
     this.prefixLengths = [
       { name: '1', code: '1' },
@@ -84,6 +86,15 @@ export class AddComponent implements OnInit {
       { name: 'Company 1', code: 'C1' },
       { name: 'Company 2', code: 'C2' },
     ];
+
+    this.addSubnet.subnetAddress="";
+    this.addSubnet.location="";
+    this.addSubnet.subnetDescription="";
+    this.addSubnet.subnetGroupName="";
+    this.addSubnet.subnetName="";
+    this.addSubnet.vlanName="";
+    this.addSubnet.subnetGroupId=0;
+    this.addSubnet.subnetMaskId=0;
   }
   
   ngOnInit(): void {
@@ -98,6 +109,49 @@ export class AddComponent implements OnInit {
 
   addClick() {
     this.isAdd = !this.isAdd;
+  }
+
+  save(){    
+    if(this.isAddIPv4Subnet){
+      this.saveIpv4Subnet();
+    }    
+  }
+
+  saveIpv4Subnet() {
+    if(this.addSubnet.subnetGroupName == ""){
+      console.log('11')
+      this.addSubnet.subnetGroupId = this.addSubnet.subnetGroup.groupId;
+    }
+
+    if(this.addSubnet.subnetMask){
+      console.log('114')
+      this.addSubnet.subnetMaskId = this.addSubnet.subnetMask.maskId;
+    }
+
+    console.log(this.addSubnet,'this.addSubnet')
+    console.log(this.isAddIPv4Subnet,'this.isAddIPv4Subnet')
+
+    this.subnetService.saveIPV4Subnet(this.addSubnet).subscribe((data) => {
+      if(data){        
+        this.onCancel(); 
+      }
+    });
+  }
+
+  getSubnetGroups() {
+    this.masterService.getSubnetGroups().subscribe((data) => {
+      if(data){
+        this.subnetGroups = data;        
+      }
+    });
+  }
+
+  getSubnetMasks() {
+    this.masterService.getSubnetMask().subscribe((data) => {
+      if(data){
+        this.subnetMasks = data;        
+      }
+    });
   }
 
   ipv4RadioChange(event: MatRadioChange) {

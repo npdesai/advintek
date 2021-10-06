@@ -1,16 +1,17 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from "src/environments/environment";
 import { RequestOptions, SortOrder } from '../../common/models/requestOptions';
 import { ServiceResponse } from '../../common/models/serviceResponse';
 import { IpDetail } from "../models/ipDetail";
 import { IpHistory } from "../models/ipHistory";
-import { Subnet } from "../models/subnet";
+import { AddSubnet, Subnet } from "../models/subnet";
 
 @Injectable()
 export class SubnetService {
 
-  rootControler: string = `/Subnets`;
+  rootControler: string = `${environment.apiUrl}/api/Subnet`;
 
   constructor(private http: HttpClient) { }
 
@@ -85,6 +86,11 @@ export class SubnetService {
       .set('id', id == null ? "" : id.trim());
 
     return this.http.delete<ServiceResponse>(`${this.rootControler}/Delete`, { params });
+  }
+
+  saveIPV4Subnet(addSubnet: AddSubnet): Observable<boolean> {
+
+    return this.http.post<boolean>(`${this.rootControler}`, addSubnet);
   }
 
 }
