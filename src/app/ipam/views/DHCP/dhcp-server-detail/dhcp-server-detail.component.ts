@@ -323,7 +323,7 @@ export class DHCPServerDetailComponent implements OnInit {
 
   getSubnetIpData() {
     this.statusMessage = 'Loading data...';
-    this.subnetService.getSubnetIps(4).then((data) => {
+    this.subnetService.getSubnetIps("").subscribe((data) => {
       this.ipDetails = data;
     });
   }

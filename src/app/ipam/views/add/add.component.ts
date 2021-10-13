@@ -85,8 +85,18 @@ export class AddComponent implements OnInit {
     this.companies = [
       { name: 'Company 1', code: 'C1' },
       { name: 'Company 2', code: 'C2' },
-    ];
+    ];    
 
+    this.newaddSubnetModel();
+  }
+  
+  ngOnInit(): void {
+    this.selectedServerType = this.serverTypes[0].code;
+    this.selectedProtocol = this.protocols[0].code;
+    this.selectedPafType = this.pafRadio1;
+  }
+
+  newaddSubnetModel(){
     this.addSubnet.subnetAddress="";
     this.addSubnet.location="";
     this.addSubnet.subnetDescription="";
@@ -96,15 +106,11 @@ export class AddComponent implements OnInit {
     this.addSubnet.subnetGroupId=0;
     this.addSubnet.subnetMaskId=0;
   }
-  
-  ngOnInit(): void {
-    this.selectedServerType = this.serverTypes[0].code;
-    this.selectedProtocol = this.protocols[0].code;
-    this.selectedPafType = this.pafRadio1;
-  }
 
   onCancel() {
     this.closeWidth.emit(0);
+    this.newaddSubnetModel();
+    this.isAdd = false;
   }
 
   addClick() {
@@ -118,13 +124,11 @@ export class AddComponent implements OnInit {
   }
 
   saveIpv4Subnet() {
-    if(this.addSubnet.subnetGroupName == ""){
-      console.log('11')
+    if(this.addSubnet.subnetGroupName == ""){      
       this.addSubnet.subnetGroupId = this.addSubnet.subnetGroup.groupId;
     }
 
-    if(this.addSubnet.subnetMask){
-      console.log('114')
+    if(this.addSubnet.subnetMask){      
       this.addSubnet.subnetMaskId = this.addSubnet.subnetMask.maskId;
     }
 
@@ -132,7 +136,7 @@ export class AddComponent implements OnInit {
     console.log(this.isAddIPv4Subnet,'this.isAddIPv4Subnet')
 
     this.subnetService.saveIPV4Subnet(this.addSubnet).subscribe((data) => {
-      if(data){        
+      if(data){
         this.onCancel(); 
       }
     });

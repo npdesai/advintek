@@ -33,7 +33,7 @@ export class GroupComponent implements OnInit {
 
   getIpDetails() {
     this.statusMessage = "Loading data...";
-    this.subnetService.getSubnetIps(4).then((data) => {
+    this.subnetService.getSubnetIps("49.256.25.0").subscribe((data) => {
       this.ipDetails = data;
     })
   }

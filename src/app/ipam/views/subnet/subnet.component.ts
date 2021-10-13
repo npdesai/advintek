@@ -1,6 +1,7 @@
 import { HttpEventType } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { ContextMenu } from 'primeng/contextmenu';
 import { AlertType, Helper } from '../../../common/helper';
@@ -55,11 +56,13 @@ export class SubnetComponent {
 
   pageTitle: string;
   width = 0;
+  subnetId ="";
 
   constructor(
     private subnetService: SubnetService,
     public dialog: MatDialog,
-    private helper: Helper
+    private helper: Helper,
+    private route: ActivatedRoute
   ) {
     this.cmenuitems = [
       { label: 'Ping', command: (item) => this.testIP(item) },
@@ -68,37 +71,21 @@ export class SubnetComponent {
       { label: 'Resolve MAC Address', command: (item) => this.testIP(item) },
       { label: 'Trace Route', command: (item) => this.testIP(item) },
       { label: 'System Explorer', command: (item) => this.testIP(item) },
-    ];
-
-    // this.searchFields = [];
-    // this.searchFields.push(new TextSearch({ field: 'Address', label: 'Address', dataType: "text", value: "" }));
-    // this.searchFields.push(new TextSearch({ field: 'Mask', label: 'Mask', dataType: "text", value: "" }));
-    // this.searchFields.push(new TextSearch({ field: 'Name', label: 'Name', dataType: "text", value: "" }));
-    // this.searchFields.push(new TextSearch({ field: 'Size', label: 'Size', dataType: "number", value: "" }));
-    // this.searchFields.push(new DropDownSearch({ field: 'ScanStatus', label: 'Scan Status', dataType: "text", value: null, dropDownValues: [{ name: 'Platinum', value: 'Platinum' }, { name: 'Gold', value: 'Gold' }, { name: 'Silver', value: 'Silver' }] }));
-    // this.searchFields.push(new DateSearch({ field: 'LastScannedOn', label: 'Last Scanned On', dataType: "date", value: null, isDateRange: false }));
-    // this.searchFields.push(new TextSearch({ field: 'Available', label: 'Available', dataType: "number", value: "" }));
-    // this.searchFields.push(new TextSearch({ field: 'Used', label: 'Used', dataType: "number", value: "" }));
-
-    // this.fields = this.searchFields.map(x => { return x.field; });
-    // this.fields.push('Id');
-
-    // this.sortElement = { propertyName: "Name", sortOrder: SortOrder.ascending };
-
-    //   this.modes.push('add');
-    //   this.modes.push("edit");
-    //   this.modes.push("delete");
+    ];   
   }
 
   ngOnInit() {
-    this.getFormData();
-    this.getSubnetIpData();
+    this.getFormData();    
     this.getIpHistories();
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.subnetId = params.get('Id');
+      this.getSubnetIpData(this.subnetId);
+    })
   }
 
-  getSubnetIpData() {
+  getSubnetIpData(subnet:string) {
     this.statusMessage = "Loading data...";
-    this.subnetService.getSubnetIps(4).then((data) => {
+    this.subnetService.getSubnetIps(subnet).subscribe((data) => {
       this.ipDetails = data;
     });
   }
