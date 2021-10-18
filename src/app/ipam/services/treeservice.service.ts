@@ -8,11 +8,11 @@ import { environment } from 'src/environments/environment';
 })
 export class TreeserviceService {
 
-  rootControler: string = `${environment.apiUrl}/api/Subnet`;
+  rootControler: string = `${environment.apiUrl}/api/Tree`;
 
   constructor(private http: HttpClient) {}
 
   getTreeData() {
-    return this.http.get<any>(`${this.rootControler}/getsubnettree`);
+    return this.http.get<any>(`${this.rootControler}`);
   }
 }

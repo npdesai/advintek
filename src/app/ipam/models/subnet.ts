@@ -13,14 +13,14 @@ export class Subnet  {
 
 
 export class AddSubnet  {
-  subnetGroupId: number;
+  subnetGroupId?: string;
   subnetGroup: any;
   subnetGroupName: string;
   subnetAddress: string;
-  subnetMaskId: number;
+  subnetMaskId: string;
   subnetMask: any;
   subnetName: string;
   subnetDescription: string;
   vlanName: string;
-  location: string;  
+  location: string;
 }

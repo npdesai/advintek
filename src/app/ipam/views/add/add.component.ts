@@ -29,7 +29,7 @@ export class AddComponent implements OnInit {
 
   isAddIPv4Subnet: boolean = false;
   isAddIPv6SubnetSite: boolean = false;
-  isAddDHCPServer: boolean = false;    
+  isAddDHCPServer: boolean = false;
   prefixLengths: any;
   adDomains: any;
   serverTypes: any;
@@ -57,7 +57,7 @@ export class AddComponent implements OnInit {
     private masterService : MasterService
   ) {
     this.getSubnetGroups();
-    this.getSubnetMasks();  
+    this.getSubnetMasks();
 
     this.prefixLengths = [
       { name: '1', code: '1' },
@@ -81,15 +81,15 @@ export class AddComponent implements OnInit {
       { name: 'Telnet', code: 'telnet' },
       { name: 'SSH', code: 'ssh' }
     ]
-    
+
     this.companies = [
       { name: 'Company 1', code: 'C1' },
       { name: 'Company 2', code: 'C2' },
-    ];    
+    ];
 
     this.newaddSubnetModel();
   }
-  
+
   ngOnInit(): void {
     this.selectedServerType = this.serverTypes[0].code;
     this.selectedProtocol = this.protocols[0].code;
@@ -103,8 +103,8 @@ export class AddComponent implements OnInit {
     this.addSubnet.subnetGroupName="";
     this.addSubnet.subnetName="";
     this.addSubnet.vlanName="";
-    this.addSubnet.subnetGroupId=0;
-    this.addSubnet.subnetMaskId=0;
+    this.addSubnet.subnetGroupId=null;
+    this.addSubnet.subnetMaskId="";
   }
 
   onCancel() {
@@ -117,27 +117,24 @@ export class AddComponent implements OnInit {
     this.isAdd = !this.isAdd;
   }
 
-  save(){    
+  save(){
     if(this.isAddIPv4Subnet){
       this.saveIpv4Subnet();
-    }    
+    }
   }
 
   saveIpv4Subnet() {
-    if(this.addSubnet.subnetGroupName == ""){      
+    if(this.addSubnet.subnetGroupName == ""){
       this.addSubnet.subnetGroupId = this.addSubnet.subnetGroup.groupId;
     }
 
-    if(this.addSubnet.subnetMask){      
+    if(this.addSubnet.subnetMask){
       this.addSubnet.subnetMaskId = this.addSubnet.subnetMask.maskId;
     }
 
-    console.log(this.addSubnet,'this.addSubnet')
-    console.log(this.isAddIPv4Subnet,'this.isAddIPv4Subnet')
-
     this.subnetService.saveIPV4Subnet(this.addSubnet).subscribe((data) => {
       if(data){
-        this.onCancel(); 
+        this.onCancel();
       }
     });
   }
@@ -145,7 +142,7 @@ export class AddComponent implements OnInit {
   getSubnetGroups() {
     this.masterService.getSubnetGroups().subscribe((data) => {
       if(data){
-        this.subnetGroups = data;        
+        this.subnetGroups = data;
       }
     });
   }
@@ -153,7 +150,7 @@ export class AddComponent implements OnInit {
   getSubnetMasks() {
     this.masterService.getSubnetMask().subscribe((data) => {
       if(data){
-        this.subnetMasks = data;        
+        this.subnetMasks = data;
       }
     });
   }

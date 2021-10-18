@@ -3,11 +3,14 @@ export class SubnetGroup  {
     groupName: string;
     groupAddress: string;
   }
-  
+
 
 export class SubnetMask  {
-    maskId: number;
-    maskName: string;
-    maskDescription: string;
+    maskId: string;
+    class: string;
+    addresses: number;
+    cidr: string;
+    hosts: number;
+    netMask : string;
+    displaySubnetMask: string;
   }
-  

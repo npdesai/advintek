@@ -44,7 +44,7 @@
                         </div>
                         <div class="col">
                             <h6>Subnet Mask</h6>
-                            <p-dropdown [options]="subnetMasks" name="subnetMaskId" [(ngModel)]="addSubnet.subnetMask" placeholder="Select Subnet Mask" optionLabel="maskName"
+                            <p-dropdown [options]="subnetMasks" name="subnetMaskId" [(ngModel)]="addSubnet.subnetMask" placeholder="Select Subnet Mask" optionLabel="displaySubnetMask"
                                 styleClass="w-100"></p-dropdown>
                         </div>
                     </div>
@@ -156,10 +156,10 @@
                     <div class="row form-row">
                         <div class="col-12 col-md-6">
                             <h6>Server Type</h6>
-                            <p-dropdown 
-                                [options]="serverTypes" 
-                                placeholder="Choose Server Type" 
-                                optionLabel="name" 
+                            <p-dropdown
+                                [options]="serverTypes"
+                                placeholder="Choose Server Type"
+                                optionLabel="name"
                                 styleClass="w-100"
                                 name="serverType"
                                 [(ngModel)]="selectedServerType"
@@ -211,9 +211,9 @@
                                     <div class="row form-row">
                                         <div class="col-12 col-md-6">
                                             <h6>Protocol</h6>
-                                            <p-dropdown 
-                                                [options]="protocols" 
-                                                placeholder="Choose AD Domain" 
+                                            <p-dropdown
+                                                [options]="protocols"
+                                                placeholder="Choose AD Domain"
                                                 optionLabel="name"
                                                 name="protocol"
                                                 [(ngModel)]="selectedProtocol"
@@ -254,7 +254,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div *ngSwitchCase="'ls'">
                             <div class="row form-row">
@@ -280,9 +280,9 @@
                             <div class="row form-row">
                                 <div class="col-12 col-md-6">
                                     <h6>Protocol</h6>
-                                    <p-dropdown 
-                                        [options]="protocols" 
-                                        placeholder="Choose AD Domain" 
+                                    <p-dropdown
+                                        [options]="protocols"
+                                        placeholder="Choose AD Domain"
                                         optionLabel="name"
                                         name="protocol"
                                         [(ngModel)]="selectedProtocol"
@@ -326,9 +326,9 @@
                             <div class="row form-row">
                                 <div class="col-12 col-md-6">
                                     <h6>Protocol</h6>
-                                    <p-dropdown 
-                                        [options]="protocols" 
-                                        placeholder="Choose AD Domain" 
+                                    <p-dropdown
+                                        [options]="protocols"
+                                        placeholder="Choose AD Domain"
                                         optionLabel="name"
                                         name="protocol"
                                         [(ngModel)]="selectedProtocol"

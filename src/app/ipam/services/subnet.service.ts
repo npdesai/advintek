@@ -32,7 +32,7 @@ export class SubnetService {
     .get<any>('../../../utilities/subnet_data.json')
     .toPromise()
     .then((res) => <Subnet[]>res.data);
-  } 
+  }
 
   getSubnetIps(subnet:string) {
     return this.http.get<any>(`${this.rootControler}/getsubnetdetail?subnet=${subnet}`);
@@ -86,8 +86,7 @@ export class SubnetService {
   }
 
   saveIPV4Subnet(addSubnet: AddSubnet): Observable<boolean> {
-
-    return this.http.post<boolean>(`${this.rootControler}`, addSubnet);
+    return this.http.post<any>(`${this.rootControler}/Add`, addSubnet);
   }
 
 }

@@ -12,10 +12,10 @@ export class MasterService {
   constructor(private http: HttpClient) {}
 
   getSubnetGroups() {
-    return this.http.get<SubnetGroup[]>(`${this.rootControler}/getsubnetgroups`);
+    return this.http.get<SubnetGroup[]>(`${this.rootControler}/SubnetGroups`);
   }
 
   getSubnetMask() {
-    return this.http.get<SubnetMask[]>(`${this.rootControler}/getsubnetmask`);
+    return this.http.get<SubnetMask[]>(`${this.rootControler}/SubnetMasks`);
   }
 }
