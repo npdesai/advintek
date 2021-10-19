@@ -34,8 +34,8 @@ export class SubnetService {
     .then((res) => <Subnet[]>res.data);
   }
 
-  getSubnetIps(subnet:string) {
-    return this.http.get<any>(`${this.rootControler}/getsubnetdetail?subnet=${subnet}`);
+  getSubnetIps(subnetid:string) {
+    return this.http.get<any>(`${this.rootControler}/SubnetIpList?subnetId=${subnetid}`);
   }
 
   getIpHistories(subnetId:any) {
