@@ -307,37 +307,92 @@
       </div>
     </div>
     <div class="row pageContent" *ngIf="isSystemExplorer">
-        <div class="col-12 mb-4">
-            <form class="form-section">
-              <div class="row form-row">
-                <div class="col-12 col-md-6">
-                  <h6>IP Address/Host Name</h6>
-                  <input
-                    type="text"
-                    pInputText
-                    class="w-100"
-                    [value]="ipDetail.ipAddress"
-                    disabled
-                  />
-                </div>
-              </div>
-              <div class="row form-row">
-                <div class="col-12 col-md-6">
-                  <h6>Read Community</h6>
-                  <input type="password" pInputText class="w-100" />
-                </div>
-              </div>
-              <p-divider></p-divider>
-              <div class="row">
-                <div class="col text-right">
-                  <p-button
-                    label="Show"
-                    styleClass="p-button-success p-button-sm"
-                  ></p-button>
-                </div>
-              </div>
-            </form>
+      <div class="col-12 mb-4">
+        <form class="form-section">
+          <div class="row form-row">
+            <div class="col-12 col-md-6">
+              <h6>IP Address/Host Name</h6>
+              <input
+                type="text"
+                pInputText
+                class="w-100"
+                [value]="ipDetail.ipAddress"
+                disabled
+              />
+            </div>
           </div>
+          <div class="row form-row">
+            <div class="col-12 col-md-6">
+              <h6>Read Community</h6>
+              <input type="password" pInputText class="w-100" />
+            </div>
+          </div>
+          <p-divider></p-divider>
+          <div class="row">
+            <div class="col text-right">
+              <p-button
+                label="Show"
+                styleClass="p-button-success p-button-sm"
+              ></p-button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="isEditIpDetail">
+      <div class="col-12 mb-4">
+        <form class="form-section">
+          <div class="row form-row">
+            <div class="col-12 col-md-6">
+              <h6>Availability</h6>
+              <p-dropdown
+                [options]="ipAvailabilities"
+                placeholder="Select Subnet Mask"
+                optionLabel="name"
+                styleClass="w-100"
+              ></p-dropdown>
+            </div>
+            <div class="col-12 col-md-6">
+              <h6>Reserved Status</h6>
+              <p-dropdown
+                [options]="reservedStatuses"
+                placeholder="Select Subnet Mask"
+                optionLabel="name"
+                styleClass="w-100"
+              ></p-dropdown>
+            </div>
+          </div>
+          <div class="row form-row">
+            <div class="col-12 col-md-6">
+              <h6>Alias Name</h6>
+              <input type="text" pInputText class="w-100" />
+            </div>
+            <div class="col-12 col-md-6">
+              <h6>Asset Tag</h6>
+              <input type="text" pInputText class="w-100" />
+            </div>
+          </div>
+          <div class="row form-row">
+            <div class="col-12">
+              <h6>Sys Location</h6>
+              <input type="text" pInputText class="w-100" />
+            </div>
+          </div>
+          <p-divider></p-divider>
+          <div class="row">
+            <div class="col text-right">
+              <p-button
+                label="Update"
+                styleClass="p-button-success p-button-sm"
+              ></p-button>
+              <p-button
+                label="Cancel"
+                styleClass="p-button-outlined p-button-secondary p-button-sm ml-3"
+              ></p-button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>

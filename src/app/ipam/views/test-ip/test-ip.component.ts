@@ -20,6 +20,7 @@ export class TestIpComponent implements OnInit {
     this.isResolveMACAddress = value === 'Resolve MAC Address';
     this.isTraceRoute = value === 'Trace Route';
     this.isSystemExplorer = value === 'System Explorer';
+    this.isEditIpDetail = value === 'Edit IP Details';
     this._pageTitle = value;
   }
   @Output() pageTitleChange = new EventEmitter<any>();
@@ -33,13 +34,26 @@ export class TestIpComponent implements OnInit {
   isResolveMACAddress: boolean = false;
   isTraceRoute: boolean = false;
   isSystemExplorer: boolean = false;
+  isEditIpDetail: boolean = false;
 
   credentials: any;
+  ipAvailabilities: any;
+  reservedStatuses: any;
 
   constructor() { 
     this.credentials = [
       { name: 'None', code: 'None' },
     ];
+    this.ipAvailabilities = [
+      { name: 'Used', code: 'Used'},
+      { name: 'Transient', code: 'Transient'},
+      { name: 'Available', code: 'Available'},
+      { name: 'Not Reachable', code: 'Not Reachable'}
+    ];
+    this.reservedStatuses = [
+      { name: 'Reserved - Static IP Addresses', code: 'Reserved - Static IP Addresses'},
+      { name: 'Not Reserved', code: 'Not Reserved'}
+    ]
   }
 
   ngOnInit(): void {

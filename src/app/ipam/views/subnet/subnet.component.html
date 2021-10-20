@@ -44,8 +44,13 @@
                     <td>{{ ipDetail.dnsIp }}</td> -->
                     <td>{{ ipDetail.dnsStatus }}</td>
                     <td>
-                      <i class="fas fa-check-circle text-success"></i>
-                      <span class="ml-2">{{ ipDetail.status }}</span>
+                      <span [ngSwitch]="ipDetail.status">
+                        <i class="fas fa-check-circle text-success" *ngSwitchCase="'Available'"></i>
+                        <i class="fas fa-circle text-danger" *ngSwitchCase="'Used'"></i>
+                        <i class="fas fa-circle text-warning" *ngSwitchCase="'Transient'"></i>
+                        <i class="fas fa-circle text-muted" *ngSwitchCase="'Not Reachable'"></i>
+                      </span>
+                      <a href="javascript:void()" class="ml-2" (click)="editIpDetails(ipDetail)">{{ ipDetail.status }}</a>
                     </td>
                     <td>{{ ipDetail.deviceType }}</td>
                     <td>{{ ipDetail.connectedSwitch }}</td>

@@ -170,6 +170,12 @@ export class SubnetComponent {
     this.width = 100;
   }
 
+  editIpDetails(ipDetail) {
+    this.selectedIpDetail = ipDetail;
+    this.pageTitle = "Edit IP Details";
+    this.width = 100;
+  }
+
   closeDiv(width) {
     this.selectedIpDetail = new IpDetail();
     this.width = width;
