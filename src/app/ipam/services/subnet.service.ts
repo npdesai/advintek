@@ -38,6 +38,10 @@ export class SubnetService {
     return this.http.get<any>(`${this.rootControler}/SubnetIpList?subnetId=${subnetid}`);
   }
 
+  updateSubnetIpDetail(subnetIpId:string) {
+    return this.http.get<any>(`${this.rootControler}/UpdateSubnetIpDetail?subnetIpId=${subnetIpId}`);
+  }
+
   getIpHistories(subnetId:any) {
     return this.http
     .get<any>('../../../utilities/subnetIpHistory_data.json')

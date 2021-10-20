@@ -17,21 +17,22 @@
             <table class="table table-bordered table-striped table-sm">
               <thead>
                 <tr>
-                  <th>IP Address</th>
+                  <th width="150">IP Address</th>
                   <th>MAC Address</th>
-                  <th>IP->DNS</th>
-                  <th>DNS->IP</th>
+                  <!-- <th>IP->DNS</th>
+                  <th>DNS->IP</th> -->
                   <th>DNS Status</th>
                   <th>Status</th>
                   <th>Device Type</th>
                   <th>Connected Switch</th>
                   <th>Connected Port</th>
+                  <th>Last Scan</th>
                 </tr>
               </thead>
               <tbody>
                 <ng-container *ngIf="ipDetails && ipDetails.length > 0">
                   <tr *ngFor="let ipDetail of ipDetails">
-                    <td>
+                    <td width="150">
                       <span class="mr-2">{{ ipDetail.ipAddress }}</span>
                       <i
                         class="fas fa-caret-right"
@@ -39,8 +40,8 @@
                       ></i>
                     </td>
                     <td>{{ ipDetail.macAddress }}</td>
-                    <td>{{ ipDetail.ipDNS }}</td>
-                    <td>{{ ipDetail.dnsIp }}</td>
+                    <!-- <td>{{ ipDetail.ipDNS }}</td>
+                    <td>{{ ipDetail.dnsIp }}</td> -->
                     <td>{{ ipDetail.dnsStatus }}</td>
                     <td>
                       <i class="fas fa-check-circle text-success"></i>
@@ -49,6 +50,14 @@
                     <td>{{ ipDetail.deviceType }}</td>
                     <td>{{ ipDetail.connectedSwitch }}</td>
                     <td>{{ ipDetail.connectedPort }}</td>
+                    <td>
+                      <ng-container *ngIf="ipDetail.lastScan.toString().indexOf('0001-01-01') !== -1; else elseTemplate">
+                        <button [disabled]="reqSent" class="btn btn-sm btn-outline-primary" type="button" (click)="updateSubnetIpDetail(ipDetail.subnetIPId)">Scan Now</button>
+                      </ng-container>
+                      <ng-template #elseTemplate>
+                        <a (click)="updateSubnetIpDetail(ipDetail.subnetIPId)" role="button" [ngClass]="{'disabled': reqSent}">{{ ipDetail.lastScan | date }}</a>
+                      </ng-template>
+                    </td>
                   </tr>
                 </ng-container>
                 <tr *ngIf="ipDetails == null || ipDetails.length == 0">

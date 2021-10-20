@@ -2,8 +2,8 @@ export class IpDetail  {
     id: string;
     ipAddress: string;
     macAddress: string;
-    ipDNS: string;
-    dnsIp: string;
+    ipDNS?: string;
+    dnsIp?: string;
     dnsStatus: string;
     status: string;
     deviceType: string;
@@ -11,4 +11,6 @@ export class IpDetail  {
     connectedPort: number;
     dnsName?: string;    
     leaseExpiryDate?: Date;
+    lastScan?: Date;
+    subnetIPId?: string;
 }

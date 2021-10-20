@@ -52,6 +52,8 @@ export class SubnetComponent {
   fields: string[];
   previousElement: HTMLElement;
 
+  reqSent: boolean = false;
+
   cmenuitems: MenuItem[];
 
   pageTitle: string;
@@ -87,6 +89,20 @@ export class SubnetComponent {
     this.statusMessage = "Loading data...";
     this.subnetService.getSubnetIps(subnet).subscribe((data) => {
       this.ipDetails = data;
+    });
+  }
+
+  updateSubnetIpDetail(subnetIpId:string) {
+    if(this.reqSent) {
+      return;
+    }
+    this.reqSent = true;
+    this.subnetService.updateSubnetIpDetail(subnetIpId).subscribe((data) => {
+      this.route.paramMap.subscribe((params: ParamMap) => {
+        this.subnetId = params.get('Id');
+        this.getSubnetIpData(this.subnetId);
+      });
+      this.reqSent = false;
     });
   }
 
