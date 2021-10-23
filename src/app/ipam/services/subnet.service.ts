@@ -6,6 +6,7 @@ import { RequestOptions, SortOrder } from '../../common/models/requestOptions';
 import { ServiceResponse } from '../../common/models/serviceResponse';
 import { IpDetail } from "../models/ipDetail";
 import { IpHistory } from "../models/ipHistory";
+import { IpPing } from "../models/ipPing";
 import { AddSubnet, Subnet } from "../models/subnet";
 
 @Injectable()
@@ -97,4 +98,10 @@ export class SubnetService {
     return this.http.post<any>(`${this.rootControler}/Add`, addSubnet);
   }
 
+  getIpPing(subnetIp: string): Observable<IpPing> {
+    const params = new HttpParams()
+      .set('ipAddress', subnetIp == null ? "" : subnetIp.trim());
+      
+    return this.http.get<IpPing>(`${this.rootControler}/Ping`,{params});
+  }
 }

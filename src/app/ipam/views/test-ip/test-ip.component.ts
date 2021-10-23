@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IpDetail } from 'src/app/ipam/models/ipDetail';
+import { IpPing, PingOptions } from '../../models/ipPing';
+import { SubnetService } from '../../services/subnet.service';
 
 @Component({
   selector: 'app-test-ip',
@@ -40,7 +42,9 @@ export class TestIpComponent implements OnInit {
   ipAvailabilities: any;
   reservedStatuses: any;
 
-  constructor() { 
+  ipPing:IpPing;
+
+  constructor(private subnetService:SubnetService) { 
     this.credentials = [
       { name: 'None', code: 'None' },
     ];
@@ -54,6 +58,9 @@ export class TestIpComponent implements OnInit {
       { name: 'Reserved - Static IP Addresses', code: 'Reserved - Static IP Addresses'},
       { name: 'Not Reserved', code: 'Not Reserved'}
     ]
+
+    this.ipPing = new IpPing();
+    this.ipPing.options = new PingOptions();
   }
 
   ngOnInit(): void {
@@ -61,6 +68,14 @@ export class TestIpComponent implements OnInit {
 
   onCancel() {
     this.closeWidth.emit(0);
+  }
+
+  onPing(subnetIp){
+    this.subnetService.getIpPing(subnetIp).subscribe((res)=>{
+        this.ipPing = res;
+        this.ipPing.options = this.ipPing.options != null ? this.ipPing.options : new PingOptions();
+        console.log(this.ipPing,"this.ipPing")
+    });
   }
 
 }
