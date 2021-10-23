@@ -38,6 +38,7 @@ export class SubnetComponent {
   ipDetails: IpDetail[] = [];
   ipHistories: IpHistory[] = [];
   selectedIpDetail: IpDetail = new IpDetail();
+  editSelectedIpDetail: IpDetail = new IpDetail();
 
   statusMessage: string = '';
   modes: string[] = [];
@@ -58,6 +59,7 @@ export class SubnetComponent {
 
   pageTitle: string;
   width = 0;
+  editWidth = 0;
   subnetId ="";
 
   constructor(
@@ -181,21 +183,24 @@ export class SubnetComponent {
     ipDetail.statusMaster = {name:ipDetail.status,code:ipDetail.status};
     ipDetail.reservedStatusMaster = {name:ipDetail.reservedStatus,code:ipDetail.reservedStatus};    
 
-    this.selectedIpDetail = ipDetail;
-    this.pageTitle = "Edit IP Details";
-    this.width = 100;    
+    this.editSelectedIpDetail = ipDetail;    
+    this.editWidth = 100;    
   }
 
-  closeDiv(ipDetail) {    
+  closeDiv(width) {    
     this.selectedIpDetail = new IpDetail();
-    this.width = 0;
+    this.width = width;
+  }
+
+  closeDivEdit(ipDetail) {    
+    this.editSelectedIpDetail = new IpDetail();
+    this.editWidth = 0;
 
     this.ipDetails.map((ip) => {
       if(ip.subnetIPId === ipDetail.subnetIPId)
       {        
         ip.status = ipDetail.status
-        // ip.deviceType = ipDetail.deviceType,
-        // ip.connectedSwitch = ipDetail.connectedSwitch        
+        ip.deviceType = ipDetail.deviceType     
       }
     })
   }

@@ -135,7 +135,14 @@
 </mat-tab-group>
 
 <app-edit-subnet
-[(ipDetail)]="selectedIpDetail"
-[(openWidth)]="width"
-(closeWidth)="closeDiv($event)"
+[(ipDetail)]="editSelectedIpDetail"
+[(openWidth)]="editWidth"
+(closeWidth)="closeDivEdit($event)"
 ></app-edit-subnet>
+
+<app-test-ip
+  [(pageTitle)]="pageTitle"
+  [(ipDetail)]="selectedIpDetail"
+  [(openWidth)]="width"
+  (closeWidth)="closeDiv($event)"
+></app-test-ip>
