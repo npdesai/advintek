@@ -176,14 +176,17 @@ export class SubnetComponent {
   }
 
   editIpDetails(ipDetail) {
+    ipDetail["statusMaster"];
+    ipDetail["reservedStatusMaster"];
+    ipDetail.statusMaster = {name:ipDetail.status,code:ipDetail.status};
+    ipDetail.reservedStatusMaster = {name:ipDetail.reservedStatus,code:ipDetail.reservedStatus};    
+
     this.selectedIpDetail = ipDetail;
     this.pageTitle = "Edit IP Details";
-    this.width = 100;
-    console.log(ipDetail,'ipDetail');
+    this.width = 100;    
   }
 
-  closeDiv(ipDetail) {
-    console.log(ipDetail,'ipDetail')
+  closeDiv(ipDetail) {    
     this.selectedIpDetail = new IpDetail();
     this.width = 0;
 

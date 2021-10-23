@@ -40,10 +40,14 @@
                     </div>
                 </div>
                 <div class="row form-row">
-                    <div class="col-12">
+                    <div class="col-12 col-md-6">
+                        <h6>Device Type</h6>
+                        <input type="text" pInputText [(ngModel)]="ipDetail.deviceType" name="deviceType" class="w-100" />
+                    </div>
+                    <div class="col-12 col-md-6">
                         <h6>Sys Location</h6>
                         <input type="text" pInputText [(ngModel)]="ipDetail.systemLocation" name="systemLocation" class="w-100" />
-                    </div>
+                    </div>                    
                 </div>
                 <p-divider></p-divider>
                 <div class="row">

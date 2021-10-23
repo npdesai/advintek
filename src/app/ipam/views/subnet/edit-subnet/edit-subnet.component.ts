@@ -31,10 +31,10 @@ export class EditSubnetComponent implements OnInit {
     this.reservedStatuses = [
       { name: 'Reserved - Static IP Addresses', code: 'Reserved - Static IP Addresses'},
       { name: 'Not Reserved', code: 'Not Reserved'}
-    ]
+    ]    
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {        
   }
 
   onCancel() {
