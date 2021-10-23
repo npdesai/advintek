@@ -38,7 +38,7 @@ export class SubnetService {
     return this.http.get<any>(`${this.rootControler}/SubnetIpList?subnetId=${subnetid}`);
   }
 
-  updateSubnetIpDetail(subnetIpId:string) {
+  scanIP(subnetIpId:string) {
     return this.http.patch<any>(`${this.rootControler}/ScanIP?subnetIpId=${subnetIpId}`,"");
   }
 

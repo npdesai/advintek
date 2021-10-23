@@ -438,6 +438,7 @@ body .ui-widget {
 
 .table > thead > tr > th {
   border-top: 2px solid #ddd !important;
+  text-align: center;
 }
 
 .table-sorter {

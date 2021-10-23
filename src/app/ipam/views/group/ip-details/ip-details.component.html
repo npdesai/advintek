@@ -17,13 +17,13 @@
               <tr>
                 <th data-column="ipAddress">IP Address</th>
                 <th data-column="macName">MAC Address</th>
-                <th data-column="ipDNS">IP->DNS</th>
-                <th data-column="dnsIp" style="width:125px">DNS->IP</th>
+                <!-- <th data-column="ipDNS">IP->DNS</th>
+                <th data-column="dnsIp" style="width:125px">DNS->IP</th> -->
                 <th data-column="dnsStatus" style="width: 125px;">DNS Status</th>
                 <th data-column="status">Status</th>
                 <th data-column="deviceType">Device Type</th>
                 <th data-column="connectedSwitch">Connected Switch</th>
-                <th data-column="connectedPort">Connected Port</th>
+                <!-- <th data-column="connectedPort">Connected Port</th> -->
               </tr>
             </thead>
             <tbody>
@@ -37,8 +37,8 @@
                     ></i>
                   </td>
                   <td>{{ ipDetail.macAddress }}</td>
-                  <td>{{ ipDetail.ipDNS }}</td>
-                  <td>{{ ipDetail.dnsIp }}</td>
+                  <!-- <td>{{ ipDetail.ipDNS }}</td>
+                  <td>{{ ipDetail.dnsIp }}</td> -->
                   <td>{{ ipDetail.dnsStatus }}</td>
                   <td>
                     <i class="fas fa-circle" style="color: #ee5656"></i>
@@ -46,7 +46,7 @@
                   </td>
                   <td>{{ ipDetail.deviceType }}</td>
                   <td>{{ ipDetail.connectedSwitch }}</td>
-                  <td>{{ ipDetail.connectedPort }}</td>
+                  <!-- <td>{{ ipDetail.connectedPort }}</td> -->
                 </tr>
               </ng-container>
               <tr *ngIf="ipDetails == null || ipDetails.length == 0">
