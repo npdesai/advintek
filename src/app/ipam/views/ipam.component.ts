@@ -14,7 +14,7 @@ declare var $: any;
 export class IpamComponent {
   treeitems: TreeNode[];
   selectedFile: TreeNode;
-  crumbs: MenuItem[];
+  // crumbs: MenuItem[];
   items: MenuItem[];
   settingsItems: MenuItem[];
   pageTitle: string;
@@ -27,7 +27,7 @@ export class IpamComponent {
 
   ngOnInit() {
     this.getTreeData();
-    this.crumbs = [{ label: 'Your Company' }];
+    // this.crumbs = [{ label: 'Your Company' }];
 
     this.items = [
       { label: 'Add IPv4 Subnet', command: (x) => this.addItems(x) },
@@ -47,14 +47,7 @@ export class IpamComponent {
 
   getTreeData() {
     this.treeserviceService.getTreeData().subscribe((data) => {
-      this.treeitems = [
-        {
-          label: 'Your Company',
-          icon: 'fa fa-globe companyicon',
-          expanded: true,
-          children: data,
-        },
-      ];
+      this.treeitems = data;
     });
   }
 

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { LoadingDataService } from 'src/app/ipam/services/loading-data.service';
 import { SubnetService } from 'src/app/ipam/services/subnet.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class EditSubnetComponent implements OnInit {
   ipAvailabilities: any;
   reservedStatuses: any;
 
-  constructor(private subnetService: SubnetService) { 
+  constructor(private subnetService: SubnetService, private loaderService: LoadingDataService) { 
     this.credentials = [
       { name: 'None', code: 'None' },
     ];
@@ -40,7 +41,8 @@ export class EditSubnetComponent implements OnInit {
     this.closeWidth.emit(this.ipDetail);
   }
 
-  onUpdate(){    
+  onUpdate(){   
+    this.loaderService.showLoader();
     if(this.ipDetail.statusMaster){
       this.ipDetail.status = this.ipDetail.statusMaster.name;
       console.log(this.ipDetail)
@@ -52,7 +54,8 @@ export class EditSubnetComponent implements OnInit {
     }
 
     this.subnetService.updateSubnetIpDetail(this.ipDetail).subscribe((data) => {      
-        this.onCancel();     
+      this.loaderService.hideLoader();
+      this.onCancel();     
     });
   }
 

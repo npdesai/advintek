@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
 import { SubnetGroup, SubnetMask } from '../../models/master';
 import { AddSubnet } from '../../models/subnet';
+import { LoadingDataService } from '../../services/loading-data.service';
 import { MasterService } from '../../services/master.service';
 import { SubnetService } from '../../services/subnet.service';
 
@@ -54,7 +55,8 @@ export class AddComponent implements OnInit {
 
   constructor(
     private subnetService : SubnetService,
-    private masterService : MasterService
+    private masterService : MasterService,
+    private loaderService : LoadingDataService
   ) {
     this.getSubnetGroups();
     this.getSubnetMasks();
@@ -124,6 +126,7 @@ export class AddComponent implements OnInit {
   }
 
   saveIpv4Subnet() {
+    this.loaderService.showLoader();
     if(this.addSubnet.subnetGroupName == ""){
       this.addSubnet.subnetGroupId = this.addSubnet.subnetGroup.groupId;
     }
@@ -134,6 +137,7 @@ export class AddComponent implements OnInit {
 
     this.subnetService.saveIPV4Subnet(this.addSubnet).subscribe((data) => {
       if(data){
+        this.loaderService.hideLoader();
         this.onCancel();
       }
     });

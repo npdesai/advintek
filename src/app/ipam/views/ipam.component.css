@@ -65,6 +65,7 @@
 
 .page-section {
     flex-grow: 1;
+    width: calc(100vw - 260px);
 }
 
 ::ng-deep .action-btn .p-button {
