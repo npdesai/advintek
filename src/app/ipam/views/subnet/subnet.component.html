@@ -57,10 +57,10 @@
                     <!-- <td>{{ ipDetail.connectedPort }}</td> -->
                     <td style="text-align: center;">
                       <ng-container *ngIf="ipDetail.lastScan.toString().indexOf('0001-01-01') !== -1; else elseTemplate">
-                        <button [disabled]="reqSent" class="btn btn-sm btn-outline-primary" type="button" (click)="scanIP(ipDetail.subnetIPId)">Scan Now</button>
+                        <button class="btn btn-sm btn-outline-primary" type="button" (click)="scanIP(ipDetail.subnetIPId)">Scan Now</button>
                       </ng-container>
                       <ng-template #elseTemplate>
-                        <a (click)="scanIP(ipDetail.subnetIPId)" role="button" [ngClass]="{'disabled': reqSent}">{{ ipDetail.lastScan | date:'MM-dd-yyyy hh:mm:ss a' }}</a>
+                        <a (click)="scanIP(ipDetail.subnetIPId)" role="button">{{ ipDetail.lastScan | date:'MM-dd-yyyy hh:mm:ss a' }}</a>
                       </ng-template>
                     </td>
                   </tr>

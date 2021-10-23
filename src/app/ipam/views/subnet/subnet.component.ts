@@ -1,4 +1,5 @@
 import { HttpEventType } from '@angular/common/http';
+import { ThrowStmt } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -20,6 +21,7 @@ import {
 import { IpDetail } from '../../models/ipDetail';
 import { IpHistory } from '../../models/ipHistory';
 import { Subnet } from '../../models/subnet';
+import { LoadingDataService } from '../../services/loading-data.service';
 import { SubnetService } from '../../services/subnet.service';
 
 declare var $: any;
@@ -52,8 +54,6 @@ export class SubnetComponent {
   fields: string[];
   previousElement: HTMLElement;
 
-  reqSent: boolean = false;
-
   cmenuitems: MenuItem[];
 
   pageTitle: string;
@@ -64,7 +64,8 @@ export class SubnetComponent {
     private subnetService: SubnetService,
     public dialog: MatDialog,
     private helper: Helper,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loaderService: LoadingDataService
   ) {
     this.cmenuitems = [
       { label: 'Ping', command: (item) => this.testIP(item) },
@@ -93,10 +94,7 @@ export class SubnetComponent {
   }
 
   scanIP(subnetIpId:string) {
-    if(this.reqSent) {
-      return;
-    }
-    this.reqSent = true;
+    this.loaderService.showLoader();
     this.subnetService.scanIP(subnetIpId).subscribe((data) => {  
       this.ipDetails.map((ip) => {
         if(ip.subnetIPId === subnetIpId)
@@ -109,7 +107,7 @@ export class SubnetComponent {
           ip.lastScan = data.lastScan
         }
       })
-      this.reqSent = false;
+      this.loaderService.hideLoader();
     });
   }
 
