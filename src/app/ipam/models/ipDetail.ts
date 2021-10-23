@@ -12,4 +12,8 @@ export class IpDetail  {
     leaseExpiryDate?: Date;
     lastScan?: Date;
     subnetIPId?: string;
+    reservedStatus?: string;
+    aliasName?: string;
+    assetTag?: string;
+    systemLocation?: string;
 }

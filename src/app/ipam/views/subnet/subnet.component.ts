@@ -97,11 +97,7 @@ export class SubnetComponent {
       return;
     }
     this.reqSent = true;
-    this.subnetService.scanIP(subnetIpId).subscribe((data) => {
-      // this.route.paramMap.subscribe((params: ParamMap) => {
-      //   this.subnetId = params.get('Id');
-      //   this.getSubnetIpData(this.subnetId);
-      // });
+    this.subnetService.scanIP(subnetIpId).subscribe((data) => {  
       this.ipDetails.map((ip) => {
         if(ip.subnetIPId === subnetIpId)
         {
@@ -185,6 +181,7 @@ export class SubnetComponent {
     this.selectedIpDetail = ipDetail;
     this.pageTitle = "Edit IP Details";
     this.width = 100;
+    console.log(ipDetail,'ipDetail');
   }
 
   closeDiv(width) {
