@@ -52,5 +52,4 @@ export class IpDetailsComponent implements OnInit {
     this.selectedIpDetail = new IpDetail();
     this.width = width;
   }
-
 }

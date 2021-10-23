@@ -31,7 +31,7 @@ export class AddComponent implements OnInit {
   isAddIPv4Subnet: boolean = false;
   isAddIPv6SubnetSite: boolean = false;
   isAddDHCPServer: boolean = false;
-  prefixLengths: any;
+  prefixLengths: any = [];
   adDomains: any;
   serverTypes: any;
   selectedServerType: string;
@@ -61,10 +61,10 @@ export class AddComponent implements OnInit {
     this.getSubnetGroups();
     this.getSubnetMasks();
 
-    this.prefixLengths = [
-      { name: '1', code: '1' },
-      { name: '2', code: '2' },
-    ];
+    for(let i = 1; i <= 128; i++)
+    {
+      this.prefixLengths.push({ name: i.toString(), code: i });
+    }
 
     this.adDomains = [
       { name: 'Domain 1', code: 'D1' },

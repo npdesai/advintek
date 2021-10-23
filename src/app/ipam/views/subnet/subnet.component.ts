@@ -102,7 +102,6 @@ export class SubnetComponent {
         if(ip.subnetIPId === subnetIpId)
         {
           ip.macAddress = data.macAddress,
-          ip.dnsStatus = data.dnsStatus,
           ip.status = data.status,
           ip.deviceType = data.deviceType,
           ip.connectedSwitch = data.connectedSwitch,

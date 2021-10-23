@@ -19,13 +19,9 @@
                 <tr>
                   <th width="150">IP Address</th>
                   <th>MAC Address</th>
-                  <!-- <th>IP->DNS</th>
-                  <th>DNS->IP</th> -->
-                  <th>DNS Status</th>
                   <th>Status</th>
                   <th>Device Type</th>
                   <th>Connected Switch</th>
-                  <!-- <th>Connected Port</th> -->
                   <th>Last Scan</th>
                 </tr>
               </thead>
@@ -40,9 +36,6 @@
                       ></i>
                     </td>
                     <td>{{ ipDetail.macAddress }}</td>
-                    <!-- <td>{{ ipDetail.ipDNS }}</td>
-                    <td>{{ ipDetail.dnsIp }}</td> -->
-                    <td>{{ ipDetail.dnsStatus }}</td>
                     <td>
                       <span [ngSwitch]="ipDetail.status">
                         <i class="fas fa-check-circle text-success" *ngSwitchCase="'Available'"></i>
@@ -54,7 +47,6 @@
                     </td>
                     <td>{{ ipDetail.deviceType }}</td>
                     <td>{{ ipDetail.connectedSwitch }}</td>
-                    <!-- <td>{{ ipDetail.connectedPort }}</td> -->
                     <td style="text-align: center;">
                       <ng-container *ngIf="ipDetail.lastScan.toString().indexOf('0001-01-01') !== -1; else elseTemplate">
                         <button class="btn btn-sm btn-outline-primary" type="button" (click)="scanIP(ipDetail.subnetIPId)">Scan Now</button>
