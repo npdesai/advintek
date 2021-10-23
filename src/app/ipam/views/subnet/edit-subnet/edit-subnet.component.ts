@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SubnetService } from 'src/app/ipam/services/subnet.service';
 
 @Component({
   selector: 'app-edit-subnet',
@@ -16,7 +17,7 @@ export class EditSubnetComponent implements OnInit {
   ipAvailabilities: any;
   reservedStatuses: any;
 
-  constructor() { 
+  constructor(private subnetService: SubnetService) { 
     this.credentials = [
       { name: 'None', code: 'None' },
     ];
@@ -36,11 +37,23 @@ export class EditSubnetComponent implements OnInit {
   }
 
   onCancel() {
-    this.closeWidth.emit(0);
+    this.closeWidth.emit(this.ipDetail);
   }
 
-  onUpdate(){
-    console.log(this.ipDetail)
+  onUpdate(){    
+    if(this.ipDetail.statusMaster){
+      this.ipDetail.status = this.ipDetail.statusMaster.name;
+      console.log(this.ipDetail)
+    }
+
+    if(this.ipDetail.reservedStatusMaster){
+      this.ipDetail.reservedStatus = this.ipDetail.reservedStatusMaster.name;
+      console.log(this.ipDetail)
+    }
+
+    this.subnetService.updateSubnetIpDetail(this.ipDetail).subscribe((data) => {      
+        this.onCancel();     
+    });
   }
 
 }

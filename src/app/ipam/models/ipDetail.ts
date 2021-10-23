@@ -16,4 +16,6 @@ export class IpDetail  {
     aliasName?: string;
     assetTag?: string;
     systemLocation?: string;
+    statusMaster: any;
+    reservedStatusMaster: any;
 }

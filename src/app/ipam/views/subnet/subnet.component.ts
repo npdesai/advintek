@@ -184,9 +184,19 @@ export class SubnetComponent {
     console.log(ipDetail,'ipDetail');
   }
 
-  closeDiv(width) {
+  closeDiv(ipDetail) {
+    console.log(ipDetail,'ipDetail')
     this.selectedIpDetail = new IpDetail();
-    this.width = width;
+    this.width = 0;
+
+    this.ipDetails.map((ip) => {
+      if(ip.subnetIPId === ipDetail.subnetIPId)
+      {        
+        ip.status = ipDetail.status
+        // ip.deviceType = ipDetail.deviceType,
+        // ip.connectedSwitch = ipDetail.connectedSwitch        
+      }
+    })
   }
 
   // clearSubnets() {

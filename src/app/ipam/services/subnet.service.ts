@@ -42,8 +42,8 @@ export class SubnetService {
     return this.http.patch<any>(`${this.rootControler}/ScanIP?subnetIpId=${subnetIpId}`,"");
   }
 
-  updateSubnetIpDetail(subnetIpDetail:any) {
-    return this.http.patch<any>(`${this.rootControler}/UpdateIPById`,JSON.stringify(subnetIpDetail));
+  updateSubnetIpDetail(subnetIpDetail:Subnet) {
+    return this.http.patch<any>(`${this.rootControler}/UpdateIPById`,subnetIpDetail);
   }
 
   getIpHistories(subnetId:any) {
