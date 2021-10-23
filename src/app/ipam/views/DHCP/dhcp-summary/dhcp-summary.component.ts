@@ -21,11 +21,11 @@ export class DHCPSummaryComponent implements OnInit {
   constructor(private dHCPserviceService: DHCPserviceService) {
     this.cmenuitems = [
       { label: 'Ping', command: (item) => this.testIP(item) },
-      { label: 'SNMP Ping', command: (item) => this.testIP(item) },
-      { label: 'Resolve DNS', command: (item) => this.testIP(item) },
-      { label: 'Resolve MAC Address', command: (item) => this.testIP(item) },
+      // { label: 'SNMP Ping', command: (item) => this.testIP(item) },
+      // { label: 'Resolve DNS', command: (item) => this.testIP(item) },
+      // { label: 'Resolve MAC Address', command: (item) => this.testIP(item) },
       { label: 'Trace Route', command: (item) => this.testIP(item) },
-      { label: 'System Explorer', command: (item) => this.testIP(item) },
+      // { label: 'System Explorer', command: (item) => this.testIP(item) },
     ];
   }
 
