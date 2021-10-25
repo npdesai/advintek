@@ -20,10 +20,14 @@ export class AddComponent implements OnInit {
   get pageTitle(): any {
     return this._pageTitle;
   }
+  addIpv4Title = 'Add IPv4 Subnet';
+  addIpv6Title = 'Add IPv6 Subnet/Site';
+  addDHCPTitle = 'Add DHCP Server';
+  addDomainTitle = 'Add AD Domain';
   @Input('pageTitle') set pageTitle(value) {
-    this.isAddIPv4Subnet = value === 'Add IPv4 Subnet';
-    this.isAddIPv6SubnetSite = value === 'Add IPv6 Subnet/Site';
-    this.isAddDHCPServer = value === 'Add DHCP Server';
+    this.isAddIPv4Subnet = value === this.addIpv4Title;
+    this.isAddIPv6SubnetSite = value === this.addIpv6Title;
+    this.isAddDHCPServer = value === this.addDHCPTitle;
     this.isAddManual = true;
     this.isGP = true;
     this._pageTitle = value;
@@ -34,6 +38,7 @@ export class AddComponent implements OnInit {
   isAddIPv4Subnet: boolean = false;
   isAddIPv6SubnetSite: boolean = false;
   isAddDHCPServer: boolean = false;
+  isAddDomain: boolean = false;
   prefixLengths: any = [];
   adDomains: any;
   serverTypes: any;
@@ -125,10 +130,26 @@ export class AddComponent implements OnInit {
     this.newaddSubnetModel();
     this.newaddIpv6SubnetModel();
     this.isAdd = false;
+    if(this.isAddDomain) {
+      setTimeout(() => {
+        this._pageTitle = this.addDHCPTitle;
+        this.isAddDomain = false;
+      }, 200);
+    }
   }
 
   addClick() {
     this.isAdd = !this.isAdd;
+  }
+
+  addDomain() {
+    this.isAddDomain = true;
+    this._pageTitle = this.addDomainTitle;
+  }
+
+  onAddDomainCancel() {
+    this.isAddDomain = false;
+    this._pageTitle = this.addDHCPTitle;
   }
 
   save(){
