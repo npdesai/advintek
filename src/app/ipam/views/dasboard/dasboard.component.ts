@@ -6,20 +6,20 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
   styleUrls: ['./dasboard.component.css'],
 })
 export class DasboardComponent implements OnInit {
-  chartOptions: any;
+  // chartOptions: any;
   eChartOptions: any;
-  eChartOptions2: any;
+  // eChartOptions2: any;
   eChartOptionsForBar: any;
 
   constructor() {
-    this.chartOptions = [
-      { name: 'DNS Status', code: 'CH1' },
-      { name: 'Reserved IPs', code: 'CH2' },
-      { name: 'Authenticity Status', code: 'CH3' },
-      { name: 'NIC Type', code: 'CH4' },
-      { name: 'Device Type', code: 'CH5' },
-      { name: 'AD Status', code: 'CH6' },
-    ];
+    // this.chartOptions = [
+    //   { name: 'DNS Status', code: 'CH1' },
+    //   { name: 'Reserved IPs', code: 'CH2' },
+    //   { name: 'Authenticity Status', code: 'CH3' },
+    //   { name: 'NIC Type', code: 'CH4' },
+    //   { name: 'Device Type', code: 'CH5' },
+    //   { name: 'AD Status', code: 'CH6' },
+    // ];
 
     this.eChartOptions = {
       tooltip: {
@@ -30,19 +30,31 @@ export class DasboardComponent implements OnInit {
         data: [
           {
             icon: 'circle',
-            name: 'Used',
-          },
-          {
-            icon: 'circle',
-            name: 'Transient',
+            name: 'Not Reachable',
+            itemStyle: {
+              color: '#6c757d'
+            }
           },
           {
             icon: 'circle',
             name: 'Available',
+            itemStyle: {
+              color: '#28a745'
+            }
           },
           {
             icon: 'circle',
-            name: 'Not Scanned',
+            name: 'Transient',
+            itemStyle: {
+              color: '#ffc107'
+            }
+          },
+          {
+            icon: 'circle',
+            name: 'Used',
+            itemStyle: {
+              color: '#dc3545'
+            }
           },
         ],
       },
@@ -51,10 +63,34 @@ export class DasboardComponent implements OnInit {
           type: 'pie',
           radius: '50%',
           data: [
-            { value: 200, name: 'Used' },
-            { value: 535, name: 'Transient' },
-            { value: 0, name: 'Available' },
-            { value: 0, name: 'Not Scanned' },
+            { 
+              value: 200, 
+              name: 'Not Reachable',
+              itemStyle: {
+                color: '#6c757d'
+              }
+            },
+            { 
+              value: 535, 
+              name: 'Available',
+              itemStyle: {
+                color: '#28a745'
+              } 
+            },
+            { 
+              value: 125, 
+              name: 'Transient',
+              itemStyle: {
+                color: '#ffc107'
+              }
+            },
+            { 
+              value: 335, 
+              name: 'Used',
+              itemStyle: {
+                color: '#dc3545'
+              } 
+            },
           ],
           emphasis: {
             itemStyle: {
@@ -67,51 +103,51 @@ export class DasboardComponent implements OnInit {
       ],
     };
 
-    this.eChartOptions2 = {
-      tooltip: {
-        trigger: 'item',
-      },
-      legend: {
-        bottom: 'bottom',
-        data: [
-          {
-            icon: 'circle',
-            name: 'Success',
-          },
-          {
-            icon: 'circle',
-            name: 'Rev. Lookup Failed',
-          },
-          {
-            icon: 'circle',
-            name: 'Fwd. Lookup Failed',
-          },
-          {
-            icon: 'circle',
-            name: 'N/A',
-          },
-        ],
-      },
-      series: [
-        {
-          type: 'pie',
-          radius: '50%',
-          data: [
-            { value: 1048, name: 'Success' },
-            { value: 735, name: 'Rev. Lookup Failed' },
-            { value: 0, name: 'Fwd. Lookup Failed' },
-            { value: 0, name: 'N/A' },
-          ],
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)',
-            },
-          },
-        },
-      ],
-    };
+    // this.eChartOptions2 = {
+    // //   tooltip: {
+    // //     trigger: 'item',
+    // //   },
+    // //   legend: {
+    // //     bottom: 'bottom',
+    // //     data: [
+    // //       {
+    // //         icon: 'circle',
+    // //         name: 'Success',
+    // //       },
+    // //       {
+    // //         icon: 'circle',
+    // //         name: 'Rev. Lookup Failed',
+    // //       },
+    // //       {
+    // //         icon: 'circle',
+    // //         name: 'Fwd. Lookup Failed',
+    // //       },
+    // //       {
+    // //         icon: 'circle',
+    // //         name: 'N/A',
+    // //       },
+    // //     ],
+    // //   },
+    // //   series: [
+    // //     {
+    // //       type: 'pie',
+    // //       radius: '50%',
+    // //       data: [
+    // //         { value: 1048, name: 'Success' },
+    // //         { value: 735, name: 'Rev. Lookup Failed' },
+    // //         { value: 0, name: 'Fwd. Lookup Failed' },
+    // //         { value: 0, name: 'N/A' },
+    // //       ],
+    // //       emphasis: {
+    // //         itemStyle: {
+    // //           shadowBlur: 10,
+    // //           shadowOffsetX: 0,
+    // //           shadowColor: 'rgba(0, 0, 0, 0.5)',
+    // //         },
+    // //       },
+    // //     },
+    // //   ],
+    // };
 
     this.eChartOptionsForBar = {
       tooltip: {
@@ -150,18 +186,30 @@ export class DasboardComponent implements OnInit {
           {
             icon: 'circle',
             name: 'Used',
+            itemStyle: {
+              color: '#dc3545'
+            }
           },
           {
             icon: 'circle',
             name: 'Transient',
+            itemStyle: {
+              color: '#ffc107'
+            }
           },
           {
             icon: 'circle',
             name: 'Available',
+            itemStyle: {
+              color: '#28a745'
+            } 
           },
           {
             icon: 'circle',
-            name: 'Not Scanned',
+            name: 'Not Reachable',
+            itemStyle: {
+              color: '#6c757d'
+            }
           },
         ],
       },
@@ -171,24 +219,36 @@ export class DasboardComponent implements OnInit {
           data: [192, 242, 229, 248, 209, 101, 221, 216, 209, 237, 214, 219],
           type: 'bar',
           stack: 'total',
+          itemStyle: {
+            color: '#dc3545'
+          }
         },
         {
           name: 'Transient',
           data: [62, 12, 25, 6, 45, 153, 33, 38, 45, 17, 40, 35],
           type: 'bar',
           stack: 'total',
+          itemStyle: {
+            color: '#ffc107'
+          }
         },
         {
           name: 'Available',
-          data: [],
+          data: [192, 242, 229, 248, 209, 101, 221, 216, 209, 237, 214, 219],
           type: 'bar',
           stack: 'total',
+          itemStyle: {
+            color: '#28a745'
+          } 
         },
         {
-          name: 'Not Scanned',
-          data: [],
+          name: 'Not Reachable',
+          data: [62, 12, 25, 6, 45, 153, 33, 38, 45, 17, 40, 35],
           type: 'bar',
           stack: 'total',
+          itemStyle: {
+            color: '#6c757d'
+          }
         },
       ],
     };
