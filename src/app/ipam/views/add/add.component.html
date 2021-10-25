@@ -28,7 +28,7 @@
                                 <div class="col pr-0">
                                     <p-dropdown [options]="subnetGroups" name="subnetGroupId" [(ngModel)]="addSubnet.subnetGroup" placeholder="Select Group" optionLabel="groupName"
                                         styleClass="w-100" *ngIf="!isAdd"></p-dropdown>
-                                        <input type="text" pInputText class="w-100" *ngIf="isAdd" name="subnetGroupName" [(ngModel)]="addSubnet.subnetGroupName"/>
+                                    <input type="text" pInputText class="w-100" *ngIf="isAdd" name="subnetGroupName" [(ngModel)]="addSubnet.subnetGroupName"/>
                                 </div>
                                 <div class="col">
                                     <button pButton pRipple type="button" icon="pi pi-plus"
@@ -103,34 +103,43 @@
                         </div>
                     </div>
                     <div class="row form-row" *ngIf="!isGP">
-                        <div class="col-12 col-md-6">
+                        <div class="col">
                             <h6>Company</h6>
-                            <p-dropdown [options]="companies" placeholder="Select Company" optionLabel="name" styleClass="w-100"></p-dropdown>
+                            <div class="row">
+                                <div class="col pr-0">
+                                    <p-dropdown [options]="companies" placeholder="Select Company" name="companyId" optionLabel="name" [(ngModel)]="addIpv6Subnet.subnetCompany" styleClass="w-100" *ngIf="!isAdd"></p-dropdown>
+                                    <input type="text" pInputText class="w-100" *ngIf="isAdd" name="companyName" [(ngModel)]="addIpv6Subnet.companyName"/>
+                                </div>
+                                <div class="col">
+                                    <button pButton pRipple type="button" icon="pi pi-plus"
+                                        class="p-button-success p-button-rounded" (click)="addClick()"></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row form-row">
                         <div class="col-12 col-md-6">
                             <h6>Prefix Name</h6>
-                            <input type="text" pInputText class="w-100" />
+                            <input type="text" name="prefixName" [(ngModel)]="addIpv6Subnet.prefixName" pInputText class="w-100" />
                         </div>
                     </div>
                     <div class="row form-row">
                         <div class="col-12 col-md-6">
                             <h6>Prefix Address</h6>
-                            <input type="text" pInputText aria-describedby="prefix-address-help" class="w-100" />
+                            <input type="text" name="prefixAddress" [(ngModel)]="addIpv6Subnet.prefixAddress" pInputText aria-describedby="prefix-address-help" class="w-100" />
                             <small id="prefix-address-help">Ex: </small>
                         </div>
                     </div>
                     <div class="row form-row">
                         <div class="col-12 col-md-6">
                             <h6>Prefix Length</h6>
-                            <p-dropdown [options]="prefixLengths" placeholder="Select Length" optionLabel="name" styleClass="w-100"></p-dropdown>
+                            <p-dropdown [options]="prefixLengths" name="prefixLength" [(ngModel)]="addIpv6Subnet.subnetPrefixLength" placeholder="Select Length" optionLabel="name" styleClass="w-100"></p-dropdown>
                         </div>
                     </div>
                     <div class="row form-row">
                         <div class="col-12 col-md-6">
                             <h6>Prefix Description</h6>
-                            <textarea pInputTextarea class="w-100"></textarea>
+                            <textarea name="prefixDescription" [(ngModel)]="addIpv6Subnet.prefixDescription" pInputTextarea class="w-100"></textarea>
                         </div>
                     </div>
                     <p-divider></p-divider>
@@ -138,7 +147,7 @@
                         <div class="col text-right">
                             <p-button label="Cancel" styleClass="p-button-secondary p-button-sm" (click)="onCancel()">
                             </p-button>
-                            <p-button label="Add" styleClass="p-button-success p-button-sm ml-2"></p-button>
+                            <p-button label="Add" styleClass="p-button-success p-button-sm ml-2" (click)="save()"></p-button>
                         </div>
                     </div>
                 </form>

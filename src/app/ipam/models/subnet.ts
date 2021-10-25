@@ -12,7 +12,7 @@ export class Subnet  {
 }
 
 
-export class AddSubnet  {
+export class AddIpv4Subnet  {
   subnetGroupId?: string;
   subnetGroup: any;
   subnetGroupName: string;
@@ -23,4 +23,15 @@ export class AddSubnet  {
   subnetDescription: string;
   vlanName: string;
   location: string;
+}
+
+export class AddIpv6Subnet {
+  prefixName: string;
+  prefixAddress: string;
+  subnetPrefixLength: any;
+  prefixLength: number;
+  prefixDescription: string;
+  subnetCompany: any;
+  companyId: string;
+  companyName: string
 }

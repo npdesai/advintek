@@ -2,7 +2,8 @@ import { computeDecimalDigest } from '@angular/compiler/src/i18n/digest';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
 import { SubnetGroup, SubnetMask } from '../../models/master';
-import { AddSubnet } from '../../models/subnet';
+import { AddIpv4Subnet, AddIpv6Subnet } from '../../models/subnet';
+import { CompanyService } from '../../services/company.service';
 import { LoadingDataService } from '../../services/loading-data.service';
 import { MasterService } from '../../services/master.service';
 import { SubnetService } from '../../services/subnet.service';
@@ -23,6 +24,8 @@ export class AddComponent implements OnInit {
     this.isAddIPv4Subnet = value === 'Add IPv4 Subnet';
     this.isAddIPv6SubnetSite = value === 'Add IPv6 Subnet/Site';
     this.isAddDHCPServer = value === 'Add DHCP Server';
+    this.isAddManual = true;
+    this.isGP = true;
     this._pageTitle = value;
   }
   @Output() pageTitleChange = new EventEmitter<any>();
@@ -49,13 +52,15 @@ export class AddComponent implements OnInit {
   isGP: boolean = true;
   companies: any;
 
-  addSubnet = new AddSubnet();
+  addSubnet = new AddIpv4Subnet();
+  addIpv6Subnet = new AddIpv6Subnet();
   subnetGroups : SubnetGroup[] = [];
   subnetMasks:SubnetMask[] = [];
 
   constructor(
     private subnetService : SubnetService,
     private masterService : MasterService,
+    private companyService : CompanyService,
     private loaderService : LoadingDataService
   ) {
     this.getSubnetGroups();
@@ -84,10 +89,7 @@ export class AddComponent implements OnInit {
       { name: 'SSH', code: 'ssh' }
     ]
 
-    this.companies = [
-      { name: 'Company 1', code: 'C1' },
-      { name: 'Company 2', code: 'C2' },
-    ];
+    this.getSubnetCompanies();
 
     this.newaddSubnetModel();
   }
@@ -109,9 +111,19 @@ export class AddComponent implements OnInit {
     this.addSubnet.subnetMaskId="";
   }
 
+  newaddIpv6SubnetModel() {
+    this.addIpv6Subnet.companyId="";
+    this.addIpv6Subnet.companyName="";
+    this.addIpv6Subnet.prefixAddress="";
+    this.addIpv6Subnet.prefixDescription="";
+    this.addIpv6Subnet.prefixLength=null;
+    this.addIpv6Subnet.prefixName="";
+  }
+
   onCancel() {
     this.closeWidth.emit(0);
     this.newaddSubnetModel();
+    this.newaddIpv6SubnetModel();
     this.isAdd = false;
   }
 
@@ -122,6 +134,8 @@ export class AddComponent implements OnInit {
   save(){
     if(this.isAddIPv4Subnet){
       this.saveIpv4Subnet();
+    } else if(this.isAddIPv6SubnetSite) {
+      this.saveIpv6SubnetSite();
     }
   }
 
@@ -143,6 +157,26 @@ export class AddComponent implements OnInit {
     });
   }
 
+  saveIpv6SubnetSite() {
+    this.loaderService.showLoader();
+    
+    if(this.addIpv6Subnet.subnetCompany && this.addIpv6Subnet.companyName === "") {
+      this.addIpv6Subnet.companyId = this.addIpv6Subnet.subnetCompany.companyId;
+    }
+
+    if(this.addIpv6Subnet.subnetPrefixLength) {
+      this.addIpv6Subnet.prefixLength = this.addIpv6Subnet.subnetPrefixLength.prefixLength;
+    }
+
+    this.subnetService.saveIPV6Subnet(this.addIpv6Subnet).subscribe((data) => {
+      if(data) {
+        this.loaderService.hideLoader();
+        this.getSubnetCompanies();
+        this.onCancel();
+      }
+    })
+  }
+
   getSubnetGroups() {
     this.masterService.getSubnetGroups().subscribe((data) => {
       if(data){
@@ -157,6 +191,14 @@ export class AddComponent implements OnInit {
         this.subnetMasks = data;
       }
     });
+  }
+
+  getSubnetCompanies() {
+    this.companyService.getSubnetCompanies().subscribe((data) => {
+      if(data) {
+        this.companies = data;
+      }
+    })
   }
 
   ipv4RadioChange(event: MatRadioChange) {

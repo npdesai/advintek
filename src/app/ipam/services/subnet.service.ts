@@ -7,7 +7,7 @@ import { ServiceResponse } from '../../common/models/serviceResponse';
 import { IpDetail } from "../models/ipDetail";
 import { IpHistory } from "../models/ipHistory";
 import { IpPing } from "../models/ipPing";
-import { AddSubnet, Subnet } from "../models/subnet";
+import { AddIpv4Subnet, AddIpv6Subnet, Subnet } from "../models/subnet";
 
 @Injectable()
 export class SubnetService {
@@ -94,8 +94,12 @@ export class SubnetService {
     return this.http.delete<ServiceResponse>(`${this.rootControler}/Delete`, { params });
   }
 
-  saveIPV4Subnet(addSubnet: AddSubnet): Observable<boolean> {
+  saveIPV4Subnet(addSubnet: AddIpv4Subnet): Observable<boolean> {
     return this.http.post<any>(`${this.rootControler}/Add`, addSubnet);
+  }
+
+  saveIPV6Subnet(addSubnet: AddIpv6Subnet): Observable<boolean> {
+    return this.http.post<any>(`${this.rootControler}/AddIPV6`, addSubnet);
   }
 
   getIpPing(subnetIp: string): Observable<IpPing> {
@@ -103,5 +107,9 @@ export class SubnetService {
       .set('ipAddress', subnetIp == null ? "" : subnetIp.trim());
       
     return this.http.get<IpPing>(`${this.rootControler}/Ping`,{params});
+  }
+
+  getSubnetCompanies(): Observable<any> {
+    return this.http.get(`${this.rootControler}`)
   }
 }
