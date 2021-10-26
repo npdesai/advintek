@@ -9,7 +9,7 @@
           <button type="button" class="btn btn-success mr-2" (click)="onAddDeviceClick()">Add Device</button>
           <button type="button" class="btn btn-success mr-2">Scan</button>
           <button type="button" class="btn btn-success mr-2">Discover Subnets</button>
-          <button type="button" class="btn btn-success">Delete</button>
+          <button type="button" class="btn btn-success" (click)="onDelete()">Delete</button>
         </div>
       </div>
       <p-divider></p-divider>
@@ -17,6 +17,7 @@
         <table class="table table-bordered table-striped">
           <thead>
             <tr>
+              <th style="width: 37px;"></th>
               <th>Device Name</th>
               <th>IP Address</th>
               <th>Last Scan Time</th>
@@ -26,6 +27,9 @@
           <tbody>
             <ng-container *ngIf="routers && routers.length > 0">
               <tr *ngFor="let router of routers">
+                <td style="width: 37px;">
+                  <input type="checkbox" name="device" (change)="routerRowChkBoxHandler($event, router)" [value]="router.deviceId">
+                </td>
                 <td>{{ router.deviceType }}</td>
                 <td>{{ router.deviceIPAddress }}</td>
                 <td>{{ router.lastScanTime }}</td>
