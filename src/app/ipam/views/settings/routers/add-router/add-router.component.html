@@ -27,11 +27,11 @@
                   (change)="radioChange($event)"
                   >Add Manually</mat-radio-button
                 >
-                <mat-radio-button
+                <!-- <mat-radio-button
                   value="importcsv"
                   (change)="radioChange($event)"
                   >Import from CSV</mat-radio-button
-                >
+                > -->
               </mat-radio-group>
             </div>
           </div>
@@ -39,11 +39,11 @@
             <div class="row form-row">
               <div class="col-12 col-md-6">
                 <h6>Server / Router / Switch</h6>
-                <input type="text" pInputText class="w-100" />
+                <input name="deviceType" [(ngModel)]="addRouter.deviceType" type="text" pInputText class="w-100" />
               </div>
               <div class="col-12 col-md-6">
                 <h6>IP Address</h6>
-                <input type="text" pInputText class="w-100" />
+                <input name="deviceIPAddress" [(ngModel)]="addRouter.deviceIPAddress" type="text" pInputText class="w-100" />
               </div>
             </div>
             <!-- <div class="row form-row">
@@ -158,6 +158,7 @@
               <p-button
                 label="Add"
                 styleClass="p-button-success p-button-sm ml-2"
+                (click)="onAddRouter()"
               ></p-button>
             </div>
           </div>

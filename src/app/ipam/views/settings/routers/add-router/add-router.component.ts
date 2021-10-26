@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
+import { AddRouter } from 'src/app/ipam/models/router';
+import { LoadingDataService } from 'src/app/ipam/services/loading-data.service';
+import { SettingService } from 'src/app/ipam/services/setting.service';
 
 @Component({
   selector: 'app-add-router',
@@ -18,7 +21,9 @@ export class AddRouterComponent implements OnInit {
 
   uploadedFiles: any[] = [];
 
-  constructor() {
+  addRouter = new AddRouter();
+
+  constructor(private loaderService: LoadingDataService, private settingService: SettingService) {
     this.credentials = [
       { name: '130', code: '130' },
       { name: '131', code: '131' },
@@ -42,6 +47,12 @@ export class AddRouterComponent implements OnInit {
 
   onCancel() {
     this.closeWidth.emit(0);
+    this.resetAddRouterModel();
+  }
+
+  resetAddRouterModel() {
+    this.addRouter.deviceType = "";
+    this.addRouter.deviceIPAddress = "";
   }
 
   radioChange(event: MatRadioChange) {
@@ -52,5 +63,16 @@ export class AddRouterComponent implements OnInit {
     for (let file of event.files) {
       this.uploadedFiles.push(file);
     }
+  }
+
+  onAddRouter() {
+    this.loaderService.showLoader();
+
+    this.settingService.addRouter(this.addRouter).subscribe((data) => {
+      if(data) {
+        this.loaderService.hideLoader();
+        this.onCancel();
+      }
+    });
   }
 }
