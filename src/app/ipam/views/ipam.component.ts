@@ -36,7 +36,7 @@ export class IpamComponent {
     ];
 
     this.settingsItems = [
-      { label: 'Add DNS Server', command: (x) => this.addDNSServer(x) },
+      //{ label: 'Add DNS Server', command: (x) => this.addDNSServer(x) },
       {
         label: 'Add Router',
         url: 'ipam/settings/router',
