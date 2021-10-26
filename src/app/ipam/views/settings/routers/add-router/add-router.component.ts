@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
-import { AddRouter } from 'src/app/ipam/models/router';
+import { AddRouter, Router } from 'src/app/ipam/models/router';
 import { LoadingDataService } from 'src/app/ipam/services/loading-data.service';
 import { SettingService } from 'src/app/ipam/services/setting.service';
 
@@ -10,6 +10,7 @@ import { SettingService } from 'src/app/ipam/services/setting.service';
   styleUrls: ['./add-router.component.css'],
 })
 export class AddRouterComponent implements OnInit {
+  @Input() routersList: Router[];
   @Input() openWidth = 0;
   @Output() openWidthChange = new EventEmitter<any>();
   @Output() closeWidth = new EventEmitter<any>();
@@ -22,6 +23,7 @@ export class AddRouterComponent implements OnInit {
   uploadedFiles: any[] = [];
 
   addRouter = new AddRouter();
+  newRouter = new Router();
 
   constructor(private loaderService: LoadingDataService, private settingService: SettingService) {
     this.credentials = [
@@ -65,12 +67,20 @@ export class AddRouterComponent implements OnInit {
     }
   }
 
+  addNewRouterToList(routerId) {
+    this.newRouter.deviceId = routerId;
+    this.newRouter.deviceIPAddress = this.addRouter.deviceIPAddress;
+    this.newRouter.deviceType = this.addRouter.deviceType;
+    this.routersList.push(this.newRouter);
+  }
+
   onAddRouter() {
     this.loaderService.showLoader();
 
     this.settingService.addRouter(this.addRouter).subscribe((data) => {
       if(data) {
         this.loaderService.hideLoader();
+        this.addNewRouterToList(data);
         this.onCancel();
       }
     });

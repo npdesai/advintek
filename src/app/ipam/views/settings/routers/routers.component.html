@@ -20,20 +20,16 @@
               <th>Device Name</th>
               <th>IP Address</th>
               <th>Last Scan Time</th>
-              <th>Modified by</th>
               <th>Status</th>
-              <th>Remarks</th>
             </tr>
           </thead>
           <tbody>
             <ng-container *ngIf="routers && routers.length > 0">
               <tr *ngFor="let router of routers">
-                <td>{{ router.deviceName }}</td>
-                <td>{{ router.ipAddress }}</td>
+                <td>{{ router.deviceType }}</td>
+                <td>{{ router.deviceIPAddress }}</td>
                 <td>{{ router.lastScanTime }}</td>
-                <td>{{ router.modifiedBy }}</td>
                 <td>{{ router.status }}</td>
-                <td>{{ router.remarks }}</td>
               </tr>
             </ng-container>
             <tr *ngIf="routers == null || routers.length == 0">
@@ -48,4 +44,4 @@
   </div>
 </section>
 
-<app-add-router [(openWidth)]="width" (closeWidth)="closeAddDevice($event)"></app-add-router>
+<app-add-router [routersList]="routers" [(openWidth)]="width" (closeWidth)="closeAddDevice($event)"></app-add-router>

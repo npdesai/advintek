@@ -1,11 +1,9 @@
 export class Router  {
-  id: string;
-  deviceName: string;
-  ipAddress: string;
+  deviceId: string;
+  deviceType: string;
+  deviceIPAddress: string;
   lastScanTime: string;
-  modifiedBy: string;
   status: string;
-  remarks: string;
 }
 
 export class AddRouter {

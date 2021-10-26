@@ -28,7 +28,7 @@ export class RoutersComponent implements OnInit {
 
   getRouterData() {
     this.statusMessage = 'Loading data...';
-    this.routerService.getRoutersData().then((data) => {
+    this.routerService.getRoutersData().subscribe((data) => {
       this.routers = data;
     });
   }
