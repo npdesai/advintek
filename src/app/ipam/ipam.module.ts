@@ -45,6 +45,7 @@ import { DHCPServerDetailComponent } from './views/dhcp/dhcp-server-detail/dhcp-
 import { IpDetailsComponent } from './views/group/ip-details/ip-details.component';
 import { IpHistoryComponent } from './views/group/ip-history/ip-history.component';
 import { EditSubnetComponent } from './views/subnet/edit-subnet/edit-subnet.component';
+import { Ipv6Component } from './views/ipv6/ipv6.component';
 
 @NgModule({
   imports: [
@@ -90,7 +91,8 @@ import { EditSubnetComponent } from './views/subnet/edit-subnet/edit-subnet.comp
     DHCPServerDetailComponent,
     IpDetailsComponent,
     IpHistoryComponent,
-    EditSubnetComponent
+    EditSubnetComponent,
+    Ipv6Component
   ],
   providers: [
     SubnetService

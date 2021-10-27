@@ -1,0 +1,186 @@
+<div class="content-container">
+    <mat-tab-group animationDuration="0ms">
+      <mat-tab label="Summary">
+        <section class="content-body">
+            <div class="summary-container">
+                <div class="row">
+                  <div class="col-6 section-container">
+                    <div class="col-section">
+                      <div class="col-section-title d-flex align-items-center">
+                        <h5 class="m-0">IPv6 Subnet Summary</h5>
+                      </div>
+                      <p-divider></p-divider>
+                      <div class="row">
+                        <div class="col-6">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Subnet Address</li>
+                            <li class="list-group-item">Subnet Name</li>
+                            <li class="list-group-item">Total IPs</li>
+                            <li class="list-group-item">Usage</li>
+                            <li class="list-group-item">Starting IP</li>
+                            <li class="list-group-item">Ending IP</li>
+                            <li class="list-group-item">Description</li>
+                          </ul>
+                        </div>
+                        <div class="col-6">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item">fe80::/64</li>
+                            <li class="list-group-item">ME</li>
+                            <li class="list-group-item">4274</li>
+                            <li class="list-group-item">35.94%</li>
+                            <li class="list-group-item">FE80:0000:0000:0000:0000:0000:0000:0000</li>
+                            <li class="list-group-item">FE80:0000:0000:0000:FFFF:FFFF:FFFF:FFFF</li>
+                            <li class="list-group-item">192</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 d-flex section-container">
+                    <div class="col-section d-flex flex-column">
+                      <div class="col-section-title d-flex align-items-center">
+                        <h5 class="m-0">Subnet Usage</h5>
+                      </div>
+                      <p-divider></p-divider>
+                      <div class="col-section-content">
+                        <div echarts [options]="eChartOptions"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6 d-flex section-container">
+                    <div class="col-section d-flex flex-column">
+                      <div class="col-section-title d-flex align-items-center">
+                        <h5 class="m-0">NIC Types</h5>
+                      </div>
+                      <p-divider></p-divider>
+                      <div class="col-section-content">
+                        <div echarts [options]="eChartOptions"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 d-flex section-container">
+                    <div class="col-section d-flex flex-column">
+                      <div class="col-section-title d-flex align-items-center">
+                        <h5 class="m-0">DNS Status</h5>
+                      </div>
+                      <p-divider></p-divider>
+                      <div class="col-section-content">
+                        <div echarts [options]="eChartOptions2"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>              
+        </section>
+      </mat-tab>
+      <mat-tab label="IP Details">
+        <section class="content-body">
+            <div class="col-md-12 no-padding">
+              <div class="box">
+                <div class="box-header">
+                  <h5 class="box-title">IPs</h5>
+                </div>
+                <p-contextMenu
+                    #cm
+                    [model]="cmenuitems"
+                    appendTo="body"
+                    triggerEvent="click"
+                    [autoZIndex]="true"
+                  ></p-contextMenu>
+                <div class="box-body">
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th width="150">IPv6 Address</th>
+                        <th>Status</th>
+                        <th>MAC Address</th>
+                        <th>DNS Status</th>
+                        <th>Vendor Name</th>
+                        <th>Last Updated Time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngIf="ipDetails && ipDetails.length > 0">
+                        <tr *ngFor="let ipDetail of ipDetails">
+                          <td>
+                            <span class="mr-2">{{ ipDetail.ipAddress }}</span>
+                            <i
+                              class="fas fa-caret-right"
+                              (click)="openCM($event, cm, ipDetail)"
+                            ></i>
+                          </td>
+                          <td>
+                              <i class="fas fa-circle" style="color: #ee5656"></i>
+                              <span class="ml-2">{{ ipDetail.status }}</span>
+                            </td>
+                          <td>{{ ipDetail.macAddress }}</td>
+                          <td>{{ ipDetail.deviceType }}</td>
+                          <td>{{ ipDetail.connectedSwitch }}</td>
+                          <td>Date & Time</td>
+                        </tr>
+                      </ng-container>
+                      <tr *ngIf="ipDetails == null || ipDetails.length == 0">
+                        <td colspan="9" style="text-align: center">
+                          {{ statusMessage }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        </section>        
+      </mat-tab>
+      <mat-tab label="IP History">
+        <section class="content-body">
+            <div class="col-md-12 no-padding">
+              <div class="box">
+                <div class="box-header">
+                  <h5 class="box-title">IP History</h5>
+                </div>
+                <div class="box-body">
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th data-column="detectedTime">Created Time</th>
+                        <th data-column="ipAddress">IPv6 Address</th>
+                        <th data-column="dnsName">DNS Name</th>
+                        <th data-column="macAddress">MAC Address</th>
+                        <th data-column="deviceType">Status</th>
+                        <th data-column="sysDesc">Changes in</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngIf="ipHistories && ipHistories.length > 0">
+                        <tr *ngFor="let ipHistory of ipHistories">
+                          <td>{{ ipHistory.detectedTime }}</td>
+                          <td>{{ ipHistory.ipAddress }}</td>
+                          <td>{{ ipHistory.macAddress }}</td>
+                          <td>{{ ipHistory.dnsName }}</td>
+                          <td>{{ ipHistory.deviceType }}</td>
+                          <td>{{ ipHistory.sysDesc }}</td>
+                        </tr>
+                      </ng-container>
+                      <tr *ngIf="ipHistories == null || ipHistories.length == 0">
+                        <td colspan="9" style="text-align: center">
+                          {{ statusMessage }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        </section>        
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  
+  <app-test-ip
+    [(pageTitle)]="pageTitle"
+    [(ipDetail)]="selectedIpDetail"
+    [(openWidth)]="width"
+    (closeWidth)="closeDiv($event)"
+  ></app-test-ip>

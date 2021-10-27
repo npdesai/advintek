@@ -9,6 +9,7 @@ import { DiscoveredV6HostsComponent } from './views/discovered/discovered-v6-hos
 import { GroupComponent } from './views/group/group.component';
 import { HomeComponent } from './views/home.component';
 import { IpamComponent } from './views/ipam.component';
+import { Ipv6Component } from './views/ipv6/ipv6.component';
 import { RoutersComponent } from './views/settings/routers/routers.component';
 import { SubnetComponent } from './views/subnet/subnet.component';
 
@@ -25,6 +26,7 @@ export const ipamRoutes: Routes = [
           { path: 'home', component: DasboardComponent },
           { path: 'groups/:Id', component: GroupComponent },
           { path: 'subnets/:Id', component: SubnetComponent },
+          { path: 'ipv6/:Id', component: Ipv6Component },
           { path: 'DHCPSummary/:Id', component: DHCPSummaryComponent },
           { path: 'DHCPSummary/server/:id', component: DHCPServerDetailComponent },
           { path: 'discovered', children: [
