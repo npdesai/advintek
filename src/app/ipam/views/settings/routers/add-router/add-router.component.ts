@@ -53,7 +53,7 @@ export class AddRouterComponent implements OnInit {
   }
 
   resetAddRouterModel() {
-    this.addRouter.deviceType = "";
+    this.addRouter.deviceName = "";
     this.addRouter.deviceIPAddress = "";
   }
 
@@ -70,7 +70,7 @@ export class AddRouterComponent implements OnInit {
   addNewRouterToList(routerId) {
     this.newRouter.deviceId = routerId;
     this.newRouter.deviceIPAddress = this.addRouter.deviceIPAddress;
-    this.newRouter.deviceType = this.addRouter.deviceType;
+    this.newRouter.deviceName = this.addRouter.deviceName;
     this.routersList.push(this.newRouter);
   }
 
