@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { SubnetGroup, SubnetMask } from '../models/master';
+import { ServerType, SubnetGroup, SubnetMask } from '../models/master';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +17,9 @@ export class MasterService {
 
   getSubnetMask() {
     return this.http.get<SubnetMask[]>(`${this.rootControler}/SubnetMasks`);
+  }
+
+  getServerTypes() {
+    return this.http.get<ServerType[]>(`${this.rootControler}/ServerTypes`);
   }
 }

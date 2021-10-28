@@ -1,7 +1,7 @@
 import { computeDecimalDigest } from '@angular/compiler/src/i18n/digest';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
-import { SubnetGroup, SubnetMask } from '../../models/master';
+import { ServerType, SubnetGroup, SubnetMask } from '../../models/master';
 import { AddIpv4Subnet, AddIpv6Subnet } from '../../models/subnet';
 import { CompanyService } from '../../services/company.service';
 import { LoadingDataService } from '../../services/loading-data.service';
@@ -41,7 +41,6 @@ export class AddComponent implements OnInit {
   isAddDomain: boolean = false;
   prefixLengths: any = [];
   adDomains: any;
-  serverTypes: any;
   selectedServerType: string;
   protocols: any;
   selectedProtocol: string;
@@ -61,6 +60,7 @@ export class AddComponent implements OnInit {
   addIpv6Subnet = new AddIpv6Subnet();
   subnetGroups : SubnetGroup[] = [];
   subnetMasks:SubnetMask[] = [];
+  serverTypes: ServerType[] = [];
 
   constructor(
     private subnetService : SubnetService,
@@ -70,6 +70,7 @@ export class AddComponent implements OnInit {
   ) {
     this.getSubnetGroups();
     this.getSubnetMasks();
+    this.getServerTypes();
 
     for(let i = 1; i <= 128; i++)
     {
@@ -81,13 +82,13 @@ export class AddComponent implements OnInit {
       { name: 'Domain 2', code: 'D2' },
     ];
 
-    this.serverTypes = [
-      { name: 'Microsoft DHCP Server', code:'mds'},
-      { name: 'Palo Alto Firewall', code:'paf'},
-      { name: 'Linux Server', code:'ls'},
-      { name: 'Cisco Router', code:'cr'},
-      { name: 'Fortinet Firewall', code:'ff'},
-    ]
+    // this.serverTypes = [
+    //   { name: 'Microsoft DHCP Server', code:'mds'},
+    //   { name: 'Palo Alto Firewall', code:'paf'},
+    //   { name: 'Linux Server', code:'ls'},
+    //   { name: 'Cisco Router', code:'cr'},
+    //   { name: 'Fortinet Firewall', code:'ff'},
+    // ]
 
     this.protocols = [
       { name: 'Telnet', code: 'telnet' },
@@ -100,7 +101,6 @@ export class AddComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selectedServerType = this.serverTypes[0].code;
     this.selectedProtocol = this.protocols[0].code;
     this.selectedPafType = this.pafRadio1;
   }
@@ -212,6 +212,14 @@ export class AddComponent implements OnInit {
         this.subnetMasks = data;
       }
     });
+  }
+
+  getServerTypes() {
+    this.masterService.getServerTypes().subscribe((data) => {
+      if(data) {
+        this.serverTypes = data;
+      }
+    })
   }
 
   getSubnetCompanies() {

@@ -14,3 +14,8 @@ export class SubnetMask  {
     netMask : string;
     displaySubnetMask: string;
   }
+
+export class ServerType {
+  serverTypeId: string;
+  name: string
+}
