@@ -10,10 +10,10 @@ import { SettingService } from 'src/app/ipam/services/setting.service';
   styleUrls: ['./add-router.component.css'],
 })
 export class AddRouterComponent implements OnInit {
-  @Input() routersList: Router[];
   @Input() openWidth = 0;
   @Output() openWidthChange = new EventEmitter<any>();
   @Output() closeWidth = new EventEmitter<any>();
+  @Output() getRouters = new EventEmitter<any>();
 
   isAddManual: boolean = true;
   credentials: any;
@@ -67,21 +67,14 @@ export class AddRouterComponent implements OnInit {
     }
   }
 
-  addNewRouterToList(routerId) {
-    this.newRouter.deviceId = routerId;
-    this.newRouter.deviceIPAddress = this.addRouter.deviceIPAddress;
-    this.newRouter.deviceName = this.addRouter.deviceName;
-    this.routersList.push(this.newRouter);
-  }
-
   onAddRouter() {
     this.loaderService.showLoader();
 
     this.settingService.addRouter(this.addRouter).subscribe((data) => {
       if(data) {
         this.loaderService.hideLoader();
-        this.addNewRouterToList(data);
         this.onCancel();
+        this.getRouters.emit();
       }
     });
   }

@@ -28,7 +28,7 @@
             <ng-container *ngIf="routers && routers.length > 0">
               <tr *ngFor="let router of routers">
                 <td style="width: 37px;">
-                  <input type="checkbox" name="device" (change)="routerRowChkBoxHandler($event, router)" [value]="router.deviceId">
+                  <input type="checkbox" name="device" (change)="routerRowChkBoxHandler($event)" [value]="router.deviceId">
                 </td>
                 <td>{{ router.deviceName }}</td>
                 <td>{{ router.deviceIPAddress }}</td>
@@ -48,4 +48,4 @@
   </div>
 </section>
 
-<app-add-router [routersList]="routers" [(openWidth)]="width" (closeWidth)="closeAddDevice($event)"></app-add-router>
+<app-add-router [(openWidth)]="width" (getRouters)="getRouterData()" (closeWidth)="closeAddDevice($event)"></app-add-router>
