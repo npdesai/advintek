@@ -17,33 +17,44 @@
       </div>
       <div class="row pageContent">
         <div class="col">
-            <form class="form-section" #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+            <form class="form-section" #f="ngForm" (ngSubmit)="onSubmit(f.value)" novalidate>
                 <div class="row form-row">
                     <div class="col">
                         <h6>User Name</h6>
-                        <input type="text" name="userName" [ngModel]="domain.userName" required />
+                        <input type="text" pInputText name="userName" #userName="ngModel" [ngModel]="domain.userName" required />
+                        <div *ngIf="userName.invalid && (userName.touched || userName.dirty)">
+                          <span class="text-danger" *ngIf="userName.errors.required">Field is Required!</span>
+                        </div>
                     </div>
                     <div class="col">
                         <h6>Password</h6>
-                        <input type="password" name="password" [ngModel]="domain.password" required />
+                        <input type="password" pInputText name="password" #password="ngModel" [ngModel]="domain.password" required />
+                        <div *ngIf="password.invalid && (password.touched || password.dirty)">
+                          <span class="text-danger">Field is Required!</span>
+                        </div>
                     </div>
                 </div>
                 <div class="row form-row">
                     <div class="col">
                         <h6>Domain</h6>
-                        <input type="text" name="domainName" [ngModel]="domain.domainName" required />
+                        <input type="text" pInputText name="domainName" #domainName="ngModel" [ngModel]="domain.domainName" required />
+                        <div *ngIf="domainName.invalid && (domainName.touched || domainName.dirty)">
+                          <span class="text-danger" *ngIf="domainName.errors.required">Field is Required!</span>
+                        </div>
                     </div>
                     <div class="col">
                         <h6>Domain Controller Name</h6>
-                        <input type="text" name="domainControllerName" [ngModel]="domain.domainControllerName" required />
+                        <input type="text" pInputText name="domainControllerName" #domainCtrlName="ngModel" [ngModel]="domain.domainControllerName" required />
+                        <div *ngIf="domainCtrlName.invalid && (domainCtrlName.touched || domainCtrlName.dirty)">
+                          <span class="text-danger">Field is Required!</span>
+                        </div>
                     </div>
                 </div>
                 <p-divider></p-divider>
                 <div class="row">
                     <div class="col text-right">
-                        <p-button type="button" label="Cancel" styleClass="p-button-secondary p-button-sm" (click)="onCancel()">
-                        </p-button>
-                        <p-button type="submit" label="Add" styleClass="p-button-success p-button-sm ml-2" *ngIf="!isEdit"></p-button>
+                        <p-button type="button" label="Cancel" styleClass="p-button-secondary p-button-sm" (click)="onCancel()"></p-button>
+                        <p-button type="submit" label="Add" styleClass="p-button-success p-button-sm ml-2" *ngIf="!isEdit" [disabled]="f.invalid"></p-button>
                         <p-button type="submit" label="Save" styleClass="p-button-success p-button-sm ml-2" *ngIf="isEdit"></p-button>
                     </div>
                 </div>

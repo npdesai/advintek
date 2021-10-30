@@ -31,7 +31,7 @@
                     <td valign="middle" (click)="editDomainHandler(domain)">{{ domain.domainControllerName }}</td>
                     <td align="center" valign="middle">
                         <!-- <button pButton pRipple type="button" icon="pi pi-times" class="p-button-sm p-button-rounded p-button-danger"></button> -->
-                        <a href="#" class="text-decoratino-none text-danger" (click)="onDelete($event, domain)">Delete</a>
+                        <a href="#deleteDomainConfirmModal" class="text-decoratino-none text-danger" data-toggle="modal" (click)="onDelete(domain)">Delete</a>
                     </td>
                 </tr>
               </ng-container>
@@ -53,3 +53,23 @@
     [domain]="selectedDomain" 
     (getDomainList)="getDomainList()"
     (closeWidth)="closeAddDomain($event)"></app-add-domain>
+
+  <div class="modal fade" #deleteDomainModal id="deleteDomainConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-danger rounded-0">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Delete Domain</h5>
+          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeDeleteDomainModal>No</button>
+          <button type="button" class="btn btn-danger"  (click)="onConfirm($event)">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>

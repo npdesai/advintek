@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Domain } from '../../models/master';
 import { DomainService } from '../../services/domain.service';
 import { LoadingDataService } from '../../services/loading-data.service';
@@ -9,6 +9,8 @@ import { LoadingDataService } from '../../services/loading-data.service';
   styleUrls: ['./domain.component.css']
 })
 export class DomainComponent implements OnInit {
+  @ViewChild ('closeDeleteDomainModal') closeDeleteDomainModal: ElementRef;
+
   statusMessage: string = "";
   domains: Domain[] = [];
   isEditDomain: boolean = false;
@@ -48,12 +50,16 @@ export class DomainComponent implements OnInit {
     this.width = width;
   }
 
-  onDelete(e, domain) {
-    e.preventDefault();
+  onDelete(domain) {
+    this.selectedDomain = domain;
+  }
+
+  onConfirm(e) {
+    this.closeDeleteDomainModal.nativeElement.click();
     this.loaderService.showLoader();
-    this.domainService.deleteDomain(domain.domainId).subscribe(data => {
+    this.domainService.deleteDomain(this.selectedDomain.domainId).subscribe(data => {
       if(data) {
-        this.domains.splice(this.domains.indexOf(this.domains.find(d => { return d.domainId === domain.domainId })), 1);
+        this.domains.splice(this.domains.indexOf(this.domains.find(d => { return d.domainId === this.selectedDomain.domainId })), 1);
         this.loaderService.hideLoader();
       }
     });

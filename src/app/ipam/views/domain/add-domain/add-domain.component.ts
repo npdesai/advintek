@@ -37,6 +37,7 @@ export class AddDomainComponent implements OnInit {
   
   addDomain() {
     this.loaderService.showLoader();
+    this.form.resetForm();
     this.domainService.addDomain(this.domain).subscribe((data) => {
       if(data) {
         this.loaderService.hideLoader();
