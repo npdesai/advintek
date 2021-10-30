@@ -1,0 +1,11 @@
+.box-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0;
+}
+
+.btn-success {
+    background: #49bd80;
+    border: 1px solid #49bd80;
+}

@@ -154,7 +154,7 @@
             </div>
         </div>
         <div class="row pageContent" *ngIf="isAddDHCPServer">
-            <div class="col" *ngIf="!isAddDomain">
+            <div class="col">
                 <form class="form-section">
                     <div class="row form-row">
                         <div class="col-12 col-md-6">
@@ -177,13 +177,13 @@
                             </p-dropdown>
                         </div>
                     </div>
-                    <div [ngSwitch]="selectedServerType">
-                        <div class="row form-row" *ngSwitchCase="'mds'">
-                            <div class="col-12 col-md-6">
-                                <h6 class="d-flex justify-content-between">Select AD Domain <a href="javascript:void()" (click)="addDomain()">Add Domain</a></h6>
-                                <p-dropdown [options]="adDomains" placeholder="Choose AD Domain" optionLabel="name" styleClass="w-100"></p-dropdown>
-                            </div>
+                    <div class="row form-row">
+                        <div class="col-12 col-md-6">
+                            <h6 class="d-flex justify-content-between">Select AD Domain <a href="ipam/DHCPSummary/domains">Add Domain</a></h6>
+                            <p-dropdown [options]="domainList" placeholder="Choose AD Domain" optionLabel="domainName" optionValue="domainId" styleClass="w-100"></p-dropdown>
                         </div>
+                    </div>
+                    <div [ngSwitch]="selectedServerType">
                         <div *ngSwitchCase="'paf'">
                             <div class="row form-row">
                                 <div class="col">
@@ -388,7 +388,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col" *ngIf="isAddDomain">
+            <!-- <div class="col" *ngIf="isAddDomain">
                 <form class="form-section">
                     <div class="row form-row">
                         <div class="col">
@@ -419,7 +419,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

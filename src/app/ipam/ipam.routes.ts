@@ -6,6 +6,7 @@ import { DHCPServerDetailComponent } from './views/dhcp/dhcp-server-detail/dhcp-
 import { DHCPSummaryComponent } from './views/dhcp/dhcp-summary/dhcp-summary.component';
 import { DiscoveredSubnetsComponent } from './views/discovered/discovered-subnets/discovered-subnets.component';
 import { DiscoveredV6HostsComponent } from './views/discovered/discovered-v6-hosts/discovered-v6-hosts.component';
+import { DomainComponent } from './views/domain/domain.component';
 import { GroupComponent } from './views/group/group.component';
 import { HomeComponent } from './views/home.component';
 import { IpamComponent } from './views/ipam.component';
@@ -27,8 +28,12 @@ export const ipamRoutes: Routes = [
           { path: 'groups/:Id', component: GroupComponent },
           { path: 'subnets/:Id', component: SubnetComponent },
           { path: 'ipv6/:Id', component: Ipv6Component },
-          { path: 'DHCPSummary/:Id', component: DHCPSummaryComponent },
-          { path: 'DHCPSummary/server/:id', component: DHCPServerDetailComponent },
+          { path: 'DHCPSummary', children: [
+            { path: 'domains', component: DomainComponent },
+            { path: 'server/:id', component: DHCPServerDetailComponent },
+            { path: ':Id', component: DHCPSummaryComponent },
+          ] },
+          // { path: 'DHCPSummary/server/:id', component: DHCPServerDetailComponent },
           { path: 'discovered', children: [
             { path: 'subnets', component: DiscoveredSubnetsComponent },
             { path: 'v6hosts', component: DiscoveredV6HostsComponent }

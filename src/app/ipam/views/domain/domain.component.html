@@ -1,0 +1,55 @@
+<section class="content-body">
+    <div class="col-md-12 no-padding">
+      <div class="box">
+        <div class="box-header">
+          <div>
+            <h5 class="box-title">Domains</h5>
+          </div>
+          <div>
+            <button type="button" class="btn btn-success mr-2" (click)="onAddDomainClick()">Add Domain</button>
+            <!-- <button type="button" class="btn btn-success mr-2">Scan</button>
+            <button type="button" class="btn btn-success mr-2">Discover Subnets</button>
+            <button type="button" class="btn btn-success" (click)="onDelete()">Delete</button> -->
+          </div>
+        </div>
+        <p-divider></p-divider>
+        <div class="box-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                  <th>User Name</th>
+                  <th>Domain Name</th>
+                  <th>Domain Controller Name</th>
+                  <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngIf="domains && domains.length > 0">
+                <tr *ngFor="let domain of domains">
+                    <td valign="middle" (click)="editDomainHandler(domain)">{{ domain.userName }}</td>
+                    <td valign="middle" (click)="editDomainHandler(domain)">{{ domain.domainName }}</td>
+                    <td valign="middle" (click)="editDomainHandler(domain)">{{ domain.domainControllerName }}</td>
+                    <td align="center" valign="middle">
+                        <!-- <button pButton pRipple type="button" icon="pi pi-times" class="p-button-sm p-button-rounded p-button-danger"></button> -->
+                        <a href="#" class="text-decoratino-none text-danger" (click)="onDelete($event, domain)">Delete</a>
+                    </td>
+                </tr>
+              </ng-container>
+              <tr *ngIf="domains == null || domains.length == 0">
+                <td colspan="6" style="text-align: center">
+                  {{ statusMessage }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <app-add-domain 
+    [(openWidth)]="width" 
+    [isEdit]="isEditDomain" 
+    [domain]="selectedDomain" 
+    (getDomainList)="getDomainList()"
+    (closeWidth)="closeAddDomain($event)"></app-add-domain>

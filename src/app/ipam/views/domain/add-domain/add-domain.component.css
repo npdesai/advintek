@@ -1,0 +1,36 @@
+.content-section {
+    transition: all 0.2s ease-in;
+    position: absolute;
+    top: 50px;
+    right: 15px;
+    height: calc(100vh - 35px);
+    z-index: 999;
+  }
+.form-section {
+    padding: 20px;
+}
+  
+.blur-section {
+opacity: 0.4;
+background: #d2d6de;
+}
+
+.page-section {
+background: #ffffff;
+box-shadow: 0 0 5px #d2d6de;
+}
+
+.pageHeader {
+padding: 20px 0;
+border-bottom: 1px solid #d2d6de;
+align-items: center;
+}
+
+.pageContent {
+height: calc(100vh - 130px);
+overflow-y: auto;
+}
+
+.form-row {
+    margin-bottom: 20px;
+}

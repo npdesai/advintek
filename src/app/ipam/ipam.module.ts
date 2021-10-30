@@ -46,6 +46,8 @@ import { IpDetailsComponent } from './views/group/ip-details/ip-details.componen
 import { IpHistoryComponent } from './views/group/ip-history/ip-history.component';
 import { EditSubnetComponent } from './views/subnet/edit-subnet/edit-subnet.component';
 import { Ipv6Component } from './views/ipv6/ipv6.component';
+import { DomainComponent } from './views/domain/domain.component';
+import { AddDomainComponent } from './views/domain/add-domain/add-domain.component';
 
 @NgModule({
   imports: [
@@ -92,7 +94,9 @@ import { Ipv6Component } from './views/ipv6/ipv6.component';
     IpDetailsComponent,
     IpHistoryComponent,
     EditSubnetComponent,
-    Ipv6Component
+    Ipv6Component,
+    DomainComponent,
+    AddDomainComponent
   ],
   providers: [
     SubnetService

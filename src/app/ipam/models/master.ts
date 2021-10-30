@@ -19,3 +19,11 @@ export class ServerType {
   serverTypeId: string;
   name: string
 }
+
+export class Domain {
+  domainId: string;
+  userName: string;
+  password: string;
+  domainName: string;
+  domainControllerName: string;
+}

@@ -1,9 +1,9 @@
-import { computeDecimalDigest } from '@angular/compiler/src/i18n/digest';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
-import { ServerType, SubnetGroup, SubnetMask } from '../../models/master';
+import { Domain, ServerType, SubnetGroup, SubnetMask } from '../../models/master';
 import { AddIpv4Subnet, AddIpv6Subnet } from '../../models/subnet';
 import { CompanyService } from '../../services/company.service';
+import { DomainService } from '../../services/domain.service';
 import { LoadingDataService } from '../../services/loading-data.service';
 import { MasterService } from '../../services/master.service';
 import { SubnetService } from '../../services/subnet.service';
@@ -38,9 +38,7 @@ export class AddComponent implements OnInit {
   isAddIPv4Subnet: boolean = false;
   isAddIPv6SubnetSite: boolean = false;
   isAddDHCPServer: boolean = false;
-  isAddDomain: boolean = false;
   prefixLengths: any = [];
-  adDomains: any;
   selectedServerType: string;
   protocols: any;
   selectedProtocol: string;
@@ -61,34 +59,24 @@ export class AddComponent implements OnInit {
   subnetGroups : SubnetGroup[] = [];
   subnetMasks:SubnetMask[] = [];
   serverTypes: ServerType[] = [];
+  domainList: Domain[] = [];
 
   constructor(
     private subnetService : SubnetService,
     private masterService : MasterService,
     private companyService : CompanyService,
-    private loaderService : LoadingDataService
+    private loaderService : LoadingDataService,
+    private domainService: DomainService,
   ) {
     this.getSubnetGroups();
     this.getSubnetMasks();
     this.getServerTypes();
+    this.getDomainList();
 
     for(let i = 1; i <= 128; i++)
     {
       this.prefixLengths.push({ name: i.toString(), code: i });
     }
-
-    this.adDomains = [
-      { name: 'Domain 1', code: 'D1' },
-      { name: 'Domain 2', code: 'D2' },
-    ];
-
-    // this.serverTypes = [
-    //   { name: 'Microsoft DHCP Server', code:'mds'},
-    //   { name: 'Palo Alto Firewall', code:'paf'},
-    //   { name: 'Linux Server', code:'ls'},
-    //   { name: 'Cisco Router', code:'cr'},
-    //   { name: 'Fortinet Firewall', code:'ff'},
-    // ]
 
     this.protocols = [
       { name: 'Telnet', code: 'telnet' },
@@ -130,25 +118,23 @@ export class AddComponent implements OnInit {
     this.newaddSubnetModel();
     this.newaddIpv6SubnetModel();
     this.isAdd = false;
-    if(this.isAddDomain) {
-      setTimeout(() => {
-        this._pageTitle = this.addDHCPTitle;
-        this.isAddDomain = false;
-      }, 200);
-    }
+    this._pageTitle = this.addDHCPTitle;
   }
 
   addClick() {
     this.isAdd = !this.isAdd;
   }
 
-  addDomain() {
-    this.isAddDomain = true;
-    this._pageTitle = this.addDomainTitle;
+  getDomainList() {
+    this.domainService.getDomainList().subscribe((data) => {
+      if(data) {
+        console.log(data);
+        this.domainList = data;
+      }
+    });
   }
 
   onAddDomainCancel() {
-    this.isAddDomain = false;
     this._pageTitle = this.addDHCPTitle;
   }
 

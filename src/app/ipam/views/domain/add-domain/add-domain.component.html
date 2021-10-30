@@ -1,0 +1,55 @@
+<div class="row content-section" [ngStyle]="{ width: openWidth + '%' }">
+    <div class="col-md-6 blur-section"></div>
+    <div class="col-md-6 page-section">
+      <div class="row pageHeader">
+        <div class="col-10">
+          <h4 class="mb-0">{{ isEdit ? "Edit Domain" : "Add Domain" }}</h4>
+        </div>
+        <div class="col-2 text-right">
+          <button
+            pButton
+            type="button"
+            icon="pi pi-times"
+            class="p-button-secondary p-button-text"
+            (click)="onCancel()"
+          ></button>
+        </div>
+      </div>
+      <div class="row pageContent">
+        <div class="col">
+            <form class="form-section" #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+                <div class="row form-row">
+                    <div class="col">
+                        <h6>User Name</h6>
+                        <input type="text" name="userName" [ngModel]="domain.userName" required />
+                    </div>
+                    <div class="col">
+                        <h6>Password</h6>
+                        <input type="password" name="password" [ngModel]="domain.password" required />
+                    </div>
+                </div>
+                <div class="row form-row">
+                    <div class="col">
+                        <h6>Domain</h6>
+                        <input type="text" name="domainName" [ngModel]="domain.domainName" required />
+                    </div>
+                    <div class="col">
+                        <h6>Domain Controller Name</h6>
+                        <input type="text" name="domainControllerName" [ngModel]="domain.domainControllerName" required />
+                    </div>
+                </div>
+                <p-divider></p-divider>
+                <div class="row">
+                    <div class="col text-right">
+                        <p-button type="button" label="Cancel" styleClass="p-button-secondary p-button-sm" (click)="onCancel()">
+                        </p-button>
+                        <p-button type="submit" label="Add" styleClass="p-button-success p-button-sm ml-2" *ngIf="!isEdit"></p-button>
+                        <p-button type="submit" label="Save" styleClass="p-button-success p-button-sm ml-2" *ngIf="isEdit"></p-button>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
