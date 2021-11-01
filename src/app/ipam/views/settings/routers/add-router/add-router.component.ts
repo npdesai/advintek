@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';
 import { AddRouter, Router } from 'src/app/ipam/models/router';
 import { LoadingDataService } from 'src/app/ipam/services/loading-data.service';
@@ -14,6 +15,8 @@ export class AddRouterComponent implements OnInit {
   @Output() openWidthChange = new EventEmitter<any>();
   @Output() closeWidth = new EventEmitter<any>();
   @Output() getRouters = new EventEmitter<any>();
+
+  @ViewChild ('addrouterform') addrouterform: NgForm;
 
   isAddManual: boolean = true;
   credentials: any;
@@ -49,6 +52,7 @@ export class AddRouterComponent implements OnInit {
 
   onCancel() {
     this.closeWidth.emit(0);
+    this.addrouterform.reset();
     this.resetAddRouterModel();
   }
 

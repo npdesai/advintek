@@ -17,7 +17,7 @@
     </div>
     <div class="row pageContent">
       <div class="col">
-        <form class="form-section">
+        <form class="form-section" #addrouterform="ngForm" novalidate>
           <div class="row form-row">
             <div class="col">
               <mat-radio-group>
@@ -39,11 +39,23 @@
             <div class="row form-row">
               <div class="col-12 col-md-6">
                 <h6>Server / Router / Switch</h6>
-                <input name="deviceName" [(ngModel)]="addRouter.deviceName" type="text" pInputText class="w-100" />
+                <input #deviceName="ngModel" name="deviceName" [(ngModel)]="addRouter.deviceName" type="text" pInputText class="w-100" required />
+                <div *ngIf="deviceName.invalid && (deviceName.touched || deviceName.dirty)">
+                  <span class="text-danger">Field is required!</span>
+                </div>
               </div>
               <div class="col-12 col-md-6">
                 <h6>IP Address</h6>
-                <input name="deviceIPAddress" [(ngModel)]="addRouter.deviceIPAddress" type="text" pInputText class="w-100" />
+                <input 
+                  #deviceIp="ngModel" 
+                  name="deviceIPAddress" 
+                  [(ngModel)]="addRouter.deviceIPAddress" 
+                  pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+                  type="text" pInputText class="w-100" required />
+                <div *ngIf="deviceIp.invalid && (deviceIp.touched || deviceIp.dirty )">
+                  <span class="text-danger" *ngIf="deviceIp.errors.required">Field is required!</span>
+                  <span class="text-danger" *ngIf="deviceIp.errors.pattern">Enter valid value!</span>
+                </div>
               </div>
             </div>
             <!-- <div class="row form-row">
@@ -159,6 +171,7 @@
                 label="Add"
                 styleClass="p-button-success p-button-sm ml-2"
                 (click)="onAddRouter()"
+                [disabled]="addrouterform.invalid ? true : false"
               ></p-button>
             </div>
           </div>
