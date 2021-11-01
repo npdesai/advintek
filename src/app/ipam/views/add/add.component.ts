@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';
 import { Domain, ServerType, SubnetGroup, SubnetMask } from '../../models/master';
 import { AddIpv4Subnet, AddIpv6Subnet } from '../../models/subnet';
@@ -16,6 +17,8 @@ import { SubnetService } from '../../services/subnet.service';
 export class AddComponent implements OnInit {
   @Input() openWidth = 0;
   @Output() openWidthChange = new EventEmitter<any>();
+
+  @ViewChild('ipv4form') ipv4form: NgForm;
   _pageTitle: any;
   get pageTitle(): any {
     return this._pageTitle;
@@ -115,6 +118,7 @@ export class AddComponent implements OnInit {
 
   onCancel() {
     this.closeWidth.emit(0);
+    this.ipv4form.reset();
     this.newaddSubnetModel();
     this.newaddIpv6SubnetModel();
     this.isAdd = false;

@@ -12,12 +12,12 @@
         </div>
         <div class="row pageContent" *ngIf="isAddIPv4Subnet">
             <div class="col">
-                <form class="form-section">
+                <form class="form-section" #ipv4form="ngForm" novalidate>
                     <div class="row form-row">
                         <div class="col">
                             <mat-radio-group>
                                 <mat-radio-button value="addmanual" checked="true" (change)="ipv4RadioChange($event)">Add Manually</mat-radio-button>
-                                <mat-radio-button value="importcsv" (change)="ipv4RadioChange($event)">Import from CSV</mat-radio-button>
+                                <!-- <mat-radio-button value="importcsv" (change)="ipv4RadioChange($event)">Import from CSV</mat-radio-button> -->
                             </mat-radio-group>
                         </div>
                     </div>
@@ -26,9 +26,21 @@
                             <h6>Group Name</h6>
                             <div class="row">
                                 <div class="col pr-0">
-                                    <p-dropdown [options]="subnetGroups" name="subnetGroupId" [(ngModel)]="addSubnet.subnetGroup" placeholder="Select Group" optionLabel="groupName"
-                                        styleClass="w-100" *ngIf="!isAdd"></p-dropdown>
-                                    <input type="text" pInputText class="w-100" *ngIf="isAdd" name="subnetGroupName" [(ngModel)]="addSubnet.subnetGroupName"/>
+                                    <p-dropdown [hidden]="isAdd" [options]="subnetGroups" name="subnetGroupId" [(ngModel)]="addSubnet.subnetGroup" placeholder="Select Group" optionLabel="groupName"
+                                        styleClass="w-100" #subnetGroupSelect="ngModel" [required]="!isAdd"></p-dropdown>
+                                    <input 
+                                        type="text" 
+                                        pInputText 
+                                        class="w-100" 
+                                        [hidden]="!isAdd"
+                                        #subnetGroupInput="ngModel" 
+                                        [required]="isAdd" 
+                                        name="subnetGroupName" 
+                                        [(ngModel)]="addSubnet.subnetGroupName"/>
+                                    <div *ngIf="(subnetGroupSelect.invalid && (subnetGroupSelect.touched || subnetGroupSelect.dirty)) || 
+                                                (subnetGroupInput.invalid && (subnetGroupInput.touched || subnetGroupInput.dirty))">
+                                        <span class="text-danger">Field is required!</span>
+                                    </div>
                                 </div>
                                 <div class="col">
                                     <button pButton pRipple type="button" icon="pi pi-plus"
@@ -40,32 +52,59 @@
                     <div class="row form-row" *ngIf="isAddManual">
                         <div class="col">
                             <h6>Subnet/Network Address</h6>
-                            <input type="text" pInputText class="w-100" name="subnetAddress" [(ngModel)]="addSubnet.subnetAddress" required/>
+                            <input 
+                                type="text" 
+                                pInputText 
+                                class="w-100" 
+                                #subnetAddress="ngModel"
+                                name="subnetAddress" 
+                                [(ngModel)]="addSubnet.subnetAddress" 
+                                pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+                                required/>
+                            <div *ngIf="subnetAddress.invalid && (subnetAddress.touched || subnetAddress.dirty)">
+                                <span class="text-danger" *ngIf="subnetAddress.errors.required">Field is required!</span>
+                                <span class="text-danger" *ngIf="subnetAddress.errors.pattern">Enter valid value!</span>
+                            </div>
                         </div>
                         <div class="col">
                             <h6>Subnet Mask</h6>
-                            <p-dropdown [options]="subnetMasks" name="subnetMaskId" [(ngModel)]="addSubnet.subnetMask" placeholder="Select Subnet Mask" optionLabel="displaySubnetMask"
-                                styleClass="w-100"></p-dropdown>
+                            <p-dropdown [options]="subnetMasks" #subnetMaskId="ngModel" name="subnetMaskId" [(ngModel)]="addSubnet.subnetMask" placeholder="Select Subnet Mask" optionLabel="displaySubnetMask"
+                                styleClass="w-100" [required]="true"></p-dropdown>
+                            <div *ngIf="subnetMaskId.invalid && (subnetMaskId.touched || subnetMaskId.dirty)">
+                                <span class="text-danger">Field is required!</span>
+                            </div>
                         </div>
                     </div>
                     <div class="row form-row" *ngIf="isAddManual">
                         <div class="col">
                             <h6>Subnet Name</h6>
-                            <input type="text" pInputText class="w-100" name="subnetName" [(ngModel)]="addSubnet.subnetName" />
+                            <input type="text" pInputText class="w-100" #subnetName="ngModel" name="subnetName" [(ngModel)]="addSubnet.subnetName" required />
+                            <div *ngIf="subnetName.invalid && (subnetName.touched || subnetName.dirty)">
+                                <span class="text-danger">Field is required!</span>
+                            </div>
                         </div>
                         <div class="col">
                             <h6>Description</h6>
-                            <input type="text" pInputText class="w-100" name="subnetDescription" [(ngModel)]="addSubnet.subnetDescription" />
+                            <input type="text" pInputText class="w-100" #subnetDesc="ngModel" name="subnetDescription" [(ngModel)]="addSubnet.subnetDescription" required />
+                            <div *ngIf="subnetDesc.invalid && (subnetDesc.touched || subnetDesc.dirty)">
+                                <span class="text-danger">Field is required!</span>
+                            </div>
                         </div>
                     </div>
                     <div class="row form-row" *ngIf="isAddManual">
                         <div class="col">
                             <h6>VLAN Name</h6>
-                            <input type="text" pInputText class="w-100" name="vlanName" [(ngModel)]="addSubnet.vlanName" />
+                            <input type="text" pInputText class="w-100" #vlanName="ngModel" name="vlanName" [(ngModel)]="addSubnet.vlanName" required />
+                            <div *ngIf="vlanName.invalid && (vlanName.touched || vlanName.dirty)">
+                                <span class="text-danger">Field is required!</span>
+                            </div>
                         </div>
                         <div class="col">
                             <h6>Location</h6>
-                            <input type="text" pInputText class="w-100" name="location" [(ngModel)]="addSubnet.location" />
+                            <input type="text" pInputText class="w-100" #location="ngModel" name="location" [(ngModel)]="addSubnet.location" required />
+                            <div *ngIf="location.invalid && (location.touched || location.dirty)">
+                                <span class="text-danger">Field is required!</span>
+                            </div>
                         </div>
                     </div>
                     <div class="row form-row" *ngIf="!isAddManual">
@@ -83,9 +122,8 @@
                     <p-divider></p-divider>
                     <div class="row">
                         <div class="col text-right">
-                            <p-button label="Cancel" styleClass="p-button-secondary p-button-sm" (click)="onCancel()">
-                            </p-button>
-                            <p-button label="Add" styleClass="p-button-success p-button-sm ml-2" (click)="save()"></p-button>
+                            <p-button label="Cancel" styleClass="p-button-secondary p-button-sm" (click)="onCancel()"></p-button>
+                            <p-button label="Add" styleClass="p-button-success p-button-sm ml-2" (click)="save()" [disabled]="ipv4form.invalid ? true : false"></p-button>
                         </div>
                     </div>
                 </form>
