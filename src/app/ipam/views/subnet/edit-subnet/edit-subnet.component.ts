@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { LoadingDataService } from 'src/app/ipam/services/loading-data.service';
 import { SubnetService } from 'src/app/ipam/services/subnet.service';
+import { IpDetail } from '../../../models/ipDetail';
 
 @Component({
   selector: 'app-edit-subnet',
@@ -14,10 +16,13 @@ export class EditSubnetComponent implements OnInit {
   @Output() ipDetailChange = new EventEmitter<any>();
   @Output() closeWidth = new EventEmitter<any>();
 
+  @ViewChild('editipform') editIpForm : NgForm;
+
   credentials: any;
   ipAvailabilities: any;
   reservedStatuses: any;
-
+  editedIpDetail: any = new IpDetail();
+  
   constructor(private subnetService: SubnetService, private loaderService: LoadingDataService) { 
     this.credentials = [
       { name: 'None', code: 'None' },
@@ -33,29 +38,25 @@ export class EditSubnetComponent implements OnInit {
       { name: 'Not Reserved', code: 'Not Reserved'}
     ]    
   }
-
+  
   ngOnInit(): void {        
   }
 
   onCancel() {
-    this.closeWidth.emit(this.ipDetail);
+    this.closeWidth.emit(0);
   }
 
   onUpdate(){   
     this.loaderService.showLoader();
-    if(this.ipDetail.statusMaster){
-      this.ipDetail.status = this.ipDetail.statusMaster.name;
-      console.log(this.ipDetail)
-    }
+    
+    Object.assign(this.editedIpDetail, this.ipDetail, this.editIpForm.value);
 
-    if(this.ipDetail.reservedStatusMaster){
-      this.ipDetail.reservedStatus = this.ipDetail.reservedStatusMaster.name;
-      console.log(this.ipDetail)
-    }
-
-    this.subnetService.updateSubnetIpDetail(this.ipDetail).subscribe((data) => {      
-      this.loaderService.hideLoader();
-      this.onCancel();     
+    this.subnetService.updateSubnetIpDetail(this.editedIpDetail).subscribe((data) => {   
+      if(data) {
+        Object.assign(this.ipDetail, data);
+        this.loaderService.hideLoader();
+        this.onCancel();     
+      }   
     });
   }
 

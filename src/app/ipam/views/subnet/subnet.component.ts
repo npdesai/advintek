@@ -177,12 +177,7 @@ export class SubnetComponent {
   }
 
   editIpDetails(ipDetail) {
-    ipDetail["statusMaster"];
-    ipDetail["reservedStatusMaster"];
-    ipDetail.statusMaster = {name:ipDetail.status,code:ipDetail.status};
-    ipDetail.reservedStatusMaster = {name:ipDetail.reservedStatus,code:ipDetail.reservedStatus};    
-
-    this.editSelectedIpDetail = ipDetail;    
+    this.editSelectedIpDetail = ipDetail;   
     this.editWidth = 100;    
   }
 
@@ -191,17 +186,9 @@ export class SubnetComponent {
     this.width = width;
   }
 
-  closeDivEdit(ipDetail) {    
+  closeDivEdit(width) {    
     this.editSelectedIpDetail = new IpDetail();
-    this.editWidth = 0;
-
-    this.ipDetails.map((ip) => {
-      if(ip.subnetIPId === ipDetail.subnetIPId)
-      {        
-        ip.status = ipDetail.status
-        ip.deviceType = ipDetail.deviceType     
-      }
-    })
+    this.editWidth = width;
   }
 
   // clearSubnets() {

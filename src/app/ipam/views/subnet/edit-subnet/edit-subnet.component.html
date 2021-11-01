@@ -16,43 +16,69 @@
             </div>
           </div>
         <div class="col-12 mb-4">
-            <form class="form-section">
+            <form class="form-section" #editipform="ngForm" novalidate>
                 <div class="row form-row">
                     <div class="col-12 col-md-6">
                         <h6>Availability</h6>
-                        <p-dropdown [options]="ipAvailabilities" [(ngModel)]="ipDetail.statusMaster" name="statusMaster" placeholder="Select Subnet Mask" optionLabel="name"
-                            styleClass="w-100"></p-dropdown>
+                        <p-dropdown 
+                            [options]="ipAvailabilities" 
+                            [ngModel]="ipDetail.status" 
+                            #status="ngModel"
+                            name="status" 
+                            placeholder="Select Subnet Mask" 
+                            optionLabel="name"
+                            optionValue="name"
+                            styleClass="w-100" [required]="true"></p-dropdown>
+                            <div *ngIf="status.invalid && (status.touched || status.dirty)">
+                                <span class="text-danger">Field is required!</span>
+                            </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <h6>Reserved Status</h6>
-                        <p-dropdown [options]="reservedStatuses" [(ngModel)]="ipDetail.reservedStatusMaster" name="reservedStatusMaster" placeholder="Select Subnet Mask" optionLabel="name"
-                            styleClass="w-100"></p-dropdown>
+                        <p-dropdown 
+                            [options]="reservedStatuses" 
+                            [ngModel]="ipDetail.reservedStatus" 
+                            #reservedStatus="ngModel"
+                            name="reservedStatus" 
+                            placeholder="Select Subnet Mask" 
+                            optionLabel="name"
+                            optionValue="name"
+                            styleClass="w-100" [required]="true"></p-dropdown>
+                            <div *ngIf="reservedStatus.invalid && (reservedStatus.touched || reservedStatus.dirty)">
+                                <span class="text-danger">Field is required!</span>
+                            </div>
                     </div>
                 </div>
                 <div class="row form-row">
                     <div class="col-12 col-md-6">
                         <h6>Alias Name</h6>
-                        <input type="text" pInputText [(ngModel)]="ipDetail.aliasName" name="aliasName" class="w-100" />
+                        <input type="text" #aliasName="ngModel" pInputText [ngModel]="ipDetail.aliasName" name="aliasName" class="w-100" required />
+                        <div *ngIf="aliasName.invalid && (aliasName.touched || aliasName.dirty)">
+                            <span class="text-danger">Field is required!</span>
+                        </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <h6>Asset Tag</h6>
-                        <input type="text" pInputText [(ngModel)]="ipDetail.assetTag" name="assetTag" class="w-100" />
+                        <input type="text" pInputText [ngModel]="ipDetail.assetTag" name="assetTag" class="w-100" />
                     </div>
                 </div>
                 <div class="row form-row">
                     <div class="col-12 col-md-6">
                         <h6>Device Type</h6>
-                        <input type="text" pInputText [(ngModel)]="ipDetail.deviceType" name="deviceType" class="w-100" />
+                        <input type="text" #deviceType="ngModel" pInputText [ngModel]="ipDetail.deviceType" name="deviceType" class="w-100" required />
+                        <div *ngIf="deviceType.invalid && (deviceType.touched || deviceType.dirty)">
+                            <span class="text-danger">Field is required!</span>
+                        </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <h6>Sys Location</h6>
-                        <input type="text" pInputText [(ngModel)]="ipDetail.systemLocation" name="systemLocation" class="w-100" />
+                        <input type="text" pInputText [ngModel]="ipDetail.systemLocation" name="systemLocation" class="w-100" />
                     </div>                    
                 </div>
                 <p-divider></p-divider>
                 <div class="row">
                     <div class="col text-right">
-                        <p-button label="Update" styleClass="p-button-success p-button-sm" (click)="onUpdate()"></p-button>
+                        <p-button label="Update" styleClass="p-button-success p-button-sm" (click)="onUpdate()" [disabled]="editipform.invalid ? true : false"></p-button>
                         <p-button label="Cancel" styleClass="p-button-outlined p-button-secondary p-button-sm ml-3" (click)="onCancel()">
                         </p-button>
                     </div>
