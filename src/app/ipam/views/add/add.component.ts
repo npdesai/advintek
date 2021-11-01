@@ -19,6 +19,9 @@ export class AddComponent implements OnInit {
   @Output() openWidthChange = new EventEmitter<any>();
 
   @ViewChild('ipv4form') ipv4form: NgForm;
+  @ViewChild('ipv6form') ipv6form: NgForm;
+  @ViewChild('dhcpform') dhcpform: NgForm;
+
   _pageTitle: any;
   get pageTitle(): any {
     return this._pageTitle;
@@ -119,6 +122,7 @@ export class AddComponent implements OnInit {
   onCancel() {
     this.closeWidth.emit(0);
     this.ipv4form.reset();
+    this.ipv6form.reset();
     this.newaddSubnetModel();
     this.newaddIpv6SubnetModel();
     this.isAdd = false;
@@ -136,10 +140,6 @@ export class AddComponent implements OnInit {
         this.domainList = data;
       }
     });
-  }
-
-  onAddDomainCancel() {
-    this._pageTitle = this.addDHCPTitle;
   }
 
   save(){
