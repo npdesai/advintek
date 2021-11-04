@@ -43,6 +43,10 @@ export class SubnetService {
     return this.http.patch<any>(`${this.rootControler}/ScanIP?subnetIpId=${subnetIpId}`,"");
   }
 
+  traceIpRoute(tracedIpId: string) {
+    return this.http.get<any>(`${this.rootControler}/TraceRoute?ipAddress=${tracedIpId}`);
+  }
+
   updateSubnetIpDetail(subnetIpDetail:Subnet) {
     return this.http.patch<any>(`${this.rootControler}/UpdateIPById`,subnetIpDetail);
   }

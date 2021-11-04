@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { IpDetail } from 'src/app/ipam/models/ipDetail';
 import { IpPing, PingOptions } from '../../models/ipPing';
+import { LoadingDataService } from '../../services/loading-data.service';
 import { SubnetService } from '../../services/subnet.service';
 
 @Component({
@@ -30,6 +32,8 @@ export class TestIpComponent implements OnInit {
   @Output() ipDetailChange = new EventEmitter<any>();
   @Output() closeWidth = new EventEmitter<any>();
 
+  @ViewChild ('traceRouteForm') traceRouteForm : NgForm;
+
   isPing: boolean = false;
   isSNMPPing: boolean = false;
   isResolveDNS: boolean = false;
@@ -37,14 +41,17 @@ export class TestIpComponent implements OnInit {
   isTraceRoute: boolean = false;
   isSystemExplorer: boolean = false;
   isEditIpDetail: boolean = false;
+  statusMessage: string = '';
 
   credentials: any;
   ipAvailabilities: any;
   reservedStatuses: any;
+  tracedRouteIps: any
 
   ipPing:IpPing;
 
-  constructor(private subnetService:SubnetService) { 
+  constructor(private subnetService:SubnetService, private loaderService: LoadingDataService) { 
+
     this.credentials = [
       { name: 'None', code: 'None' },
     ];
@@ -75,6 +82,17 @@ export class TestIpComponent implements OnInit {
         this.ipPing = res;
         this.ipPing.options = this.ipPing.options != null ? this.ipPing.options : new PingOptions();
         console.log(this.ipPing,"this.ipPing")
+    });
+  }
+
+  onTraceRoute(values: any) {
+    this.statusMessage = "Loading data..";
+    this.loaderService.showLoader();
+    this.subnetService.traceIpRoute(this.traceRouteForm.controls.traceIp.value).subscribe((data) => {
+      if(data) {
+        this.loaderService.hideLoader();
+        this.tracedRouteIps = data;
+      }
     });
   }
 
