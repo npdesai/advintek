@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap, Route, Router, Routes } from '@angular/router
 import { PrimeNGConfig } from 'primeng/api';
 import { IpDetail } from '../../models/ipDetail';
 import { IpHistory } from '../../models/ipHistory';
-import { SubnetGroup } from '../../models/subnet';
+import { AddIpv4Subnet, SubnetGroupDetail } from '../../models/subnet';
 import { SubnetService } from '../../services/subnet.service';
 
 @Component({
@@ -13,13 +13,13 @@ import { SubnetService } from '../../services/subnet.service';
 })
 export class GroupComponent implements OnInit {
 
-  subnets: SubnetGroup[] = [];
+  subnets: SubnetGroupDetail[] = [];
   ipDetails: IpDetail[] = [];
   ipHistories: IpHistory[] = [];
   statusMessage: string = "";
   subnetGroupId: string = "";
   updateSubnetWidth = 0;
-  selectedSubnet: SubnetGroup = new SubnetGroup();
+  selectedSubnet: AddIpv4Subnet = new AddIpv4Subnet();
   isSubnetSelected: boolean = false;
 
   constructor(private subnetService: SubnetService, private router: Router, private route: ActivatedRoute, private primeNgConfig: PrimeNGConfig) { 
@@ -30,9 +30,9 @@ export class GroupComponent implements OnInit {
     this.primeNgConfig.ripple = true;
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.getSubnetData(params.get('Id'));
-    });
-    this.getIpDetails();
-    this.getIpHistories();
+      this.getIpHistories(params.get('Id'));
+      this.getIpDetails(params.get('Id')); 
+    });       
   }
 
   getSubnetData(id: string) {
@@ -52,16 +52,16 @@ export class GroupComponent implements OnInit {
     this.updateSubnetWidth = 100;
   }
 
-  getIpDetails() {
+  getIpDetails(subnetId: string) {
     this.statusMessage = "Loading data...";
-    this.subnetService.getSubnetIps("49.256.25.0").subscribe((data) => {
+    this.subnetService.getSubnetIps(subnetId).subscribe((data) => {
       this.ipDetails = data;
     })
   }
 
-  getIpHistories() {
+  getIpHistories(subnetId: string) {
     this.statusMessage = "Loading data...";
-    this.subnetService.getIpHistories(4).then((data) => {
+    this.subnetService.getIpHistories(subnetId).subscribe((data) => {
       this.ipHistories = data;
     })
   }
@@ -71,7 +71,15 @@ export class GroupComponent implements OnInit {
   }
 
   selectSubnetHandler(subnet) {
-    this.isSubnetSelected = true;
-    this.selectedSubnet = subnet;
+    this.isSubnetSelected = true;    
+    this.getSubnetDetail(subnet.subnetId);
+  }
+
+  getSubnetDetail(subnetId:string) {
+    this.subnetService.getSubnetDetail(subnetId).subscribe((data) => {
+      if(data) {
+        this.selectedSubnet = data;
+      }
+    })
   }
 }

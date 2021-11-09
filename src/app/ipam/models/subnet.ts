@@ -11,7 +11,7 @@ export class Subnet  {
   lastScannedOn: string;
 }
 
-export class SubnetGroup {
+export class SubnetGroupDetail {
   subnetId: string;
   subnetGroupId: string;
   subnetGroupName: string;
@@ -41,6 +41,10 @@ export class AddIpv4Subnet  {
   vlanId: string;
   location: string;
   accessMode: string;
+  alert:number;
+  warning:number;
+  critical:number;
+  email:string;
 }
 
 export class AddIpv6Subnet {

@@ -1,5 +1,57 @@
 <mat-tab-group animationDuration="0ms">
   <mat-tab label="Subnet Summary">
+    <div class="dashboard-container">
+      <div class="row">
+        <div class="col-4 section-container">
+          <div class="col-section">
+            <div class="col-section-title d-flex align-items-center">
+              <h5 class="m-0">Subnet Summary</h5>
+            </div>
+            <p-divider></p-divider>
+            <div class="row">
+              <div class="col-8">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Subnet Address</li>
+                  <li class="list-group-item">Subnet Name</li>
+                  <li class="list-group-item">Subnet Mask</li>
+                  <li class="list-group-item">Subnet Size</li>
+                  <li class="list-group-item">Subnet Usage</li>
+                  <li class="list-group-item">VLAN Name</li>
+                  <li class="list-group-item">Location</li>
+                  <li class="list-group-item">Last Scan Time</li>
+                  <li class="list-group-item">Description</li>
+                  <li class="list-group-item">Scan Status</li>
+                </ul>
+              </div>
+              <div class="col-4">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">3048</li>
+                  <li class="list-group-item">0</li>
+                  <li class="list-group-item">12</li>
+                  <li class="list-group-item">16.77%</li>
+                  <li class="list-group-item">124</li>
+                  <li class="list-group-item">27</li>
+                  <li class="list-group-item">192</li>
+                  <li class="list-group-item">27</li>
+                  <li class="list-group-item">192</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-8 d-flex section-container">
+          <div class="col-section d-flex flex-column">
+            <div class="col-section-title d-flex align-items-center">
+              <h5 class="m-0">IP Availability</h5>
+            </div>
+            <p-divider></p-divider>
+            <div class="col-section-content">
+              <div echarts [options]="eChartOptions"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </mat-tab>
   <mat-tab label="IP Details">
     <section class="content-body">

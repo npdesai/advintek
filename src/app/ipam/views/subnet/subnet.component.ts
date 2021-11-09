@@ -61,6 +61,7 @@ export class SubnetComponent {
   width = 0;
   editWidth = 0;
   subnetId ="";
+  eChartOptions: any;
 
   constructor(
     private subnetService: SubnetService,
@@ -76,21 +77,30 @@ export class SubnetComponent {
       // { label: 'Resolve MAC Address', command: (item) => this.testIP(item) },
       { label: 'Trace Route', command: (item) => this.testIP(item) },
       // { label: 'System Explorer', command: (item) => this.testIP(item) },
-    ];   
+    ];       
   }
 
   ngOnInit() {
-    this.getFormData();    
-    this.getIpHistories();
+    this.generateAvailabilityChart();
+    this.getFormData();       
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.subnetId = params.get('Id');
       this.getSubnetIpData(this.subnetId);
+      this.getIpHistories(this.subnetId);
+      this.getSubnetDetail(this.subnetId);
     })
   }
 
   getSubnetIpData(subnet:string) {
     this.statusMessage = "Loading data...";
     this.subnetService.getSubnetIps(subnet).subscribe((data) => {
+      this.ipDetails = data;
+    });
+  }
+
+  getSubnetDetail(subnetId:string) {
+    this.statusMessage = "Loading data...";
+    this.subnetService.getSubnetDetail(subnetId).subscribe((data) => {
       this.ipDetails = data;
     });
   }
@@ -112,9 +122,9 @@ export class SubnetComponent {
     });
   }
 
-  getIpHistories() {
+  getIpHistories(subnetId) {
     this.statusMessage = "Loading data...";
-    this.subnetService.getIpHistories(4).then((data) => {
+    this.subnetService.getIpHistories(subnetId).subscribe((data) => {
       this.ipHistories = data;
     })
   }
@@ -189,6 +199,90 @@ export class SubnetComponent {
   closeDivEdit(width) {    
     this.editSelectedIpDetail = new IpDetail();
     this.editWidth = width;
+  }
+
+  generateAvailabilityChart(){
+    this.eChartOptions = {
+      tooltip: {
+        trigger: 'item',
+      },
+      legend: {
+        bottom: 'bottom',
+        data: [
+          {
+            icon: 'circle',
+            name: 'Not Reachable',
+            itemStyle: {
+              color: '#6c757d'
+            }
+          },
+          {
+            icon: 'circle',
+            name: 'Available',
+            itemStyle: {
+              color: '#28a745'
+            }
+          },
+          {
+            icon: 'circle',
+            name: 'Transient',
+            itemStyle: {
+              color: '#ffc107'
+            }
+          },
+          {
+            icon: 'circle',
+            name: 'Used',
+            itemStyle: {
+              color: '#dc3545'
+            }
+          },
+        ],
+      },
+      series: [
+        {
+          type: 'pie',
+          radius: '50%',
+          data: [
+            { 
+              value: 200, 
+              name: 'Not Reachable',
+              itemStyle: {
+                color: '#6c757d'
+              }
+            },
+            { 
+              value: 535, 
+              name: 'Available',
+              itemStyle: {
+                color: '#28a745'
+              } 
+            },
+            { 
+              value: 125, 
+              name: 'Transient',
+              itemStyle: {
+                color: '#ffc107'
+              }
+            },
+            { 
+              value: 335, 
+              name: 'Used',
+              itemStyle: {
+                color: '#dc3545'
+              } 
+            },
+          ],
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)',
+            },
+          },
+        },
+      ],
+    };
   }
 
   // clearSubnets() {

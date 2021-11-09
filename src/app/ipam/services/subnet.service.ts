@@ -33,7 +33,10 @@ export class SubnetService {
   }
 
   getSubnetIps(subnetid:string) {
-    return this.http.get<any>(`${this.rootControler}/SubnetIpList?subnetId=${subnetid}`);
+    const params = new HttpParams()
+    .set('subnetId', subnetid == null ? "" : subnetid.trim());
+    
+    return this.http.get<any>(`${this.rootControler}/SubnetIpList`,{params});    
   }
 
   scanIP(subnetIpId:string) {
@@ -49,13 +52,10 @@ export class SubnetService {
   }
 
   getIpHistories(subnetId:any) {
-    return this.http
-    .get<any>('../../../utilities/subnetIpHistory_data.json')
-    .toPromise()
-    .then((res) => {
-      console.log("json data", res.data);
-      return <IpHistory[]>res.data;
-    });
+    const params = new HttpParams()
+      .set('subnetId', subnetId == null ? "" : subnetId.trim());
+      
+    return this.http.get<IpHistory[]>(`${this.rootControler}/GetSubnetHistory`,{params});    
   }
 
   downloadSubnets(requestOptions?: RequestOptions) {
@@ -113,4 +113,16 @@ export class SubnetService {
   getSubnetCompanies(): Observable<any> {
     return this.http.get(`${this.rootControler}`)
   }
+
+  getSubnetDetail(subnetId: string): Observable<any> {
+    const params = new HttpParams()
+      .set('subnetId', subnetId == null ? "" : subnetId.trim());
+      
+    return this.http.get<any>(`${this.rootControler}/GetSubnetDetailBySubnetId`,{params});
+  }
+
+  updateSubnetDetail(subnetIpDetail:AddIpv4Subnet) {
+    return this.http.patch<any>(`${this.rootControler}/Update`,subnetIpDetail);
+  }
+
 }
