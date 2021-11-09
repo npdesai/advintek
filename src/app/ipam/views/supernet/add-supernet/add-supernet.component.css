@@ -47,6 +47,37 @@
     margin-bottom: 20px;
 }
 
-mat-tab-group.mat-tab-group.mat-primary{
+::ng-deep.supernet mat-tab-group .mat-tab-label-container {
+    padding: 0 !important;
     pointer-events: none !important;
+}
+
+::ng-deep.supernet mat-tab-group .mat-tab-body-content {
+    overflow: hidden;
+}
+
+::ng-deep.supernet .mat-ink-bar {
+    display: none;
+}
+
+::ng-deep.supernet .mat-tab-label {
+    border-bottom: 2px solid #49bd80;
+    width: 33.36%;
+}
+
+::ng-deep.supernet .mat-tab-label.mat-tab-label-active ~ .mat-tab-label {
+    border-color: transparent;
+}
+
+::ng-deep.supernet .list-group-item {
+    border: 0;
+}
+
+::ng-deep.supernet .col-section-title {
+    padding: 5px 15px;
+    background-color: lightgray;
+}
+
+::ng-deep.supernet .col-section {
+    border: 1px solid lightgray;
 }

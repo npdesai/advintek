@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { AlertType, Helper } from 'src/app/common/helper';
 import { SubnetGroup, SubnetMask } from 'src/app/ipam/models/master';
 import { MasterService } from 'src/app/ipam/services/master.service';
@@ -6,7 +6,8 @@ import { MasterService } from 'src/app/ipam/services/master.service';
 @Component({
   selector: 'app-add-supernet',
   templateUrl: './add-supernet.component.html',
-  styleUrls: ['./add-supernet.component.css']
+  styleUrls: ['./add-supernet.component.css'],
+  // encapsulation: ViewEncapsulation.None
 })
 export class AddSupernetComponent implements OnInit {
   @Input() openSupernetWidth = 0;

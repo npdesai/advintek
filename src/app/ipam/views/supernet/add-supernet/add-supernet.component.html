@@ -14,143 +14,144 @@
                 (click)="onCancel()"
               ></button>
             </div>
-          </div>  
-          <div class="col-12 mb-4">
-            <form class="form-section" #editipform="ngForm" novalidate>
-                <mat-tab-group animationDuration="0ms" [selectedIndex]="selectedIndex">
-                    <mat-tab label="1.Supernet Details">
-                        <div class="row form-row mt-3">
-                            <div class="col-12 col-md-6">
-                                <h6>Network Address</h6>
-                                <input 
-                                    type="text" 
-                                    pInputText 
-                                    class="w-100"                                     
-                                    name="subnetAddress"                                     
-                                    pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
-                                    required/>                                
+        </div>  
+        <div class="row pageContent supernet">
+            <div class="col-12 mb-4">
+                <form class="form-section" #editipform="ngForm" novalidate>
+                    <mat-tab-group animationDuration="0ms" [disablePagination]="true" [selectedIndex]="selectedIndex">
+                        <mat-tab label="1.Supernet Details">
+                            <div class="row form-row mt-3">
+                                <div class="col-12 col-md-6">
+                                    <h6>Network Address</h6>
+                                    <input 
+                                        type="text" 
+                                        pInputText 
+                                        class="w-100"                                     
+                                        name="subnetAddress"                                     
+                                        pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+                                        required/>                                
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <h6>Network Mask</h6>
+                                    <p-dropdown [options]="subnetMasks" placeholder="Select Subnet Mask" optionLabel="displaySubnetMask"
+                                        styleClass="w-100" [required]="true"></p-dropdown>                               
+                                </div>
                             </div>
-                            <div class="col-12 col-md-6">
-                                <h6>Network Mask</h6>
-                                <p-dropdown [options]="subnetMasks" placeholder="Select Subnet Mask" optionLabel="displaySubnetMask"
-                                    styleClass="w-100" [required]="true"></p-dropdown>                               
+                            <div class="row form-row">
+                                <div class="col-12 col-md-6">
+                                    <h6>Supernet Name</h6>
+                                    <input 
+                                        type="text" 
+                                        pInputText 
+                                        class="w-100"                                     
+                                        name="Supernetname"                                     
+                                        pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+                                        required/>                                
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <h6>Description</h6>
+                                    <input 
+                                        type="text" 
+                                        pInputText 
+                                        class="w-100"                                     
+                                        name="description"                                     
+                                        pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+                                        required/>                                   
+                                </div>
                             </div>
-                        </div>
-                        <div class="row form-row">
-                            <div class="col-12 col-md-6">
-                                <h6>Supernet Name</h6>
-                                <input 
-                                    type="text" 
-                                    pInputText 
-                                    class="w-100"                                     
-                                    name="Supernetname"                                     
-                                    pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
-                                    required/>                                
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <h6>Description</h6>
-                                <input 
-                                    type="text" 
-                                    pInputText 
-                                    class="w-100"                                     
-                                    name="description"                                     
-                                    pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
-                                    required/>                                   
-                            </div>
-                        </div>
-                    </mat-tab>
-                    <mat-tab label="2.Selected Supernet">
-                        <div class="row form-row mt-3">
-                            <div class="col-12">
-                                <h6>Group Name</h6>
-                                <div class="row">
-                                    <div class="col pr-0">
-                                        <p-dropdown [hidden]="isAdd" [options]="subnetGroups" name="subnetGroupId" placeholder="Select Group" optionLabel="groupName"
-                                            styleClass="w-100" [required]="!isAdd"></p-dropdown>
-                                        <input 
-                                            type="text" 
-                                            pInputText 
-                                            class="w-100" 
-                                            [hidden]="!isAdd"
-                                            [required]="isAdd" 
-                                            name="subnetGroupName"/>                                        
-                                    </div>
-                                    <div class="col">
-                                        <button pButton pRipple type="button" icon="pi pi-plus"
-                                            class="p-button-success p-button-rounded" (click)="addClick()"></button>
-                                    </div>
-                                </div>                         
-                            </div>                            
-                        </div>
-                        <div class="row form-row">
-                            <div class="col-12 col-md-6">
-                                <h6>Desired Subnet Mask</h6>
-                                <p-dropdown [options]="subnetMasks" placeholder="Select Subnet Mask" optionLabel="displaySubnetMask"
-                                    styleClass="w-100" [required]="true"></p-dropdown>                          
-                            </div>
-                        </div>
-                        <div class="row form-row">
-                            <div class="col-12">
-                                <div class="box-body table-responsive">
-                                    <table class="table table-bordered table-striped table-sm">
-                                      <thead>
-                                        <tr>
-                                          <th width="150">Subnet Address</th>
-                                          <th>Subnet Mask</th>
-                                          <th>GroupName</th>
-                                          <th>SubnetName</th>                                          
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                       
-                                      </tbody>
-                                    </table>
-                                  </div>                       
-                            </div>
-                        </div>
-                    </mat-tab>
-                    <mat-tab label="3.Preview">
-                        <div class="row mt-3">
-                            <div class="col-4 section-container">
-                                <div class="col-section">
-                                    <div class="col-section-title d-flex align-items-center">
-                                        <h5 class="m-0">Supernet Detail</h5>
-                                    </div>
-                                    <p-divider></p-divider>
+                        </mat-tab>
+                        <mat-tab label="2.Selected Supernet">
+                            <div class="row form-row mt-3">
+                                <div class="col-12">
+                                    <h6>Group Name</h6>
                                     <div class="row">
-                                        <div class="col-8">
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">Network Address</li>
-                                                <li class="list-group-item">Network Mask</li>
-                                                <li class="list-group-item">Supernet Name</li>
-                                                <li class="list-group-item">Description</li>
-                                            </ul>
+                                        <div class="col pr-0">
+                                            <p-dropdown [hidden]="isAdd" [options]="subnetGroups" name="subnetGroupId" placeholder="Select Group" optionLabel="groupName"
+                                                styleClass="w-100" [required]="!isAdd"></p-dropdown>
+                                            <input 
+                                                type="text" 
+                                                pInputText 
+                                                class="w-100" 
+                                                [hidden]="!isAdd"
+                                                [required]="isAdd" 
+                                                name="subnetGroupName"/>                                        
                                         </div>
-                                        <div class="col-4">
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">192.168.0.0</li>
-                                                <li class="list-group-item">255.255.0.0</li>
-                                                <li class="list-group-item">test</li>
-                                                <li class="list-group-item">test</li>
-                                            </ul>
+                                        <div class="col">
+                                            <button pButton pRipple type="button" icon="pi pi-plus"
+                                                class="p-button-success p-button-rounded" (click)="addClick()"></button>
+                                        </div>
+                                    </div>                         
+                                </div>                            
+                            </div>
+                            <div class="row form-row">
+                                <div class="col-12 col-md-6">
+                                    <h6>Desired Subnet Mask</h6>
+                                    <p-dropdown [options]="subnetMasks" placeholder="Select Subnet Mask" optionLabel="displaySubnetMask"
+                                        styleClass="w-100" [required]="true"></p-dropdown>                          
+                                </div>
+                            </div>
+                            <div class="row form-row">
+                                <div class="col-12">
+                                    <div class="box-body table-responsive">
+                                        <table class="table table-bordered table-striped table-sm">
+                                          <thead>
+                                            <tr>
+                                              <th width="150">Subnet Address</th>
+                                              <th>Subnet Mask</th>
+                                              <th>GroupName</th>
+                                              <th>SubnetName</th>                                          
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                           
+                                          </tbody>
+                                        </table>
+                                      </div>                       
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="3.Preview">
+                            <div class="row mt-3">
+                                <div class="col section-container">
+                                    <div class="col-section">
+                                        <div class="col-section-title">
+                                            <h5 class="m-0">Supernet Detail</h5>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item d-flex justify-content-between"><span>Network Address</span><span>:</span></li>
+                                                    <li class="list-group-item d-flex justify-content-between"><span>Network Mask</span><span>:</span></li>
+                                                    <li class="list-group-item d-flex justify-content-between"><span>Supernet Name</span><span>:</span></li>
+                                                    <li class="list-group-item d-flex justify-content-between"><span>Description</span><span>:</span></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-8">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">192.168.0.0</li>
+                                                    <li class="list-group-item">255.255.0.0</li>
+                                                    <li class="list-group-item">test</li>
+                                                    <li class="list-group-item">test</li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <p-divider></p-divider>
+                    <div class="row">
+                        <div class="col text-left">                        
+                            <p-button *ngIf="selectedIndex > 0" label="Previous" styleClass="p-button-outlined p-button-secondary p-button-sm" (click)="previousStep()"></p-button>                        
                         </div>
-                    </mat-tab>
-                </mat-tab-group>
-                <p-divider></p-divider>
-                <div class="row">
-                    <div class="col text-left">                        
-                        <p-button *ngIf="selectedIndex > 0" label="Previous" styleClass="p-button-outlined p-button-secondary p-button-sm" (click)="previousStep()"></p-button>                        
+                        <div class="col text-right">                        
+                            <p-button label="Cancel" styleClass="p-button-outlined p-button-secondary p-button-sm" (click)="onCancel()"></p-button>
+                            <p-button [label]="savebtnlabel" styleClass="p-button-success p-button-sm ml-3" (click)="nextStep()"></p-button>
+                        </div>
                     </div>
-                    <div class="col text-right">                        
-                        <p-button label="Cancel" styleClass="p-button-outlined p-button-secondary p-button-sm" (click)="onCancel()"></p-button>
-                        <p-button [label]="savebtnlabel" styleClass="p-button-success p-button-sm ml-3" (click)="nextStep()"></p-button>
-                    </div>
-                </div>
-            </form>
-          </div>      
+                </form>
+            </div>      
+        </div>
     </div>
 </div>

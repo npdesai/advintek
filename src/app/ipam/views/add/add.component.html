@@ -42,16 +42,16 @@
                                         <span class="text-danger">Field is required!</span>
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col d-flex align-items-center">
                                     <button pButton pRipple type="button" icon="pi pi-plus"
                                         class="p-button-success p-button-rounded" (click)="addClick()"></button>
 
-                                        <div class="ml-5" style="display: inline;">
-                                            <mat-radio-group name="accessMode" [(ngModel)]="addSubnet.accessMode">
-                                                <mat-radio-button value="Private" checked="true">Private</mat-radio-button>
-                                                <mat-radio-button value="Public" >Public</mat-radio-button>
-                                            </mat-radio-group>
-                                        </div>
+                                    <div class="ml-5" style="display: inline;">
+                                        <mat-radio-group name="accessMode" [(ngModel)]="addSubnet.accessMode">
+                                            <mat-radio-button value="Private" checked="true">Private</mat-radio-button>
+                                            <mat-radio-button value="Public" >Public</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
                                 </div>
                             </div>                          
                         </div>
