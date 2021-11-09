@@ -39,7 +39,6 @@ export class GroupComponent implements OnInit {
     this.statusMessage = "Loading data...";
     this.subnetService.getSubnets(id).subscribe((data) => {
       if(data) {
-        console.log('data: ', data);
         this.subnets = data;
       }
     })
@@ -73,7 +72,6 @@ export class GroupComponent implements OnInit {
 
   selectSubnetHandler(subnet) {
     this.isSubnetSelected = true;
-    console.log("selected subnet: ", subnet);
     this.selectedSubnet = subnet;
   }
 }
