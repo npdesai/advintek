@@ -1,0 +1,152 @@
+<div class="row content-section" [ngStyle]="{ width: openWidth + '%' }">
+    <div class="col-md-6 blur-section"></div>
+    <div class="col-md-6 page-section">
+        <div class="row pageHeader">
+            <div class="col-10">
+              <h4 class="mb-0">Modify Subnet</h4>
+            </div>
+            <div class="col-2 text-right">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-times"
+                class="p-button-secondary p-button-text"
+                (click)="onCancel()"
+              ></button>
+            </div>
+        </div>
+        <div class="row pageContent">
+            <div class="col-12 mb-4">
+                <form #updateSubnetForm="ngForm" class="form-section">
+                    <div class="row form-row">
+                        <div class="col">
+                            <h6>Group Name</h6>
+                            <div class="row">
+                                <div class="col">
+                                    <p-dropdown 
+                                        [hidden]="isAdd" 
+                                        [options]="subnetGroups" 
+                                        name="subnetGroupId" 
+                                        [ngModel]="subnet.subnetGroupId" 
+                                        placeholder="Select Group" 
+                                        optionLabel="groupName"
+                                        optionValue="groupId"
+                                        styleClass="w-100" 
+                                        #subnetGroupSelect="ngModel" 
+                                        [required]="!isAdd"></p-dropdown>
+                                    <input 
+                                        type="text" 
+                                        pInputText 
+                                        class="w-100" 
+                                        [hidden]="!isAdd"
+                                        #subnetGroupInput="ngModel" 
+                                        [required]="isAdd" 
+                                        name="subnetGroupName" 
+                                        [ngModel]="subnet.subnetGroupName"/>
+                                </div>
+                                <div class="col">
+                                    <button pButton pRipple type="button" icon="pi pi-plus"
+                                        class="p-button-success p-button-rounded" (click)="addClick()"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-row">
+                        <div class="col">
+                            <h6>Subnet/Network Address</h6>
+                            <input 
+                                type="text" 
+                                pInputText 
+                                class="w-100" 
+                                #subnetAddress="ngModel"
+                                name="subnetAddress" 
+                                [ngModel]="subnet.subnetAddress" 
+                                disabled
+                                pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+                                required/>
+                            <div *ngIf="subnetAddress.invalid && (subnetAddress.touched || subnetAddress.dirty)">
+                                <span class="text-danger" *ngIf="subnetAddress.errors.required">Field is required!</span>
+                                <span class="text-danger" *ngIf="subnetAddress.errors.pattern">Enter valid value!</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h6>Subnet Mask</h6>
+                            <p-dropdown [options]="subnetMasks" #subnetMaskId="ngModel" name="subnetMaskId" 
+                                [ngModel]="subnet.subnetMaskId" placeholder="Select Subnet Mask" optionLabel="displaySubnetMask"
+                                optionValue="maskId" [disabled]="true"
+                                styleClass="w-100" [required]="true"></p-dropdown>
+                            <div *ngIf="subnetMaskId.invalid && (subnetMaskId.touched || subnetMaskId.dirty)">
+                                <span class="text-danger">Field is required!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-row">
+                        <div class="col">
+                            <h6>Subnet Name</h6>
+                            <input type="text" pInputText class="w-100" #subnetName="ngModel" name="subnetName" [ngModel]="subnet.subnetName" required />
+                            <div *ngIf="subnetName.invalid && (subnetName.touched || subnetName.dirty)">
+                                <span class="text-danger">Field is required!</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h6>Description</h6>
+                            <input type="text" pInputText class="w-100" #subnetDesc="ngModel" name="subnetDescription" [ngModel]="subnet.subnetDescription" required />
+                            <div *ngIf="subnetDesc.invalid && (subnetDesc.touched || subnetDesc.dirty)">
+                                <span class="text-danger">Field is required!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-row">
+                        <div class="col">
+                            <h6>VLAN Name</h6>
+                            <input type="text" pInputText class="w-100" #vlanName="ngModel" name="vlanName" [ngModel]="subnet.vlanName" required />
+                            <div *ngIf="vlanName.invalid && (vlanName.touched || vlanName.dirty)">
+                                <span class="text-danger">Field is required!</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h6>Location</h6>
+                            <input type="text" pInputText class="w-100" #location="ngModel" name="location" [ngModel]="subnet.location" required />
+                            <div *ngIf="location.invalid && (location.touched || location.dirty)">
+                                <span class="text-danger">Field is required!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-row">
+                        <div class="col">
+                            <h6>Alert</h6>
+                            <input type="number" max="100" #alerts="ngModel" pInputText class="w-100" name="alerts" [ngModel]="subnet.alert" required />
+                            <div *ngIf="alerts.invalid && (alerts.touched || alerts.dirty)">
+                                <span class="text-danger" *ngIf="alerts.errors.required">Field is required!</span>
+                                <span class="text-danger" *ngIf="alerts.errors.max">Value max 100!</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h6>Warning</h6>
+                            <input type="number" max="100" #warnings="ngModel" pInputText class="w-100" name="warnings" [ngModel]="subnet.warning" required />
+                            <div *ngIf="warnings.invalid && (warnings.touched || warnings.dirty)">
+                                <span class="text-danger" *ngIf="warnings.errors.required">Field is required!</span>
+                                <span class="text-danger" *ngIf="warnings.errors.max">Value max 100!</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h6>Critical</h6>
+                            <input type="number" max="100" #critical="ngModel" pInputText class="w-100" name="critical" [ngModel]="subnet.critical" required />
+                            <div *ngIf="critical.invalid && (critical.touched || critical.dirty)">
+                                <span class="text-danger" *ngIf="critical.errors.required">Field is required!</span>
+                                <span class="text-danger" *ngIf="critical.errors.max">Value max 100!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p-divider></p-divider>
+                    <div class="row">
+                        <div class="col text-right">
+                            <p-button label="Cancel" styleClass="p-button-secondary p-button-sm" (click)="onCancel()"></p-button>
+                            <p-button label="Update" styleClass="p-button-success p-button-sm ml-2" (click)="update()" [disabled]="updateSubnetForm.invalid ? true : false"></p-button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

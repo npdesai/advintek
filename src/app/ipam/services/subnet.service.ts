@@ -29,10 +29,7 @@ export class SubnetService {
 
     // return this.http.post<ServiceResponse>(`${this.rootControler}/GetSubnets`, requestOptions);
 
-    return this.http
-    .get<any>('../../../utilities/subnet_data.json')
-    .toPromise()
-    .then((res) => <Subnet[]>res.data);
+    return this.http.get<any>(`${this.rootControler}/GetSubnetListByGroupId?subnetGroupId=${groupId}`);
   }
 
   getSubnetIps(subnetid:string) {

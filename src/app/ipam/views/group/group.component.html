@@ -4,17 +4,21 @@
       <section class="content-body">
         <div class="col-md-12 no-padding">
           <div class="box">
-            <div class="box-header">
+            <div class="box-header d-flex justify-content-between align-items-center">
               <h5 class="box-title">Subnets</h5>
+              <div>
+                <button type="button" class="btn btn-success mr-2" (click)="editSubnetHandler()">Edit</button>
+              </div>
             </div>
             <div class="box-body">
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th data-column="Address">Address</th>
+                    <th style="width: 37px;"></th>
+                    <th data-column="Address" width="165">Address</th>
                     <th data-column="Name">Name</th>
                     <th data-column="Size">Size</th>
-                    <th data-column="Usage" style="width:125px">Usage</th>
+                    <th data-column="Usage">Usage</th>
                     <th data-column="ScanStatus">Scan Status</th>
                     <th data-column="Available">Available</th>
                     <th data-column="Used">Used</th>
@@ -25,24 +29,27 @@
                 <tbody>
                   <ng-container *ngIf="subnets && subnets.length > 0">
                     <tr *ngFor="let subnet of subnets">
-                      <td>{{ subnet.address }}</td>
-                      <td>{{ subnet.name }}</td>
-                      <td>{{ subnet.size }}</td>
+                      <td style="width: 37px;">
+                        <input type="radio" name="subnet" [value]="subnet.subnetId" (change)="selectSubnetHandler(subnet)">
+                      </td>
+                      <td width="165">{{ subnet.subnetAddress }}</td>
+                      <td>{{ subnet.subnetName }}</td>
+                      <td>{{ subnet.subnetSize }}</td>
                       <td>
-                          <div class="d-flex align-items-center">
-                              <div class="align-self-start w-100">
+                          <div class="d-flex">
+                              <div class="flex-grow-1">
                                   <div class="progress">
                                       <div
                                         class="progress-bar"
                                         role="progressbar"
-                                        [ngStyle]="{ 'width.%': subnet.usage }"
+                                        [ngStyle]="{ 'width.%': subnet.subnetUsage }"
                                         aria-valuenow="subnet.usage"
                                         aria-valuemin="0"
                                         aria-valuemax="100"
                                       ></div>
                                     </div>
                               </div>
-                              <div class="align-self-end ml-2 f10">{{ subnet.usage }}%</div>
+                              <div class="ml-2 f10">{{ subnet.subnetUsage }}%</div>
                           </div>
                       </td>
                       <td>
@@ -52,7 +59,7 @@
                       <td>{{ subnet.available }}</td>
                       <td>{{ subnet.used }}</td>
                       <td>{{ subnet.transient }}</td>
-                      <td>{{ subnet.lastScannedOn | date: "dd/MM/yyyy" }}</td>
+                      <td>{{ subnet.lastScanTime | date: "dd/MM/yyyy" }}</td>
                     </tr>
                   </ng-container>
                   <tr *ngIf="subnets == null || subnets.length == 0">
@@ -82,3 +89,10 @@
   [(openWidth)]="openDetail.width"
   (closeWidth)="openDetail.closeDiv($event)"
 ></app-test-ip>
+
+<app-update-subnet 
+  [(subnet)]="selectedSubnet" 
+  [(openWidth)]="updateSubnetWidth" 
+  (closeWidth)="closeDiv($event)"
+  >
+</app-update-subnet>

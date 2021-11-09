@@ -11,6 +11,22 @@ export class Subnet  {
   lastScannedOn: string;
 }
 
+export class SubnetGroup {
+  subnetId: string;
+  subnetGroupId: string;
+  subnetGroupName: string;
+  subnetAddress: string;
+  subnetMaskId: string;
+  subnetName: string;
+  subnetSize: number;
+  subnetUsage: number;
+  scanStatus: string;
+  available: number;
+  used: number;
+  transient: number;
+  lastScanTime: string;
+}
+
 
 export class AddIpv4Subnet  {
   subnetGroupId?: string;

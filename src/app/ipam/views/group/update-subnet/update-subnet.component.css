@@ -1,0 +1,48 @@
+.content-section {
+    transition: all 0.2s ease-in;
+    position: absolute;
+    top: 50px;
+    right: 15px;
+    height: calc(100vh - 35px);
+    z-index: 999;
+}
+
+.blur-section {
+    opacity: 0.4;
+    background: #d2d6de;
+}
+
+.page-section {
+    background: #ffffff;
+    box-shadow: 0 0 5px #d2d6de;
+}
+
+.pageHeader {
+    padding: 20px 0;
+    border-bottom: 1px solid #d2d6de;
+}
+
+.pageContent {
+    height: calc(100vh - 130px);
+    overflow-y: auto;
+}
+
+.p-button.p-button-secondary.p-button-text:enabled:hover, .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:hover, .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:hover {
+    background: transparent;
+}
+
+.p-button.p-button-secondary:enabled:focus, .p-buttonset.p-button-secondary > .p-button:enabled:focus, .p-splitbutton.p-button-secondary > .p-button:enabled:focus {
+    box-shadow: none;
+}
+
+.form-section {
+    padding: 20px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
+
+.form-row {
+    margin-bottom: 20px;
+}
