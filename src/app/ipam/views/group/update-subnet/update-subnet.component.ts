@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SubnetMask, SubnetGroup } from 'src/app/ipam/models/master';
-import { AddIpv4Subnet, SubnetGroupDetail } from 'src/app/ipam/models/subnet';
+import { AddIpv4Subnet } from 'src/app/ipam/models/subnet';
 import { LoadingDataService } from 'src/app/ipam/services/loading-data.service';
 import { MasterService } from 'src/app/ipam/services/master.service';
 import { SubnetService } from 'src/app/ipam/services/subnet.service';

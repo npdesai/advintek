@@ -123,10 +123,12 @@
                         </div>
                         <div class="col">
                             <h6>Email</h6>
-                            <input type="email" max="100" #email="ngModel" pInputText class="w-100" name="email" [ngModel]="subnet.email" required />
+                            <input type="email" #email="ngModel" pInputText class="w-100" name="email" 
+                                pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
+                                [ngModel]="subnet.email" required />
                             <div *ngIf="email.invalid && (email.touched || email.dirty)">
                                 <span class="text-danger" *ngIf="email.errors.required">Field is required!</span>
-                                <span class="text-danger" *ngIf="email.errors.max">Value max 100!</span>
+                                <span class="text-danger" *ngIf="email.errors.pattern">Enter valid Email!</span>
                             </div>
                         </div>                        
                     </div>
