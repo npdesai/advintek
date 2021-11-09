@@ -48,6 +48,7 @@ import { EditSubnetComponent } from './views/subnet/edit-subnet/edit-subnet.comp
 import { Ipv6Component } from './views/ipv6/ipv6.component';
 import { DomainComponent } from './views/domain/domain.component';
 import { AddDomainComponent } from './views/domain/add-domain/add-domain.component';
+import { AddSupernetComponent } from './views/supernet/add-supernet/add-supernet.component';
 
 @NgModule({
   imports: [
@@ -96,7 +97,8 @@ import { AddDomainComponent } from './views/domain/add-domain/add-domain.compone
     EditSubnetComponent,
     Ipv6Component,
     DomainComponent,
-    AddDomainComponent
+    AddDomainComponent,
+    AddSupernetComponent
   ],
   providers: [
     SubnetService

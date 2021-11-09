@@ -108,6 +108,7 @@ export class AddComponent implements OnInit {
     this.addSubnet.vlanName="";
     this.addSubnet.subnetGroupId=null;
     this.addSubnet.subnetMaskId="";
+    this.addSubnet.accessMode="Private";
   }
 
   newaddIpv6SubnetModel() {

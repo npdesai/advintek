@@ -45,8 +45,15 @@
                                 <div class="col">
                                     <button pButton pRipple type="button" icon="pi pi-plus"
                                         class="p-button-success p-button-rounded" (click)="addClick()"></button>
+
+                                        <div class="ml-5" style="display: inline;">
+                                            <mat-radio-group name="accessMode" [(ngModel)]="addSubnet.accessMode">
+                                                <mat-radio-button value="Private" checked="true">Private</mat-radio-button>
+                                                <mat-radio-button value="Public" >Public</mat-radio-button>
+                                            </mat-radio-group>
+                                        </div>
                                 </div>
-                            </div>
+                            </div>                          
                         </div>
                     </div>
                     <div class="row form-row" *ngIf="isAddManual">
@@ -93,12 +100,21 @@
                     </div>
                     <div class="row form-row" *ngIf="isAddManual">
                         <div class="col">
+                            <h6>VLAN Id</h6>
+                            <input type="text" pInputText class="w-100" #vlanId="ngModel" name="vlanId" [(ngModel)]="addSubnet.vlanId" required />
+                            <div *ngIf="vlanId.invalid && (vlanId.touched || vlanId.dirty)">
+                                <span class="text-danger">Field is required!</span>
+                            </div>
+                        </div>
+                        <div class="col">
                             <h6>VLAN Name</h6>
                             <input type="text" pInputText class="w-100" #vlanName="ngModel" name="vlanName" [(ngModel)]="addSubnet.vlanName" required />
                             <div *ngIf="vlanName.invalid && (vlanName.touched || vlanName.dirty)">
                                 <span class="text-danger">Field is required!</span>
                             </div>
                         </div>
+                    </div>
+                    <div class="row form-row" *ngIf="isAddManual">
                         <div class="col">
                             <h6>Location</h6>
                             <input type="text" pInputText class="w-100" #location="ngModel" name="location" [(ngModel)]="addSubnet.location" required />

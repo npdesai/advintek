@@ -22,7 +22,9 @@ export class AddIpv4Subnet  {
   subnetName: string;
   subnetDescription: string;
   vlanName: string;
+  vlanId: string;
   location: string;
+  accessMode: string;
 }
 
 export class AddIpv6Subnet {

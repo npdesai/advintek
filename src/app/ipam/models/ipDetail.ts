@@ -13,4 +13,7 @@ export class IpDetail  {
     systemLocation?: string;
     statusMaster: any;
     reservedStatusMaster: any;
+    vlanName: string;
+    vlanId: string;
+    accessMode: string;
 }

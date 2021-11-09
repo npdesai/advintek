@@ -20,6 +20,7 @@ export class IpamComponent {
   pageTitle: string;
   width = 0;
   dnswidth = 0;
+  supernetwidth = 0;
   constructor(
     private treeserviceService: TreeserviceService,
     private router: Router
@@ -33,6 +34,7 @@ export class IpamComponent {
       { label: 'Add IPv4 Subnet', command: (x) => this.addItems(x) },
       { label: 'Add IPv6 Subnet/Site', command: (x) => this.addItems(x) },
       { label: 'Add DHCP Server', command: (x) => this.addItems(x) },
+      { label: 'Add Supernet', command: (x) => this.addSupernet(x) }
     ];
 
     this.settingsItems = [
@@ -56,6 +58,11 @@ export class IpamComponent {
     this.width = 100;
   }
 
+  addSupernet(x) {    
+    this.supernetwidth = 100;
+    console.log('test')
+  }
+
   addDNSServer(x) {
     this.dnswidth = 100;
   }
@@ -75,5 +82,9 @@ export class IpamComponent {
 
   closeDNSServer(width) {
     this.dnswidth = width;
+  }
+
+  closeSupernet(width) {
+    this.supernetwidth = width;
   }
 }
