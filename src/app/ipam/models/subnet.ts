@@ -17,14 +17,19 @@ export class SubnetGroupDetail {
   subnetGroupName: string;
   subnetAddress: string;
   subnetMaskId: string;
+  subnetMask:string;
   subnetName: string;
   subnetSize: number;
   subnetUsage: number;
   scanStatus: string;
   available: number;
+  notReachable:number;
   used: number;
   transient: number;
   lastScanTime: string;
+  vlanName: string;
+  location: string;
+  description: string;
 }
 
 

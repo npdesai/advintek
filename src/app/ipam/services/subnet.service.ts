@@ -121,6 +121,13 @@ export class SubnetService {
     return this.http.get<any>(`${this.rootControler}/GetSubnetDetailBySubnetId`,{params});
   }
 
+  getSubnetSummary(subnetId: string): Observable<any> {
+    const params = new HttpParams()
+      .set('subnetId', subnetId == null ? "" : subnetId.trim());
+      
+    return this.http.get<any>(`${this.rootControler}/GetSubnetSummary`,{params});
+  }
+
   updateSubnetDetail(subnetIpDetail:AddIpv4Subnet) {
     return this.http.patch<any>(`${this.rootControler}/Update`,subnetIpDetail);
   }

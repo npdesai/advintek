@@ -20,7 +20,7 @@ import {
 } from '../../../common/models/searchField';
 import { IpDetail } from '../../models/ipDetail';
 import { IpHistory } from '../../models/ipHistory';
-import { Subnet } from '../../models/subnet';
+import { Subnet, SubnetGroupDetail } from '../../models/subnet';
 import { LoadingDataService } from '../../services/loading-data.service';
 import { SubnetService } from '../../services/subnet.service';
 
@@ -62,6 +62,7 @@ export class SubnetComponent {
   editWidth = 0;
   subnetId ="";
   eChartOptions: any;
+  subnetSummary: SubnetGroupDetail;
 
   constructor(
     private subnetService: SubnetService,
@@ -80,14 +81,13 @@ export class SubnetComponent {
     ];       
   }
 
-  ngOnInit() {
-    this.generateAvailabilityChart();
+  ngOnInit() {   
     this.getFormData();       
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.subnetId = params.get('Id');
       this.getSubnetIpData(this.subnetId);
       this.getIpHistories(this.subnetId);
-      this.getSubnetDetail(this.subnetId);
+      this.getSubnetSummary(this.subnetId);
     })
   }
 
@@ -98,10 +98,14 @@ export class SubnetComponent {
     });
   }
 
-  getSubnetDetail(subnetId:string) {
+  getSubnetSummary(subnetId:string) {
     this.statusMessage = "Loading data...";
-    this.subnetService.getSubnetDetail(subnetId).subscribe((data) => {
-      
+    this.subnetService.getSubnetSummary(subnetId).subscribe((data) => {
+      this.subnetSummary = data;
+      this.generateAvailabilityChart(this.subnetSummary.notReachable,
+           this.subnetSummary.used,this.subnetSummary.transient,this.subnetSummary.available,
+           this.subnetSummary.subnetSize - (this.subnetSummary.transient+this.subnetSummary.used+this.subnetSummary.available+this.subnetSummary.notReachable));
+      console.log(this.subnetSummary,'this.subnetSummary');
     });
   }
 
@@ -201,7 +205,8 @@ export class SubnetComponent {
     this.editWidth = width;
   }
 
-  generateAvailabilityChart(){
+  generateAvailabilityChart(notReachable:number,used:number,transient:number,available:number,notScanned:number){
+    console.log(notReachable,used,transient,available,notScanned,'sds')
     this.eChartOptions = {
       tooltip: {
         trigger: 'item',
@@ -237,6 +242,13 @@ export class SubnetComponent {
               color: '#dc3545'
             }
           },
+          {
+            icon: 'circle',
+            name: 'Not Scanned',
+            itemStyle: {
+              color: '#6a8d17'
+            }
+          },
         ],
       },
       series: [
@@ -245,31 +257,38 @@ export class SubnetComponent {
           radius: '50%',
           data: [
             { 
-              value: 200, 
+              value: notReachable, 
               name: 'Not Reachable',
               itemStyle: {
                 color: '#6c757d'
               }
             },
             { 
-              value: 535, 
+              value: available, 
               name: 'Available',
               itemStyle: {
                 color: '#28a745'
               } 
             },
             { 
-              value: 125, 
+              value: transient, 
               name: 'Transient',
               itemStyle: {
                 color: '#ffc107'
               }
             },
             { 
-              value: 335, 
+              value: used, 
               name: 'Used',
               itemStyle: {
                 color: '#dc3545'
+              } 
+            },
+            { 
+              value: notScanned, 
+              name: 'Not Scanned',
+              itemStyle: {
+                color: '#6a8d17'
               } 
             },
           ],

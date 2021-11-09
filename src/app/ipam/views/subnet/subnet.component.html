@@ -9,7 +9,7 @@
             </div>
             <p-divider></p-divider>
             <div class="row">
-              <div class="col-8">
+              <div class="col-6">
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">Subnet Address</li>
                   <li class="list-group-item">Subnet Name</li>
@@ -23,17 +23,18 @@
                   <li class="list-group-item">Scan Status</li>
                 </ul>
               </div>
-              <div class="col-4">
+              <div class="col-6">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">3048</li>
-                  <li class="list-group-item">0</li>
-                  <li class="list-group-item">12</li>
-                  <li class="list-group-item">16.77%</li>
-                  <li class="list-group-item">124</li>
-                  <li class="list-group-item">27</li>
-                  <li class="list-group-item">192</li>
-                  <li class="list-group-item">27</li>
-                  <li class="list-group-item">192</li>
+                  <li class="list-group-item">{{subnetSummary.subnetAddress}}</li>
+                  <li class="list-group-item">{{subnetSummary.subnetGroupName}}</li>
+                  <li class="list-group-item">{{subnetSummary.subnetMask}}</li>                  
+                  <li class="list-group-item">{{subnetSummary.subnetSize}}</li>
+                  <li class="list-group-item">{{subnetSummary.subnetUsage}}%</li>
+                  <li class="list-group-item">{{subnetSummary.vlanName}}</li>
+                  <li class="list-group-item">{{subnetSummary.location}}</li>
+                  <li class="list-group-item">{{subnetSummary.lastScanTime | date}}</li>
+                  <li class="list-group-item">{{subnetSummary.description}}</li>
+                  <li class="list-group-item">{{subnetSummary.scanStatus}}</li>
                 </ul>
               </div>
             </div>
