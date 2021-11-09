@@ -101,7 +101,7 @@ export class SubnetComponent {
   getSubnetDetail(subnetId:string) {
     this.statusMessage = "Loading data...";
     this.subnetService.getSubnetDetail(subnetId).subscribe((data) => {
-      this.ipDetails = data;
+      
     });
   }
 
