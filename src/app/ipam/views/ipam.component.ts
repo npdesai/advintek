@@ -24,7 +24,9 @@ export class IpamComponent {
   constructor(
     private treeserviceService: TreeserviceService,
     private router: Router
-  ) {}
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
   ngOnInit() {
     this.getTreeData();

@@ -2,7 +2,7 @@ import { HttpEventType } from '@angular/common/http';
 import { ThrowStmt } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { ContextMenu } from 'primeng/contextmenu';
 import { AlertType, Helper } from '../../../common/helper';
@@ -20,7 +20,7 @@ import {
 } from '../../../common/models/searchField';
 import { IpDetail } from '../../models/ipDetail';
 import { IpHistory } from '../../models/ipHistory';
-import { Subnet, SubnetGroupDetail } from '../../models/subnet';
+import { AddIpv4Subnet, Subnet, SubnetGroupDetail } from '../../models/subnet';
 import { LoadingDataService } from '../../services/loading-data.service';
 import { SubnetService } from '../../services/subnet.service';
 
@@ -60,15 +60,18 @@ export class SubnetComponent {
   pageTitle: string;
   width = 0;
   editWidth = 0;
+  editSubnetWidth = 0;
   subnetId ="";
   eChartOptions: any;
-  subnetSummary: SubnetGroupDetail;
+  subnetSummary: SubnetGroupDetail = new SubnetGroupDetail();
+  subnetDetail: AddIpv4Subnet = new AddIpv4Subnet();
 
   constructor(
     private subnetService: SubnetService,
     public dialog: MatDialog,
     private helper: Helper,
     private route: ActivatedRoute,
+    private router: Router,
     private loaderService: LoadingDataService
   ) {
     this.cmenuitems = [
@@ -77,6 +80,7 @@ export class SubnetComponent {
       // { label: 'Resolve DNS', command: (item) => this.testIP(item) },
       // { label: 'Resolve MAC Address', command: (item) => this.testIP(item) },
       { label: 'Trace Route', command: (item) => this.testIP(item) },
+      { label: 'Scan Now', command: (item) => this.scanIP(this.selectedIpDetail.subnetIPId)}
       // { label: 'System Explorer', command: (item) => this.testIP(item) },
     ];       
   }
@@ -88,6 +92,7 @@ export class SubnetComponent {
       this.getSubnetIpData(this.subnetId);
       this.getIpHistories(this.subnetId);
       this.getSubnetSummary(this.subnetId);
+      this.getSubnetDetail(this.subnetId);
     })
   }
 
@@ -98,6 +103,14 @@ export class SubnetComponent {
     });
   }
 
+  getSubnetDetail(subnetId:string) {
+    this.subnetService.getSubnetDetail(subnetId).subscribe((data) => {
+      if(data) {
+        this.subnetDetail = data;
+      }
+    })
+  }
+
   getSubnetSummary(subnetId:string) {
     this.statusMessage = "Loading data...";
     this.subnetService.getSubnetSummary(subnetId).subscribe((data) => {
@@ -106,6 +119,8 @@ export class SubnetComponent {
            this.subnetSummary.used,this.subnetSummary.transient,this.subnetSummary.available,
            this.subnetSummary.subnetSize - (this.subnetSummary.transient+this.subnetSummary.used+this.subnetSummary.available+this.subnetSummary.notReachable));
       console.log(this.subnetSummary,'this.subnetSummary');
+      /* Hide loader if it is in show state */
+      this.loaderService.hideLoader();
     });
   }
 
@@ -130,6 +145,25 @@ export class SubnetComponent {
     this.statusMessage = "Loading data...";
     this.subnetService.getIpHistories(subnetId).subscribe((data) => {
       this.ipHistories = data;
+    })
+  }
+
+  scanSubnet() {
+    this.loaderService.showLoader();
+    this.getSubnetSummary(this.subnetId);
+  }
+
+  editSubnet() {
+    this.editSubnetWidth = 100;
+  }
+
+  deleteSubnet() {
+    this.loaderService.showLoader();
+    this.subnetService.delete(this.subnetId).subscribe((data) => {
+      if(data) {
+        this.router.navigate(['/']);
+        this.loaderService.hideLoader();
+      }
     })
   }
 
@@ -203,6 +237,11 @@ export class SubnetComponent {
   closeDivEdit(width) {    
     this.editSelectedIpDetail = new IpDetail();
     this.editWidth = width;
+  }
+
+  closeEditSubnetDiv(width) {
+    this.getSubnetSummary(this.subnetId);
+    this.editSubnetWidth = width;
   }
 
   generateAvailabilityChart(notReachable:number,used:number,transient:number,available:number,notScanned:number){

@@ -88,11 +88,7 @@ export class SubnetService {
   }
 
   delete(id: string): Observable<ServiceResponse> {
-
-    const params = new HttpParams()
-      .set('id', id == null ? "" : id.trim());
-
-    return this.http.delete<ServiceResponse>(`${this.rootControler}/Delete`, { params });
+    return this.http.delete<ServiceResponse>(`${this.rootControler}/DeleteSubnet?subnetId=${id}`);
   }
 
   saveIPV4Subnet(addSubnet: AddIpv4Subnet): Observable<boolean> {
