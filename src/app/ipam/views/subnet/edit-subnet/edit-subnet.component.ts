@@ -29,7 +29,7 @@ export class EditSubnetComponent implements OnInit {
     ];
     this.ipAvailabilities = [
       { name: 'Used', code: 'Used'},
-      { name: 'Transient', code: 'Transient'},
+      { name: 'Quarantine', code: 'Quarantine'},
       { name: 'Available', code: 'Available'},
       { name: 'Not Reachable', code: 'Not Reachable'}
     ];

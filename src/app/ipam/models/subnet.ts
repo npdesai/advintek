@@ -7,7 +7,7 @@ export class Subnet  {
   scanStatus: string;
   available?: number;
   used?: number;
-  transient: number;
+  quarantine: number;
   lastScannedOn: string;
 }
 
@@ -25,7 +25,7 @@ export class SubnetGroupDetail {
   available: number;
   notReachable:number;
   used: number;
-  transient: number;
+  quarantine: number;
   lastScanTime: string;
   vlanName: string;
   location: string;

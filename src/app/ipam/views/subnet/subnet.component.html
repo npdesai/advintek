@@ -80,6 +80,7 @@
                   <th width="150">IP Address</th>
                   <th>MAC Address</th>
                   <th>Status</th>
+                  <th>Scanned Status</th>
                   <th>Device Type</th>
                   <th>Connected Switch</th>
                   <th>Last Scan</th>
@@ -100,11 +101,12 @@
                       <span [ngSwitch]="ipDetail.status">
                         <i class="fas fa-check-circle text-success" *ngSwitchCase="'Available'"></i>
                         <i class="fas fa-circle text-danger" *ngSwitchCase="'Used'"></i>
-                        <i class="fas fa-circle text-warning" *ngSwitchCase="'Transient'"></i>
+                        <i class="fas fa-circle text-warning" *ngSwitchCase="'Quarantine'"></i>
                         <i class="fas fa-circle text-muted" *ngSwitchCase="'Not Reachable'"></i>
                       </span>
                       <a href="javascript:void()" class="ml-2" (click)="editIpDetails(ipDetail)">{{ ipDetail.status }}</a>
                     </td>
+                    <td>{{ ipDetail.scanStatus }}</td>
                     <td>{{ ipDetail.deviceType }}</td>
                     <td>{{ ipDetail.connectedSwitch }}</td>
                     <td style="text-align: center;">

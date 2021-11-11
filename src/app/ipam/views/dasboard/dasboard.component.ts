@@ -44,7 +44,7 @@ export class DasboardComponent implements OnInit {
           },
           {
             icon: 'circle',
-            name: 'Transient',
+            name: 'Quarantine',
             itemStyle: {
               color: '#ffc107'
             }
@@ -79,7 +79,7 @@ export class DasboardComponent implements OnInit {
             },
             { 
               value: 125, 
-              name: 'Transient',
+              name: 'Quarantine',
               itemStyle: {
                 color: '#ffc107'
               }
@@ -192,7 +192,7 @@ export class DasboardComponent implements OnInit {
           },
           {
             icon: 'circle',
-            name: 'Transient',
+            name: 'Quarantine',
             itemStyle: {
               color: '#ffc107'
             }
@@ -224,7 +224,7 @@ export class DasboardComponent implements OnInit {
           }
         },
         {
-          name: 'Transient',
+          name: 'Quarantine',
           data: [62, 12, 25, 6, 45, 153, 33, 38, 45, 17, 40, 35],
           type: 'bar',
           stack: 'total',

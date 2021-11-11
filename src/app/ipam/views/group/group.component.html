@@ -22,7 +22,7 @@
                     <th data-column="ScanStatus">Scan Status</th>
                     <th data-column="Available">Available</th>
                     <th data-column="Used">Used</th>
-                    <th data-column="Transient">Transient</th>
+                    <th data-column="Quarantine">Quarantine</th>
                     <th data-column="LastScanTime">Last Scan Time</th>
                   </tr>
                 </thead>
@@ -58,7 +58,7 @@
                       </td>
                       <td>{{ subnet.available }}</td>
                       <td>{{ subnet.used }}</td>
-                      <td>{{ subnet.transient }}</td>
+                      <td>{{ subnet.quarantine }}</td>
                       <td>{{ subnet.lastScanTime | date: "dd/MM/yyyy" }}</td>
                     </tr>
                   </ng-container>

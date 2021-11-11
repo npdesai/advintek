@@ -25,7 +25,7 @@
             "DNSStatus": "",
             "DNSIp": "172.21.146.0",
             "vendorName": "Dell",
-            "status": "Transient"
+            "status": "Quarantine"
         }
     ]
 }

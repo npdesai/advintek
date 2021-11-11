@@ -16,4 +16,5 @@ export class IpDetail  {
     vlanName: string;
     vlanId: string;
     accessMode: string;
+    scanStatus:string;
 }

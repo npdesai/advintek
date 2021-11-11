@@ -27,7 +27,7 @@ export class DiscoveredV6HostsComponent implements OnInit {
           },
           {
             icon: 'circle',
-            name: 'Transient',
+            name: 'Quarantine',
           },
           {
             icon: 'circle',
@@ -45,7 +45,7 @@ export class DiscoveredV6HostsComponent implements OnInit {
           radius: '50%',
           data: [
             { value: 200, name: 'Used' },
-            { value: 535, name: 'Transient' },
+            { value: 535, name: 'Quarantine' },
             { value: 0, name: 'Available' },
             { value: 0, name: 'Not Scanned' },
           ],
@@ -72,7 +72,7 @@ export class DiscoveredV6HostsComponent implements OnInit {
           },
           {
             icon: 'circle',
-            name: 'Transient',
+            name: 'Quarantine',
           },
           {
             icon: 'circle',
@@ -90,7 +90,7 @@ export class DiscoveredV6HostsComponent implements OnInit {
           radius: '50%',
           data: [
             { value: 200, name: 'Used' },
-            { value: 535, name: 'Transient' },
+            { value: 535, name: 'Quarantine' },
             { value: 300, name: 'Available' },
             { value: 170, name: 'Not Scanned' },
           ],

@@ -9,7 +9,7 @@
             "scanStatus": "Scanned",
             "available": 0,
             "used": 65,
-            "transient": 545,
+            "quarantine": 545,
             "lastScannedOn": "2019/09/09"
         },
         {
@@ -21,7 +21,7 @@
             "scanStatus": "Scanned",
             "available": 0,
             "used": 65,
-            "transient": 97,
+            "quarantine": 97,
             "lastScannedOn": "2019/09/10"
         },
         {
@@ -33,7 +33,7 @@
             "scanStatus": "Not Started",
             "available": 0,
             "used": 33,
-            "transient": 88,
+            "qransient": 88,
             "lastScannedOn": "2019/09/01"
         }
     ]

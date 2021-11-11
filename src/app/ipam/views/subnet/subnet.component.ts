@@ -116,8 +116,8 @@ export class SubnetComponent {
     this.subnetService.getSubnetSummary(subnetId).subscribe((data) => {
       this.subnetSummary = data;
       this.generateAvailabilityChart(this.subnetSummary.notReachable,
-           this.subnetSummary.used,this.subnetSummary.transient,this.subnetSummary.available,
-           this.subnetSummary.subnetSize - (this.subnetSummary.transient+this.subnetSummary.used+this.subnetSummary.available+this.subnetSummary.notReachable));
+           this.subnetSummary.used,this.subnetSummary.quarantine,this.subnetSummary.available,
+           this.subnetSummary.subnetSize - (this.subnetSummary.quarantine+this.subnetSummary.used+this.subnetSummary.available+this.subnetSummary.notReachable));
       console.log(this.subnetSummary,'this.subnetSummary');
       /* Hide loader if it is in show state */
       this.loaderService.hideLoader();
@@ -134,7 +134,8 @@ export class SubnetComponent {
           ip.status = data.status,
           ip.deviceType = data.deviceType,
           ip.connectedSwitch = data.connectedSwitch,
-          ip.lastScan = data.lastScan
+          ip.lastScan = data.lastScan,
+          ip.scanStatus = data.scanStatus
         }
       })
       this.loaderService.hideLoader();
@@ -244,8 +245,8 @@ export class SubnetComponent {
     this.editSubnetWidth = width;
   }
 
-  generateAvailabilityChart(notReachable:number,used:number,transient:number,available:number,notScanned:number){
-    console.log(notReachable,used,transient,available,notScanned,'sds')
+  generateAvailabilityChart(notReachable:number,used:number,quarantine:number,available:number,notScanned:number){
+    console.log(notReachable,used,quarantine,available,notScanned,'sds')
     this.eChartOptions = {
       tooltip: {
         trigger: 'item',
@@ -269,7 +270,7 @@ export class SubnetComponent {
           },
           {
             icon: 'circle',
-            name: 'Transient',
+            name: 'Quarantine',
             itemStyle: {
               color: '#ffc107'
             }
@@ -310,8 +311,8 @@ export class SubnetComponent {
               } 
             },
             { 
-              value: transient, 
-              name: 'Transient',
+              value: quarantine, 
+              name: 'Quarantine',
               itemStyle: {
                 color: '#ffc107'
               }

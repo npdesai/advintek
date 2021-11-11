@@ -50,7 +50,7 @@ export class Ipv6Component implements OnInit {
           },
           {
             icon: 'circle',
-            name: 'Transient',
+            name: 'Quarantine',
             itemStyle: {
               color: '#ffc107'
             }
@@ -85,7 +85,7 @@ export class Ipv6Component implements OnInit {
             },
             { 
               value: 125, 
-              name: 'Transient',
+              name: 'Quarantine',
               itemStyle: {
                 color: '#ffc107'
               }
