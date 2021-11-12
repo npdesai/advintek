@@ -136,8 +136,7 @@ export class AddComponent implements OnInit {
 
   getDomainList() {
     this.domainService.getDomainList().subscribe((data) => {
-      if(data) {
-        console.log(data);
+      if(data) {        
         this.domainList = data;
       }
     });

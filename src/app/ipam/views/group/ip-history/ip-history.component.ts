@@ -17,8 +17,7 @@ export class IpHistoryComponent implements OnInit, AfterContentInit {
 
   ngAfterContentInit(): void {
     //Called after ngOnInit when the component's or directive's content has been initialized.
-    //Add 'implements AfterContentInit' to the class.
-    console.log(this.ipHistories);
+    //Add 'implements AfterContentInit' to the class.    
   }
 
 }

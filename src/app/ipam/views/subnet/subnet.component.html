@@ -65,6 +65,8 @@
         <div class="box">
           <div class="box-header">
             <h5 class="box-title">IPs</h5>
+            <input type="button" value="Download PDF" class="btn btn-success" (click)="ExportPdfData()">  
+            <input type="button" value="Download CSV" class="btn btn-success" (click)="ExportCsvData()">  
           </div>
           <p-contextMenu
             #cm
@@ -73,7 +75,7 @@
             triggerEvent="click"
             [autoZIndex]="true"
           ></p-contextMenu>
-          <div class="box-body table-responsive">
+          <div class="box-body table-responsive" id="content" #content>
             <table class="table table-bordered table-striped table-sm">
               <thead>
                 <tr>

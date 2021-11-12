@@ -61,8 +61,7 @@ export class IpamComponent {
   }
 
   addSupernet(x) {    
-    this.supernetwidth = 100;
-    console.log('test')
+    this.supernetwidth = 100;    
   }
 
   addDNSServer(x) {

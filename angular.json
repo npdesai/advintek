@@ -70,7 +70,8 @@
               "./node_modules/@mapbox/togeojson/togeojson.js",
               "./node_modules/shpjs/dist/shp.min.js",
               "src/libs/moment.min.js",
-              "src/libs/daterangepicker/daterangepicker.js"
+              "src/libs/daterangepicker/daterangepicker.js",             
+              "./node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js"
             ]
           },
           "configurations": {

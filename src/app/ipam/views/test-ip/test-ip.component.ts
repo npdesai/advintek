@@ -80,8 +80,7 @@ export class TestIpComponent implements OnInit {
   onPing(subnetIp){
     this.subnetService.getIpPing(subnetIp).subscribe((res)=>{
         this.ipPing = res;
-        this.ipPing.options = this.ipPing.options != null ? this.ipPing.options : new PingOptions();
-        console.log(this.ipPing,"this.ipPing")
+        this.ipPing.options = this.ipPing.options != null ? this.ipPing.options : new PingOptions();        
     });
   }
 

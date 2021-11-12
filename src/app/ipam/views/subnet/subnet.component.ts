@@ -1,10 +1,13 @@
 import { HttpEventType } from '@angular/common/http';
 import { ThrowStmt } from '@angular/compiler';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { ContextMenu } from 'primeng/contextmenu';
+//import * as jsPDF from 'jspdf'; 
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
 import { AlertType, Helper } from '../../../common/helper';
 import {
   RequestOptions,
@@ -33,6 +36,8 @@ declare var $: any;
   providers: [SubnetService],
 })
 export class SubnetComponent {
+  @ViewChild('content') content:ElementRef;
+
   subnets: Subnet[] = [];
   subnet: Subnet;
   ipDetails: IpDetail[] = [];
@@ -65,6 +70,8 @@ export class SubnetComponent {
   eChartOptions: any;
   subnetSummary: SubnetGroupDetail = new SubnetGroupDetail();
   subnetDetail: AddIpv4Subnet = new AddIpv4Subnet();
+  exportPdfData:string[][] = [];
+  exportRow:string[] = [];
 
   constructor(
     private subnetService: SubnetService,
@@ -117,8 +124,7 @@ export class SubnetComponent {
       this.subnetSummary = data;
       this.generateAvailabilityChart(this.subnetSummary.notReachable,
            this.subnetSummary.used,this.subnetSummary.quarantine,this.subnetSummary.available,
-           this.subnetSummary.subnetSize - (this.subnetSummary.quarantine+this.subnetSummary.used+this.subnetSummary.available+this.subnetSummary.notReachable));
-      console.log(this.subnetSummary,'this.subnetSummary');
+           this.subnetSummary.subnetSize - (this.subnetSummary.quarantine+this.subnetSummary.used+this.subnetSummary.available+this.subnetSummary.notReachable));     
       /* Hide loader if it is in show state */
       this.loaderService.hideLoader();
     });
@@ -245,8 +251,7 @@ export class SubnetComponent {
     this.editSubnetWidth = width;
   }
 
-  generateAvailabilityChart(notReachable:number,used:number,quarantine:number,available:number,notScanned:number){
-    console.log(notReachable,used,quarantine,available,notScanned,'sds')
+  generateAvailabilityChart(notReachable:number,used:number,quarantine:number,available:number,notScanned:number){    
     this.eChartOptions = {
       tooltip: {
         trigger: 'item',
@@ -342,6 +347,88 @@ export class SubnetComponent {
         },
       ],
     };
+  }
+
+  title = 'export-table-data-to-pdf-using-jspdf-example';
+
+  head = [['ipAddress', 'macAddress', 'status', 'scanStatus','deviceType','connectedSwitch']] 
+
+  ExportPdfData(){
+    this.ipDetails.forEach(element => {  
+      this.exportRow = [];
+       
+      var ipAddress = element["ipAddress"]
+      this.exportRow.push(ipAddress);
+      var macAddress = element["macAddress"]
+      this.exportRow.push(macAddress);   
+      var status = element["status"]
+      this.exportRow.push(status);   
+      var scanStatus = element["scanStatus"]
+      this.exportRow.push(scanStatus);   
+      var deviceType = element["deviceType"]
+      this.exportRow.push(deviceType);   
+      var connectedSwitch = element["connectedSwitch"]
+      this.exportRow.push(connectedSwitch); 
+
+      this.exportPdfData.push(this.exportRow);      
+    });    
+
+    this.SavePDF();
+  }
+
+  public SavePDF() {  
+    let content=this.content.nativeElement;  
+    let doc = new jsPDF();    
+
+    doc.setFontSize(18);
+    doc.text('IP Detail', 11, 8);
+    doc.setFontSize(11);
+    doc.setTextColor(100);
+
+
+    (doc as any).autoTable({
+      head: this.head,
+      body: this.exportPdfData,
+      theme: 'plain',
+      didDrawCell: data => {
+        //console.log(data.column.index)
+      }
+    })
+
+    // below line for Open PDF document in new tab
+    //doc.output('dataurlnewwindow')
+
+    // below line for Download PDF document  
+    doc.save('IpDetail.pdf'); 
+  }
+
+  ExportCsvData() {
+    var exportData = this.ipDetails;
+    exportData.forEach(function (entry) {
+      delete entry['subnetIPId'];
+      delete entry['subnetId'];
+      delete entry['subnet'];
+    });
+
+    const replacer = (key, value) => (value === null ? '' : value); // specify how you want to handle null values here
+    const header = Object.keys(exportData[0]);
+    const csv = exportData.map((row) =>
+      header
+        .map((fieldName) => JSON.stringify(row[fieldName], replacer))
+        .join(',')
+    );
+    csv.unshift(header.join(','));
+    const csvArray = csv.join('\r\n');
+  
+    const a = document.createElement('a');
+    const blob = new Blob([csvArray], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+  
+    a.href = url;
+    a.download = 'IpDetail.csv';
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove();
   }
 
   // clearSubnets() {

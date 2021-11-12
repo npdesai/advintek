@@ -32,7 +32,7 @@ export class UpdateSubnetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.subnet,'this.subnet');
+    
   }
 
   getSubnetMasks() {

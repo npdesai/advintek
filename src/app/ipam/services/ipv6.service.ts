@@ -27,8 +27,7 @@ export class Ipv6Service {
     return this.http
     .get<any>('../../../utilities/subnetIpHistory_data.json')
     .toPromise()
-    .then((res) => {
-      console.log("json data", res.data);
+    .then((res) => {      
       return <IpHistory[]>res.data;
     });
   }
