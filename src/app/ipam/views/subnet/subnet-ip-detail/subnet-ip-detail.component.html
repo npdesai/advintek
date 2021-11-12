@@ -1,0 +1,187 @@
+<mat-tab-group animationDuration="0ms">
+    <mat-tab label="IP Summary">
+        <section class="content-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <div class="box">
+                            <div class="box-header">
+                                <h5 class="box-title">{{subnetIpDetail.ipAddress}}</h5>
+                            </div>
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <div class="col-5 py-2 d-flex justify-content-between">
+                                                <span>IP Address</span>
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7 py-2">
+                                                <span>{{subnetIpDetail.ipAddress}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <div class="col-5 py-2 d-flex justify-content-between">
+                                                <span>MAC Address</span>
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7 py-2">
+                                                <span>{{subnetIpDetail.macAddress}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <div class="col-5 py-2 border-top d-flex justify-content-between">
+                                                <span>Access Mode</span>
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7 py-2 border-top">
+                                                <span>{{subnetIpDetail.accessMode}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <div class="col-5 py-2 border-top d-flex justify-content-between">
+                                                <span>Alias Name</span>
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7 py-2 border-top">
+                                                <span>{{subnetIpDetail.aliasName}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <div class="col-5 py-2 border-top d-flex justify-content-between">
+                                                <span>Asset Tag</span>
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7 py-2 border-top">
+                                                <span>{{subnetIpDetail.assetTag}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <div class="col-5 py-2 border-top d-flex justify-content-between">
+                                                <span>Connected Switch</span>
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7 py-2 border-top">
+                                                <span>{{subnetIpDetail.connectedSwitch}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <div class="col-5 py-2 border-top d-flex justify-content-between">
+                                                <span>Device Type</span>
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7 py-2 border-top">
+                                                <span>{{subnetIpDetail.deviceType}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <div class="col-5 py-2 border-top d-flex justify-content-between">
+                                                <span>DNS Status</span>
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7 py-2 border-top">
+                                                <span>{{subnetIpDetail.dnsStatus}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <div class="col-5 py-2 border-top d-flex justify-content-between">
+                                                <span>Last Scan</span>
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7 py-2 border-top">
+                                                <span>{{subnetIpDetail.lastScan | date:'MM-dd-yyyy hh:mm:ss a'}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <div class="col-5 py-2 border-top d-flex justify-content-between">
+                                                <span>Reserved Status</span>
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7 py-2 border-top">
+                                                <span>{{subnetIpDetail.reservedStatus}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <div class="col-5 py-2 border-top d-flex justify-content-between">
+                                                <span>Scan Status</span>
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7 py-2 border-top">
+                                                <span>{{subnetIpDetail.scanStatus}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <div class="col-5 py-2 border-top d-flex justify-content-between">
+                                                <span>Status</span>
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7 py-2 border-top">
+                                                <span>{{subnetIpDetail.status}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <div class="col-5 py-2 border-top d-flex justify-content-between">
+                                                <span>System Loacation</span>
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7 py-2 border-top">
+                                                <span>{{subnetIpDetail.systemLocation}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex">
+                                            <div class="col-5 py-2 border-top d-flex justify-content-between">
+                                                <span>VLan Name</span>
+                                                <span>:</span>
+                                            </div>
+                                            <div class="col-7 py-2 border-top">
+                                                <span>{{subnetIpDetail.vlanName}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </mat-tab>
+</mat-tab-group>

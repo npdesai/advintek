@@ -117,6 +117,10 @@ export class SubnetService {
     return this.http.get<any>(`${this.rootControler}/GetSubnetDetailBySubnetId`,{params});
   }
 
+  getSubnetIpDetail(subnetIpId: string): Observable<any> {
+    return this.http.get<any>(`${this.rootControler}/GetSubnetIpDetailBySubnetIpId?subnetIPId=${subnetIpId}`);
+  }
+
   getSubnetSummary(subnetId: string): Observable<any> {
     const params = new HttpParams()
       .set('subnetId', subnetId == null ? "" : subnetId.trim());

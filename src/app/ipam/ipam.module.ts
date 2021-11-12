@@ -50,6 +50,7 @@ import { DomainComponent } from './views/domain/domain.component';
 import { AddDomainComponent } from './views/domain/add-domain/add-domain.component';
 import { AddSupernetComponent } from './views/supernet/add-supernet/add-supernet.component';
 import { UpdateSubnetComponent } from './views/group/update-subnet/update-subnet.component';
+import { SubnetIpDetailComponent } from './views/subnet/subnet-ip-detail/subnet-ip-detail.component';
 
 @NgModule({
   imports: [
@@ -100,7 +101,8 @@ import { UpdateSubnetComponent } from './views/group/update-subnet/update-subnet
     DomainComponent,
     AddDomainComponent,
     AddSupernetComponent,
-    UpdateSubnetComponent
+    UpdateSubnetComponent,
+    SubnetIpDetailComponent
   ],
   providers: [
     SubnetService

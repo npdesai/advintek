@@ -12,6 +12,7 @@ import { HomeComponent } from './views/home.component';
 import { IpamComponent } from './views/ipam.component';
 import { Ipv6Component } from './views/ipv6/ipv6.component';
 import { RoutersComponent } from './views/settings/routers/routers.component';
+import { SubnetIpDetailComponent } from './views/subnet/subnet-ip-detail/subnet-ip-detail.component';
 import { SubnetComponent } from './views/subnet/subnet.component';
 
 
@@ -26,7 +27,10 @@ export const ipamRoutes: Routes = [
           { path: '', redirectTo: 'home', pathMatch: 'full' },
           { path: 'home', component: DasboardComponent },
           { path: 'groups/:Id', component: GroupComponent },
-          { path: 'subnets/:Id', component: SubnetComponent },
+          { path: 'subnets', children: [
+            { path: 'subnetip/:Id', component: SubnetIpDetailComponent },
+            { path: ':Id', component: SubnetComponent}
+          ] },
           { path: 'ipv6/:Id', component: Ipv6Component },
           { path: 'DHCPSummary', children: [
             { path: 'domains', component: DomainComponent },

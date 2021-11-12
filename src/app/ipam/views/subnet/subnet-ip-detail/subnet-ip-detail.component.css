@@ -1,0 +1,10 @@
+.box {
+    margin: 0px;
+    border: 1px solid lightgray;
+    padding: 0;
+}
+.box-header {
+    padding: 5px 15px;
+    background-color: #f4f5f6;
+    border-bottom: 1px solid #e0e0e0;
+}

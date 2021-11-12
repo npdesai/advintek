@@ -32,6 +32,26 @@ export class SubnetGroupDetail {
   description: string;
 }
 
+export class SubnetIPDetail {
+  subnetIPId: string;
+  subnetId: string;
+  ipAddress: string;
+  macAddress: string;
+  dnsStatus: string;
+  status: string;
+  deviceType: string;
+  connectedSwitch: string;
+  reservedStatus: string;
+  aliasName: string;
+  assetTag: string;
+  systemLocation: string;
+  lastScan: string;
+  vlanId: string;
+  vlanName: string;
+  accessMode: string;
+  scanStatus: string;
+}
+
 
 export class AddIpv4Subnet  {
   subnetGroupId?: string;

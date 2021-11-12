@@ -174,6 +174,10 @@ export class SubnetComponent {
     })
   }
 
+  showSubnetIPDetail(ipDetail) {
+    this.router.navigate([`ipam/subnets/subnetip/${ipDetail.subnetIPId}`]);
+  }
+
   getFormData() {
     //$("#ajax-loading").show();
 
@@ -351,43 +355,53 @@ export class SubnetComponent {
 
   title = 'export-table-data-to-pdf-using-jspdf-example';
 
-  head = [['ipAddress', 'macAddress', 'status', 'scanStatus','deviceType','connectedSwitch']] 
+  iphead = [['ipAddress', 'macAddress', 'status', 'scanStatus','deviceType','connectedSwitch']];
+  ipHistoryHead = [['ipAddress', 'detectedTime', 'dnsName', 'macAddress', 'deviceType']];
 
-  ExportPdfData(){
-    this.ipDetails.forEach(element => {  
-      this.exportRow = [];
-       
-      var ipAddress = element["ipAddress"]
-      this.exportRow.push(ipAddress);
-      var macAddress = element["macAddress"]
-      this.exportRow.push(macAddress);   
-      var status = element["status"]
-      this.exportRow.push(status);   
-      var scanStatus = element["scanStatus"]
-      this.exportRow.push(scanStatus);   
-      var deviceType = element["deviceType"]
-      this.exportRow.push(deviceType);   
-      var connectedSwitch = element["connectedSwitch"]
-      this.exportRow.push(connectedSwitch); 
+  ExportPdfData(type){
+    if(type === 'ip') {
+      this.ipDetails.forEach(element => {  
+        this.exportRow = [];
+        this.exportRow.push(
+          element["ipAddress"], 
+          element["macAddress"], 
+          element["status"], 
+          element["scanStatus"], 
+          element["deviceType"], 
+          element["connectedSwitch"]);
+          
+          this.exportPdfData.push(this.exportRow);   
+        });    
+      } else if(type === 'ipHistory') {
+        this.ipHistories.forEach(element => {
+        this.exportRow = [];
+        this.exportRow.push(
+          element['ipAddress'], 
+          element['detectedTime'], 
+          element['dnsName'], 
+          element['macAddress'], 
+          element['deviceType']);
 
-      this.exportPdfData.push(this.exportRow);      
-    });    
-
-    this.SavePDF();
+        this.exportPdfData.push(this.exportRow);   
+      });
+    }
+    
+    this.SavePDF(type);
   }
 
-  public SavePDF() {  
+  public SavePDF(type) {  
     let content=this.content.nativeElement;  
     let doc = new jsPDF();    
+    const isIpType = type === 'ip';
 
     doc.setFontSize(18);
-    doc.text('IP Detail', 11, 8);
+    doc.text(isIpType ? 'IP Detail' : 'IP History', 11, 8);
     doc.setFontSize(11);
     doc.setTextColor(100);
 
 
     (doc as any).autoTable({
-      head: this.head,
+      head: isIpType ? this.iphead : this.ipHistoryHead,
       body: this.exportPdfData,
       theme: 'plain',
       didDrawCell: data => {
@@ -399,15 +413,19 @@ export class SubnetComponent {
     //doc.output('dataurlnewwindow')
 
     // below line for Download PDF document  
-    doc.save('IpDetail.pdf'); 
+    doc.save(isIpType ? 'IpDetail.pdf' : 'IpHistory.pdf'); 
+    this.exportPdfData.length = 0;
   }
 
-  ExportCsvData() {
-    var exportData = this.ipDetails;
+  ExportCsvData(type) {
+    var isIpType = type === 'ip';
+    var exportData = isIpType ? this.ipDetails : this.ipHistories;
     exportData.forEach(function (entry) {
       delete entry['subnetIPId'];
       delete entry['subnetId'];
       delete entry['subnet'];
+      delete entry['subnetIPHistoryId'];
+      delete entry['sysDescription'];
     });
 
     const replacer = (key, value) => (value === null ? '' : value); // specify how you want to handle null values here
@@ -425,7 +443,7 @@ export class SubnetComponent {
     const url = window.URL.createObjectURL(blob);
   
     a.href = url;
-    a.download = 'IpDetail.csv';
+    a.download = isIpType ? 'IpDetail.csv' : 'IpHistory.csv';
     a.click();
     window.URL.revokeObjectURL(url);
     a.remove();

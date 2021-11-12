@@ -63,10 +63,12 @@
     <section class="content-body">
       <div class="col-md-12 no-padding">
         <div class="box">
-          <div class="box-header">
+          <div class="box-header d-flex justify-content-between align-items-center">
             <h5 class="box-title">IPs</h5>
-            <input type="button" value="Download PDF" class="btn btn-success" (click)="ExportPdfData()">  
-            <input type="button" value="Download CSV" class="btn btn-success" (click)="ExportCsvData()">  
+            <div>
+              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="ExportPdfData('ip')" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+              <button type="button" pButton pRipple icon="pi pi-file" (click)="ExportCsvData('ip')" pTooltip="CSV" tooltipPosition="bottom"></button>
+            </div>
           </div>
           <p-contextMenu
             #cm
@@ -92,7 +94,7 @@
                 <ng-container *ngIf="ipDetails && ipDetails.length > 0">
                   <tr *ngFor="let ipDetail of ipDetails">
                     <td width="150">
-                      <span class="mr-2">{{ ipDetail.ipAddress }}</span>
+                      <a href="javascript:void()" (click)="showSubnetIPDetail(ipDetail)" class="mr-2 text-decoration-none text-dark">{{ ipDetail.ipAddress }}</a>
                       <i
                         class="fas fa-caret-right"
                         (click)="openCM($event, cm, ipDetail)"
@@ -137,8 +139,12 @@
     <section class="content-body">
       <div class="col-md-12 no-padding">
         <div class="box">
-          <div class="box-header">
+          <div class="box-header d-flex justify-content-between align-items-center">
             <h5 class="box-title">IP History</h5>
+            <div>
+              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="ExportPdfData('ipHistory')" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+              <button type="button" pButton pRipple icon="pi pi-file" (click)="ExportCsvData('ipHistory')" pTooltip="CSV" tooltipPosition="bottom"></button>
+            </div>
           </div>
           <p-contextMenu
             #cm2
