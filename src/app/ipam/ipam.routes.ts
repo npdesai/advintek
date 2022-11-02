@@ -7,6 +7,7 @@ import { DHCPSummaryComponent } from './views/dhcp/dhcp-summary/dhcp-summary.com
 import { DiscoveredSubnetsComponent } from './views/discovered/discovered-subnets/discovered-subnets.component';
 import { DiscoveredV6HostsComponent } from './views/discovered/discovered-v6-hosts/discovered-v6-hosts.component';
 import { DomainComponent } from './views/domain/domain.component';
+import { EmailConfigurationsComponent } from './views/email-configurations/email-configurations.component';
 import { GroupComponent } from './views/group/group.component';
 import { HomeComponent } from './views/home.component';
 import { IpamComponent } from './views/ipam.component';
@@ -43,7 +44,8 @@ export const ipamRoutes: Routes = [
             { path: 'v6hosts', component: DiscoveredV6HostsComponent }
           ] },
           { path: 'settings', children: [
-            { path: 'router', component: RoutersComponent }
+            { path: 'router', component: RoutersComponent },
+            { path: 'emailtemplates', component: EmailConfigurationsComponent },
           ] },
           { path: '**', redirectTo: 'home', pathMatch: 'full' },
         ],

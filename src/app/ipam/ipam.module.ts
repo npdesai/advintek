@@ -51,6 +51,8 @@ import { AddDomainComponent } from './views/domain/add-domain/add-domain.compone
 import { AddSupernetComponent } from './views/supernet/add-supernet/add-supernet.component';
 import { UpdateSubnetComponent } from './views/group/update-subnet/update-subnet.component';
 import { SubnetIpDetailComponent } from './views/subnet/subnet-ip-detail/subnet-ip-detail.component';
+import { EmailConfigurationsComponent } from './views/email-configurations/email-configurations.component';
+import { EmailEditorModule } from 'angular-email-editor';
 
 @NgModule({
   imports: [
@@ -76,7 +78,8 @@ import { SubnetIpDetailComponent } from './views/subnet/subnet-ip-detail/subnet-
     TooltipModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
-    })
+    }),
+    EmailEditorModule
   ],
   declarations: [
     HomeComponent,
@@ -102,7 +105,8 @@ import { SubnetIpDetailComponent } from './views/subnet/subnet-ip-detail/subnet-
     AddDomainComponent,
     AddSupernetComponent,
     UpdateSubnetComponent,
-    SubnetIpDetailComponent
+    SubnetIpDetailComponent,
+    EmailConfigurationsComponent
   ],
   providers: [
     SubnetService

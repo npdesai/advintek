@@ -46,6 +46,10 @@ export class IpamComponent {
         url: 'ipam/settings/router',
         command: (x) => this.navigateToRouter(x),
       },
+      {
+        label: 'Email Templates',        
+        command: () => this.emailTemplates(),
+      }
     ];
   }
 
@@ -53,6 +57,11 @@ export class IpamComponent {
     this.treeserviceService.getTreeData().subscribe((data) => {
       this.treeitems = data;
     });
+  }
+
+  emailTemplates()
+  {
+    this.router.navigate(['ipam/settings/emailtemplates']);
   }
 
   addItems(x) {
